@@ -19,3 +19,5 @@ var categoriaProduto = sequelize.define('tb_categoria_produto', {
     freezeTableName: true,
     timestamps: false
 });
+
+module.exports = categoriaProduto;

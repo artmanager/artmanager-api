@@ -49,3 +49,5 @@ var endereco = sequelize.define('tb_endereco', {
     freezeTableName: true,
     timestamps: false
 });
+
+module.exports = endereco;
