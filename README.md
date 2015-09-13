@@ -4,6 +4,13 @@
  - npm install              -->  instalar dependencias
  - npm test                 -->  rodar os testes
  - npm start                -->  rodar o projeto
+ 
+
+#Model
+não esqueçam de colocar os parametros 
+    freezeTableName: true,
+    timestamps: false
+do contrario, ao tentar fazer insert vai dar erro, pois o sequelize vai tentar inserir data de update e de criação do parametro
 
 </pre>
 # Estrutura
