@@ -1,12 +1,14 @@
-var pg = require('pg');
+var Sequelize = require('sequelize');
+//Parametros para conexão
+//database, username, password
+var sequelize = new Sequelize('nodejs', 'postgres', 'download', {
+    host: 'localhost',
+    port: '5432',
+    dialect: 'postgres',
 
-var con = new pg.Client({
-  host: 'localhost',
-  port: '5432',
-  user: 'postgres',
-  password: 'download',
-  database: 'Artmanager_Desenvolvimento'
+    store: 'path/to/database.postgres'
+
 });
-//con.connect();
 
-module.exports = con;
+module.exports = sequelize;
+
