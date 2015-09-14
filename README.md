@@ -6,8 +6,8 @@
  - npm start                -->  rodar o projeto
  
 
-## Model
-não esqueçam de colocar os parametros do contrario, ao tentar fazer insert vai dar erro, pois o sequelize vai tentar inserir data de update e de criação do parâmetro
+## Models
+**NÃO esqueçam** de colocar os parametros do contrario, ao tentar fazer insert vai dar erro, pois o sequelize vai tentar inserir data de update e de criação do parâmetro
 
 ```
     freezeTableName: true,
