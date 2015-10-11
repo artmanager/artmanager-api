@@ -12,7 +12,13 @@ var categoriaProduto = sequelize.define('tb_categoria_produto', {
 
     ds_descricao: {
         type: dataTypes.STRING,
-        field: 'ds_descricao'
+        field: 'ds_descricao',
+        get : function () {
+            return this.getDataValue('ds_descricao');
+        },
+        set : function (val) {
+            this.setDataValue('ds_descricao', val);
+        }
     }
 
 }, {

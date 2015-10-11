@@ -9,7 +9,10 @@ var forncedor = sequelize.define('tb_fornecedor', {
         type: dataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        field: 'id'
+        field: 'id',
+        get : function () {
+            return this.getDataValue('id');
+        }
     },
 
     id_endereco: {
@@ -19,6 +22,12 @@ var forncedor = sequelize.define('tb_fornecedor', {
             model: endereco,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_endereco');
+        },
+        set : function (val) {
+            this.setDataValue('id_endereco', val);
         }
     },
 
@@ -29,12 +38,24 @@ var forncedor = sequelize.define('tb_fornecedor', {
             model: telefone,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_telefone');
+        },
+        set : function (val) {
+            this.setDataValue('id_telefone', val);
         }
     },
 
     ds_nome: {
         type: dataTypes.STRING,
-        field: 'ds_nome'
+        field: 'ds_nome',
+        get : function () {
+            return this.getDataValue('ds_nome');
+        },
+        set : function (val) {
+            this.setDataValue('ds_nome', val);
+        }
     }
 
 }, {

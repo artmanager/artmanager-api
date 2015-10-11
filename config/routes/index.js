@@ -7,7 +7,9 @@ var express = 		require('express'),
 	producao = 		require('./producao'),
 	produtos = 		require('./produtos'),
 	usuarios = 		require('./usuarios'),
-	vendas = 		require('./vendas'); 
+	vendas = 		require('./vendas'),
+	autenticacao = 	require('./autenticacao'); 
+
 
 app.use('/', fornecedores);
 app.use('/', pedidos);
@@ -15,6 +17,7 @@ app.use('/', producao);
 app.use('/', produtos);
 app.use('/', usuarios);
 app.use('/', vendas);
+app.use('/', autenticacao);
 
 
 module.exports = app;

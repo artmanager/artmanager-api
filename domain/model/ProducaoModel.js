@@ -11,7 +11,11 @@ var producao = sequelize.define('tb_producao', {
         type: dataTypes.INTEGER,
         autoIncrement: true,
         primariKey: true,
-        field: 'id'
+        field: 'id',
+        get : function () {
+            return this.getDataValue('id');
+        }
+
     },
 
     id_cliente: {
@@ -21,6 +25,12 @@ var producao = sequelize.define('tb_producao', {
             model: cliente,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_cliente');
+        }, 
+        set : function (val) {
+            this.setDataValue('id_cliente', val);
         }
 
     },
@@ -32,6 +42,12 @@ var producao = sequelize.define('tb_producao', {
             model: produto,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_produto');
+        }, 
+        set : function (val) {
+            this.setDataValue('id_produto', val);
         }
     },
 
@@ -42,6 +58,12 @@ var producao = sequelize.define('tb_producao', {
             model: pedido,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_pedido');
+        }, 
+        set : function (val) {
+            this.setDataValue('id_pedido', val);
         }
     },
 
@@ -52,22 +74,46 @@ var producao = sequelize.define('tb_producao', {
             model: usuario,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_usuario');
+        }, 
+        set : function (val) {
+            this.setDataValue('id_usuario', val);
         }
     },
 
     dt_data_inicio: {
         type: dataTypes.DATE,
-        field: 'dt_data_inicio'
+        field: 'dt_data_inicio',
+        get : function () {
+            return this.getDataValue('dt_data_inicio');
+        }, 
+        set : function (val) {
+            this.setDataValue('dt_data_inicio', val);
+        }
     },
 
     dt_data_entrega: {
         type: dataTypes.DATE,
-        field: 'dt_data_entrega'
+        field: 'dt_data_entrega',
+        get : function () {
+            return this.getDataValue('dt_data_entrega');
+        }, 
+        set : function (val) {
+            this.setDataValue('dt_data_entrega', val);
+        }
     },
 
     vl_porcentagem_conclusao: {
         type: dataTypes.DECIMAL,
-        field: 'vl_porcetagem'
+        field: 'vl_porcetagem',
+        get : function () {
+            return this.getDataValue('vl_porcentagem_conclusao');
+        }, 
+        set : function (val) {
+            this.setDataValue('vl_porcentagem_conclusao', val);
+        }
     },
 
 }, {

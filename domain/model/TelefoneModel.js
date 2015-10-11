@@ -7,22 +7,43 @@ var telefone = sequelize.define('tb_telefone', {
         type: DataTypes.INTEGER,
         field: 'id',
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        get : function () {
+            return this.getDataValue('id');
+        }
     },
 
     ds_comercial: {
         type: DataTypes.STRING,
-        field: 'ds_comercial'
+        field: 'ds_comercial',
+        get : function () {
+            return this.getDataValue('ds_comercial');
+        },
+        set : function (val) {
+            this.setDataValue('ds_comercial', val);
+        }
     },
 
     ds_residencial: {
         type: DataTypes.STRING,
-        field: 'ds_residencial'
+        field: 'ds_residencial',
+        get : function () {
+            return this.getDataValue('ds_residencial');
+        },
+        set : function (val) {
+            this.setDataValue('ds_residencial', val);
+        }
     },
 
     ds_celular: {
         type: DataTypes.STRING,
-        field: 'ds_celular'
+        field: 'ds_celular',
+        get : function () {
+            return this.getDataValue('ds_celular');
+        },
+        set : function (val) {
+            this.setDataValue('ds_celular', val);
+        }
     }
 
 }, {

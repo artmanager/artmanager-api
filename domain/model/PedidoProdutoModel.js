@@ -12,6 +12,12 @@ var pedidoProduto = sequelize.define('tb_pedido_produto', {
             model: pedido,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_pedido');
+        },
+        set : function (val){
+            this.setDataValue('id_pedido', val);
         }
     },
 
@@ -22,6 +28,12 @@ var pedidoProduto = sequelize.define('tb_pedido_produto', {
             model: produto,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_produto');
+        },
+        set : function (val) {
+            this.setDataValue('id_produto', val);
         }
     }
 

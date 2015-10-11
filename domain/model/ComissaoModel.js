@@ -8,7 +8,10 @@ var comissao = sequelize.define('tb_comissao', {
         type: dataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        field: 'id'
+        field: 'id',
+        get : function () {
+            return this.getDataValue('id');
+        }
     },
 
     id_produto: {
@@ -18,12 +21,24 @@ var comissao = sequelize.define('tb_comissao', {
             model: produto,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_produto');
+        },
+        set : function (val) {
+            this.setDataValue('id_produto', val)
         }
     },
 
     vl_porcentagem: {
         type: dataTypes.DECIMAL,
-        field: 'vl_procentagem'
+        field: 'vl_procentagem',
+        get : function () {
+            return this.getDataValue('vl_porcentagem');
+        },
+        set : function (val) {
+            this.setDataValue('vl_porcentagem', val)
+        }
     }
 
 }, {
