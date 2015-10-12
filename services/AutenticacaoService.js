@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
 var promise = require('bluebird');
 var cripto = require('md5');
+var decrip = require('atob');
 var usuarioDAO = require('../domain/dao/UsuarioDAO');
 
  function Autenticacao(){
@@ -12,12 +13,20 @@ var usuarioDAO = require('../domain/dao/UsuarioDAO');
 	body = this;
 	try	{
 		var param = req.body;
-		param = param.data.split("-");
+		param = decrip(param.data);
+		param = param.split('-');
+		
 		user = {
 			usuario : param[0],
-			senha	: param[1]
+			senha	: cripto(param[1])
 		};
+
 		usuarioDAO.findOne(user, function (r) {
+			if (r == null || r == undefined){
+				res.json({erro : 'Usuário ou senha inválidos.'});
+				return;
+			}
+
 			obj = {
 				id : r.id,
 				name : r.ds_descricao,
