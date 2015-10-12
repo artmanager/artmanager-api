@@ -16,8 +16,6 @@ UsuarioService.prototype.cadastro = function (req, res) {
 	try {
 		var obj = req.body;
 		usuarioBus.cadastroUsuario(obj, function (result) {
-			console.log(result);
-			console.log('Service')
 			res.json({ retorno : result });
 		});
 	} catch (e) {
