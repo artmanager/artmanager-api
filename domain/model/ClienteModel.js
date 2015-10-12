@@ -1,8 +1,5 @@
 var sequelize = require('../../db/postgres'),
-    dataTypes = require('sequelize'),
-    endereco = require('EnderecoModel'),
-    telefone = require('TelefoneModel');
-
+    dataTypes = require('sequelize');
 
 var cliente = sequelize.define('tb_cliente', {
 
@@ -13,38 +10,6 @@ var cliente = sequelize.define('tb_cliente', {
         field: 'id',
         get : function () {
             return this.getDataValue('id');
-        }
-    },
-
-    id_endereco: {
-        type: dataTypes.INTEGER,
-        field: 'id_endereco',
-        references: {
-            model: endereco,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_endereco');
-        },
-        set : function (val) {
-            this.getDataValue('id_endereco', val);
-        }
-    },
-
-    id_telefone: {
-        type: dataTypes.INTEGER,
-        field: 'id_telefone',
-        references: {
-            model: telefone,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_telefone');
-        },
-        set : function (val) {
-            this.getDataValue('id_telefone', val);
         }
     },
 

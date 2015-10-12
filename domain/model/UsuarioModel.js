@@ -12,40 +12,7 @@ var usuario = sequelize.define('tb_usuario', {
         autoIncrement: true,
         field: 'id',
         get : function () {
-            var id = this.getDataValue('id');
-            this.getDataValue('id') + '('+ id +')';
-        }
-    },
-
-    id_endereco: {
-        type: dataTypes.INTEGER,
-        field: 'id_endereco',
-        refereces: {
-            model: endereco,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
             return this.getDataValue('id');
-        },
-        set : function (val) {
-            this.setDataValue('id_endereco', val);
-        }
-    },
-
-    id_telefone: {
-        type: dataTypes.INTEGER,
-        field: 'id_telefone',
-        refereces: {
-            model: telefone,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_telefone');
-        },
-        set : function (val) {
-            this.setDataValue('id_telefone', val);
         }
     },
 
