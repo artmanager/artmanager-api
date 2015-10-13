@@ -13,6 +13,7 @@
     "atob": "^1.1.2",
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.4.0",
     "md5": "^2.0.0",

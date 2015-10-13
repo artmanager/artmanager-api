@@ -3,11 +3,14 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var routes = require('./config/routes');
+var cors = require('cors');
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use(cors());
 
- 
+app.use(methodOverride('Access-Control-Allow-Origin', '*'));
+app.use(methodOverride('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'));
 app.use(methodOverride('X-HTTP-Method'));  
 app.use(methodOverride('X-HTTP-Method-Override'));   
 app.use(methodOverride('X-Method-Override'));  
