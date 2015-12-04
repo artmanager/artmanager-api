@@ -1,6 +1,6 @@
 var promise = require('bluebird');
 var UsuarioModel = require('../model/UsuarioModel');
-
+var cripto = require('md5');
 
 function UsuarioDAO(Model){
 	this.Data = promise.promisifyAll(Model);
@@ -8,10 +8,11 @@ function UsuarioDAO(Model){
 
 UsuarioDAO.prototype.findOne = function(obj, callback) {
 	if (obj != null && obj != undefined) {
+		var hash = cripto(obj.senha);
 		UsuarioModel.findOne({
 			where: {
 				ds_usuario: obj.usuario,
-				ds_senha : obj.senha
+				ds_senha : hash
 			}
 		}).then(function(user){
 			callback(user);

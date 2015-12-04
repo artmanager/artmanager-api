@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
-//Parametros para conexao
-//database, username, password
+var properties = require('properties');
+
 var sequelize = new Sequelize('artmanager_development', 'vagrant', 'vagrant', {
     host: 'localhost',
     port: '5432',

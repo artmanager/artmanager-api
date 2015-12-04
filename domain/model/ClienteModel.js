@@ -20,7 +20,7 @@ var cliente = sequelize.define('tb_cliente', {
             return this.getDataValue('ds_nome');
         },
         set : function (val) {
-            this.getDataValue('ds_nome', val);
+            this.setDataValue('ds_nome', val);
         }
     },
 

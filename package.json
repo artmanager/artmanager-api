@@ -19,9 +19,11 @@
     "md5": "^2.0.0",
     "method-override": "^2.3.5",
     "mocha": "^2.3.3",
+    "node-ini": "^1.0.0",
     "nodemon": "^1.4.1",
     "pg": "^4.4.1",
     "pg-hstore": "^2.3.2",
+    "properties": "^1.2.1",
     "sequelize": "^3.8.0",
     "sequelize-cli": "^1.9.1"
   },

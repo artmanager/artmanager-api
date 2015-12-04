@@ -8,9 +8,14 @@ UsuarioService.prototype.login = function (req, res) {
 	
 };
 
-UsuarioService.prototype.teste = function (req, res){
-	 var body = this;
-};
+UsuarioService.prototype.GetOne = function(req, res) {
+	try {
+		var obj = req.body;
+		
+	} catch (e) {
+		res.json({ erro : e });
+	}
+}
 
 UsuarioService.prototype.cadastro = function (req, res) {
 	try {

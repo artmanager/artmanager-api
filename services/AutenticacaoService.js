@@ -3,12 +3,13 @@ var promise = require('bluebird');
 var cripto = require('md5');
 var decrip = require('atob');
 var usuarioDAO = require('../domain/dao/UsuarioDAO');
+var properties = require('properties');
 
  function Autenticacao(){
 	 
  }
- 
- Autenticacao.prototype.auth = function (req, res, next)  {
+
+ Autenticacao.prototype.geraToken = function (req, res, next)  {
 	var body, obj, user;
 	body = this;
 	try	{
@@ -22,7 +23,7 @@ var usuarioDAO = require('../domain/dao/UsuarioDAO');
 		};
 
 		usuarioDAO.findOne(user, function (r) {
-			if (r == null || r == undefined){
+			if (r == null || r == undefined) {
 				res.json({erro : 'Usuário ou senha inválidos.'});
 				return;
 			}
@@ -33,7 +34,7 @@ var usuarioDAO = require('../domain/dao/UsuarioDAO');
 				tipo : r.perfil
 			};
 			body = { 
-				token : jwt.sign(obj, 'GUSTAVO')
+				token : jwt.sign(obj, 'n3JZZm27T4yccdVf')
 			};
 			console.log(body);
 			res.json(body);
@@ -41,6 +42,19 @@ var usuarioDAO = require('../domain/dao/UsuarioDAO');
 	} catch (e) {
 		res.json({erro : e});
 	}
- }
+ };
+
+ Autenticacao.prototype.validaToken = function(req, res, next) {
+ 	try	{
+ 		var param = req.body;
+ 		var token = param.token;
+ 		var result = cripto.verify(token, 'n3JZZm27T4yccdVf');
+
+ 		console.log('Result ' + result);
+
+ 	} catch(e) {
+ 		res.json({erro : e});
+ 	}
+ };
  
  module.exports = new Autenticacao();
