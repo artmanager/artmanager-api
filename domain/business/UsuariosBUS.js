@@ -23,9 +23,14 @@ UsuarioBus.prototype.consultaUsuario  = function(obj, callback){
 
 UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 	var tel, end, usu, idUsu, createdUsuer;
-	usu = obj.usuario;
 	tel = obj.telefone;
 	end = obj.endereco;
+
+	usu = {
+		nome : obj.nome,
+		usuario : obj.usuario,
+		senha : obj.senha
+	};
 
 	if (usu != null && usu != undefined) {
 		usuDao.insertOne(usu, function (result) {
@@ -34,11 +39,15 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 			
 			if (tel != null && tel != undefined && tel.length > 0) {
 				tel.forEach(function (o) {
+					var ddd, numero;
+					console.log(o);
+					ddd = o.numero.substring(0,2);
+					numero = o.numero.substring(2);
 					var telefone = {
 						usuario 	: idUsu,
-						ddd 		: o.ddd,
-						numero		: o.numero,
-						tipo 		: o.tipo							
+						ddd 		: ddd,
+						numero		: numero,
+						tipo 		: 1							
 					};
 					telDao.insertOne(telefone, function (e) {
 						console.log(e);
@@ -61,7 +70,7 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 					};
 
 					if (endereco.estado.length > 2) {
-						callback( {erro : 'O campo estado pode ter apenas 2 caracteres'});
+						callback( { erro : 'O campo estado pode ter apenas 2 caracteres' });
 						return;
 					}
 
@@ -70,7 +79,7 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 				});
 			}
 
-		callback({ success : true, create : createdUsuer });
+		callback({ success : 'Usuario Cadastrado com sucesso.' });
 		});
 	}
 }

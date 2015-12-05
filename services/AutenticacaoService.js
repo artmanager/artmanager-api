@@ -1,6 +1,5 @@
 var jwt = require('jsonwebtoken');
 var promise = require('bluebird');
-var cripto = require('md5');
 var decrip = require('atob');
 var usuarioDAO = require('../domain/dao/UsuarioDAO');
 var properties = require('properties');
@@ -19,7 +18,7 @@ var properties = require('properties');
 		
 		user = {
 			usuario : param[0],
-			senha	: cripto(param[1])
+			senha	: param[1]
 		};
 
 		usuarioDAO.findOne(user, function (r) {

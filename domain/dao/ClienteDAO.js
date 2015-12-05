@@ -7,16 +7,17 @@ function ClienteDAO(Model) {
 
 ClienteDAO.prototype.InsertOne = function(obj, callback) {
 	console.log('=========================================');
-	console.log(obj.cpf_cnpj);
+	console.log(obj);
 	if (obj != null && obj != undefined) {
 		ClienteModel.findOrCreate({ 
 			where : {
 				ds_nome 	: obj.nome,
-				ds_cpf_cnpj : obj.cpf_cnpj,
-				ds_email	: obj.email
+				ds_email	: obj.email,
+				ds_cpf_cnpj : obj.cpf_cnpj
 			}
-		}).spread(function(client, created) {
-			callback( {cliente: client, create: created });
+		}).spread(function (client, created) {
+			console.log('Callback ' + client);
+			callback({cliente: client});
 		});
 	}
 }

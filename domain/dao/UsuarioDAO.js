@@ -22,12 +22,13 @@ UsuarioDAO.prototype.findOne = function(obj, callback) {
 
 UsuarioDAO.prototype.insertOne = function (obj, callback) {
 	if (obj != null && obj != undefined) {
+		var hash = cripto(obj.senha);
 		UsuarioModel.findOrCreate({ 
 			where: {
 				ds_nome 	: obj.nome,
 				ds_usuario 	: obj.usuario,
-				ds_senha	: obj.senha,
-				nr_perfil	: obj.perfil
+				ds_senha	: hash,
+				nr_perfil	: 1
 			}
 		}).spread(function (user, created ) {
 			callback({ usuario : user , create : created });

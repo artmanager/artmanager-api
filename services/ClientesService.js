@@ -17,7 +17,7 @@ ClientesService.prototype.CadastroCliente = function(req, res) {
 			res.json({ erro: 'Por favor envie um E-mail valido'});
 
 		cliBuss.CadastroCliente(param, function(obj) {
-			res.json({erro : obj});
+			res.json(obj);
 		});
 		
 		res.json({ success : 'Cliente cadastrado com sucesso. ' });

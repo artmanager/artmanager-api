@@ -11,21 +11,20 @@ ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
 	var cliente, tel, end, id;
 	tel 	= obj.telefone;
 	end 	= obj.endereco;
-	
+
 	cliente = { 
 		nome : obj.nome,
 		email : obj.email,
 		cpf_cnpj : obj.cpf_cnpj
 	};
-	console.log(cliente);
 	if (obj != null && obj != undefined) {
 		cliDao.InsertOne(cliente, function (result) {
 			id = result.cliente.id;
 			if (tel != null && tel != undefined && tel.length > 0) {
 				tel.forEach(function (o) {
 					var ddd, numero;
-					ddd = o.substring(0,2);
-					numero = o.substring(2);
+					ddd = o.numero.substring(0,2);
+					numero = o.numero.substring(2);
 					var telefone = {
 						cliente 	: id,
 						ddd 		: ddd,

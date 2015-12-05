@@ -19,9 +19,15 @@ UsuarioService.prototype.GetOne = function(req, res) {
 
 UsuarioService.prototype.cadastro = function (req, res) {
 	try {
-		var obj = req.body;
+		var obj = req.body;	
+		if (obj.usuario == undefined || obj.usuario == null || obj.usuario == '')
+			res.json({ erro : 'Usuario inválido.'});
+
+		if(obj.senha == undefined || obj.senha == null || obj.senha == '')
+			res.json({ erro: 'Senha inválida'});
+
 		usuarioBus.cadastroUsuario(obj, function (result) {
-			res.json({ retorno : result });
+			res.json({ success : result });
 		});
 	} catch (e) {
 		res.json({erro: e});
