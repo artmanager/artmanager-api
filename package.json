@@ -28,7 +28,9 @@
     "sequelize-cli": "^1.9.1"
   },
   "devDependencies": {
+    "gulp-nodemon": "^2.0.6",
     "mocha": "^2.3.1",
+    "nodemon": "^1.8.1",
     "supertest": "^1.1.0"
   }
 }
