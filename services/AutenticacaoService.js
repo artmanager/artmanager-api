@@ -21,6 +21,8 @@ var properties = require('properties');
 			senha	: param[1]
 		};
 
+		console.log(user);
+
 		usuarioDAO.findOne(user, function (r) {
 			if (r == null || r == undefined) {
 				res.json({erro : 'Usuário ou senha inválidos.'});

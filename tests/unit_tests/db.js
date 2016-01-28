@@ -2,7 +2,7 @@ var 	request = require('supertest'),
 		assert 	= require('assert'),
 		pg 		= require('../../db/postgres');
 
-
+/*
 describe.only('Postgres Endpoints', function(){
 	it('Test Connection postgres', function(done){
 		pg.connect(function(err) {
@@ -19,8 +19,5 @@ describe.only('Postgres Endpoints', function(){
 
 		  });
 		});
-
-
 	});
-
-});
+});*/
