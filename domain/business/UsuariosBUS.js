@@ -79,7 +79,7 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 				});
 			}
 
-		callback({ success : 'Usuario Cadastrado com sucesso.' });
+		callback({ success : 'Usuário Cadastrado com sucesso.' });
 		});
 	}
 }
