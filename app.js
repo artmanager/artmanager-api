@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var routes = require('./config/routes');
 var cors = require('cors');
+var Autenticacao = require('./services/AutenticacaoService');
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -16,8 +17,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(methodOverride('X-Method-Override'));  
 app.use(methodOverride('_method'));
 
-// //all routers
-app.use('/', routes);
+//all routers
+app.use('/', Autenticacao.ValidateToken.bind(Autenticacao), routes);
 
 
 var server = app.listen(3000, function () {

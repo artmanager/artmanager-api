@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "node_modules/.bin/mocha tests/unit_tests"
+    "test": "node_modules/.bin/mocha tests/unit_tests/"
   },
   "author": "",
   "license": "ISC",
