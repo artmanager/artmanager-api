@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "node_modules/.bin/mocha tests/unit_tests/"
+    "test": "./node_modules/.bin/mocha tests/unit_tests/"
   },
-  "author": "",
+  "bin": {
+    "mocha": "./bin/mocha",
+    "_mocha": "./bin/_mocha"
+  },
+  "author": "Gustavo Oliveira, https://br.linkedin.com/in/gustavo-oliveira-77ab6466",
   "license": "ISC",
   "dependencies": {
     "atob": "^1.1.2",
@@ -16,6 +20,9 @@
     "btoa": "^1.1.2",
     "cors": "^2.7.1",
     "express": "^4.13.3",
+    "gulp": "^3.9.1",
+    "gulp-jasmine": "^2.2.1",
+    "iniparser": "^1.0.5",
     "jsonwebtoken": "^5.4.0",
     "md5": "^2.0.0",
     "method-override": "^2.3.5",

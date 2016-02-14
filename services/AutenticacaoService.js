@@ -46,27 +46,25 @@ var properties = require('properties');
 
  Autenticacao.prototype.ValidateToken = function(req, res, next) {
  	try	{
- 		console.log('url');
- 		console.log(req.url);
 
  		if (req.url == '/autenticacao') {
  			next(); 		
  			return;
  		}
 
- 		console.log('Validando token');
  		var token = req.body.token;
  		
- 		if (token == null || token == undefined)
+ 		if (token == null || token == undefined) {
  			res.json({ erro: 'invalid token'});
+ 			return;
+ 		}
 
- 		console.log(token);
 		decoded = jwt.verify(token, 'n3JZZm27T4yccdVf', function( err, decoded) {
-			if (err)
+			if (err){
 				res.json({ erro: 'Não foi possível validar token. Erro: ' + err });
+				return;
+			}
 
-			console.log('validação');
-			console.log(decoded);
 			if (decoded.id != null && decoded.id > 0){
 				next();
 				return;
@@ -75,6 +73,7 @@ var properties = require('properties');
  		
  	} catch (e) {
  		res.json({erro : 'Não foi possível validar o token. ' + e});
+ 		return;
  	}
  };
  

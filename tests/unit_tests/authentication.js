@@ -39,6 +39,7 @@ describe.only('Autenthication', function () {
 
   			if (res.body.token != null && res.body.token != undefined) {
   				token = res.body.token;
+  				console.log(token);
   				done();
   			}
   			else 
