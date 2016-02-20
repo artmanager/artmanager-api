@@ -1,11 +1,24 @@
 # ArtManager Project API
 
+ - Instalação do NodeJS v5.6.0 e NPM
 
- - npm install              -->  instalar dependencias
- - npm test                 -->  rodar os testes
- - npm start                -->  rodar o projeto
+```
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install npm -g
+```
+
+ - Instalação das dependências e pacotes do projeto (necessário estar na caiz do projeto)
+
+```
+## instalar dependencias
+npm install
+##rodar os testes
+npm test
+##rodar o projeto
+npm start
+```
  
-
 ## Models
 **NÃO esqueçam** de colocar os parametros do contrario, ao tentar fazer insert vai dar erro, pois o sequelize vai tentar inserir data de update e de criação do parâmetro
 
@@ -39,4 +52,22 @@ ArtManager.API                          --> raiz projeto
 │
 └── tests                               --> testes do projeto, mock, stubs, unit_tests e etc.
     └── unit_tests                      --> testes unitarios 
+```
+
+## Configuração do supervisor na EC2
+
+```
+[program:artmanager-api]
+command=/usr/bin/npm start
+directory=/home/artmanager/artmanager-api
+user=artmanager
+autostart=true
+autorestart=true
+stopsignal=QUIT
+stdout_logfile=/var/log/artmanager/artmanager-api-error.log
+stdout_logfile_backups=0
+stdout_logfile_maxbytes=0
+stderr_logfile=/var/log/artmanager/artmanager-api.log
+stderr_logfile_backups=0
+stderr_logfile_maxbytes=0
 ```
