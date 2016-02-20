@@ -8,7 +8,7 @@ var properties = require('properties');
 	 
  }
 
- Autenticacao.prototype.geraToken = function (req, res, next)  {
+ Autenticacao.prototype.GenerateToken = function (req, res, next)  {
 	var body, obj, user;
 	body = this;
 	try	{
@@ -21,8 +21,6 @@ var properties = require('properties');
 			senha	: param[1]
 		};
 
-		console.log(user);
-
 		usuarioDAO.findOne(user, function (r) {
 			if (r == null || r == undefined) {
 				res.json({erro : 'Usuário ou senha inválidos.'});
@@ -31,13 +29,14 @@ var properties = require('properties');
 
 			obj = {
 				id : r.id,
-				name : r.ds_descricao,
-				tipo : r.perfil
+				name : r.ds_usuario,
+				tipo : r.nr_perfil
 			};
+
 			body = { 
 				token : jwt.sign(obj, 'n3JZZm27T4yccdVf')
 			};
-			console.log(body);
+
 			res.json(body);
 		});	
 	} catch (e) {
@@ -45,16 +44,36 @@ var properties = require('properties');
 	}
  };
 
- Autenticacao.prototype.validaToken = function(req, res, next) {
+ Autenticacao.prototype.ValidateToken = function(req, res, next) {
  	try	{
- 		var param = req.body;
- 		var token = param.token;
- 		var result = cripto.verify(token, 'n3JZZm27T4yccdVf');
 
- 		console.log('Result ' + result);
+ 		if (req.url == '/autenticacao') {
+ 			next(); 		
+ 			return;
+ 		}
 
- 	} catch(e) {
- 		res.json({erro : e});
+ 		var token = req.body.token;
+ 		
+ 		if (token == null || token == undefined) {
+ 			res.json({ erro: 'invalid token'});
+ 			return;
+ 		}
+
+		decoded = jwt.verify(token, 'n3JZZm27T4yccdVf', function( err, decoded) {
+			if (err){
+				res.json({ erro: 'Não foi possível validar token. Erro: ' + err });
+				return;
+			}
+
+			if (decoded.id != null && decoded.id > 0){
+				next();
+				return;
+			}	
+		});
+ 		
+ 	} catch (e) {
+ 		res.json({erro : 'Não foi possível validar o token. ' + e});
+ 		return;
  	}
  };
  

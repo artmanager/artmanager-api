@@ -1,26 +1,49 @@
 var 	request = require('supertest'),
-		assert 	= require('assert'),
 		btoa 	= require('btoa'),
-		pg 		= require('../../db/postgres');
-
+		pg 		= require('../../db/postgres'),
+		token 	= null;
 
 describe.only('Autenthication', function () {
-	it('Test user and password wrong', function (done) {
+
+	it('Test Autenthication - user and password wrong', function (done) {
 		var obj = { data : btoa('teste-teste')};
 		request('http://localhost:3000')
 		.post('/autenticacao')
 		.send(obj)
 		.set('Accept', 'application/json')
       	.expect('Content-Type', /json/)
-      	.expect(function (result){
-      		console.log('expect --------------------------');
-      		console.log(result.data);
-      	})
-      	.end(function (err, res){
-      		console.log('***********************************');
-      		console.log(err);
-      		console.log(res);
-      		done();
+      	.expect(200)
+		.end(function (err, res) {
+			if (err)
+				throw err;
+			if (res.body.erro == 'Usuário ou senha inválidos.') 
+  				done();
+  			else {
+  				throw 'Unexpected result';
+  			}
+		});
+	});
+
+	it('Test Autenthication - user and password correct', function (done) {
+		var obj = { data : btoa('artmanager-artmanager')};
+		request('http://localhost:3000')
+		.post('/autenticacao')
+		.send(obj)
+		.set('Accept', 'application/json')
+      	.expect('Content-Type', /json/)
+      	.expect(200)
+      	.end(function (err, res) {
+      		
+  			if (err) 
+  				throw err;
+
+  			if (res.body.token != null && res.body.token != undefined) {
+  				token = res.body.token;
+  				console.log(token);
+  				done();
+  			}
+  			else 
+  				throw 'Unexpected result';
       	});
 	});
 });

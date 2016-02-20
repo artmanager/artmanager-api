@@ -21,15 +21,16 @@ UsuarioBus.prototype.consultaUsuario  = function(obj, callback){
 };
 
 
-UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
+UsuarioBus.prototype.cadastroUsuario = function (obj, callback) {
 	var tel, end, usu, idUsu, createdUsuer;
-	tel = obj.telefone;
-	end = obj.endereco;
+
+	tel = obj.telefone || null;
+	end = obj.endereco || null;
 
 	usu = {
-		nome : obj.nome,
-		usuario : obj.usuario,
-		senha : obj.senha
+		nome : obj.usuario.nome,
+		usuario : obj.usuario.usuario,
+		senha : obj.usuario.senha
 	};
 
 	if (usu != null && usu != undefined) {
@@ -40,20 +41,23 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 			if (tel != null && tel != undefined && tel.length > 0) {
 				tel.forEach(function (o) {
 					var ddd, numero;
-					console.log(o);
-					ddd = o.numero.substring(0,2);
-					numero = o.numero.substring(2);
-					var telefone = {
-						usuario 	: idUsu,
-						ddd 		: ddd,
-						numero		: numero,
-						tipo 		: 1							
-					};
-					telDao.insertOne(telefone, function (e) {
-						console.log(e);
-					});
+					if (o.numero.length > 2) {
+						
+						ddd = o.numero.substring(0,2);
+						numero = o.numero.substring(2);	
+
+						var telefone = {
+							usuario 	: idUsu,
+							ddd 		: ddd,
+							numero		: numero,
+							tipo 		: 1							
+						};
+
+						telDao.insertOne(telefone, function (e) {
+							
+						});
+					}
 				});
-				
 			}
 
 			if (end != null && end != undefined && end.length > 0) {
@@ -78,8 +82,8 @@ UsuarioBus.prototype.cadastroUsuario = function(obj, callback) {
 					});
 				});
 			}
-
-		callback({ success : 'Usuario Cadastrado com sucesso.' });
+			
+			callback({ success : 'Usuário Cadastrado com sucesso.' });
 		});
 	}
 }

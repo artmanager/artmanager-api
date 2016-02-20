@@ -20,15 +20,20 @@ UsuarioService.prototype.GetOne = function(req, res) {
 UsuarioService.prototype.cadastro = function (req, res) {
 	try {
 		var obj = req.body;	
-		if (obj.usuario == undefined || obj.usuario == null || obj.usuario == '')
+		if (obj.usuario.usuario == undefined || obj.usuario.usuario == null || obj.usuario.usuario == '') {
 			res.json({ erro : 'Usuario inválido.'});
+			return;
+		}
 
-		if(obj.senha == undefined || obj.senha == null || obj.senha == '')
+		if (obj.usuario.senha == undefined || obj.usuario.senha == null || obj.usuario.senha == '') {
 			res.json({ erro: 'Senha inválida'});
+			return;
+		}
 
-		usuarioBus.cadastroUsuario(obj, function (result) {
-			res.json({ success : result });
+		usuarioBus.cadastroUsuario(obj, function (callback) {
+			res.json(callback);
 		});
+
 	} catch (e) {
 		res.json({erro: e});
 	}
