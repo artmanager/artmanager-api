@@ -81,8 +81,8 @@ server {
     listen 8888 default_server;
     listen [::]:8888 default_server ipv6only=on;
 
-    sccess_log /var/log/nginx/scanboo-api.log main;
-    error_log  /var/log/nginx/scanboo-api-error.log;
+    sccess_log /var/log/nginx/artmanager-api.log main;
+    error_log  /var/log/nginx/artmanager-api-error.log;
 
     server_name localhost;
 
