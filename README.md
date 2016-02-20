@@ -77,33 +77,25 @@ stderr_logfile_maxbytes=0
  - ** Api terá que ser acessada com $endpoint:8888/api **
 
 ```
-upstream api_node_js {
-    server    127.0.0.1:3000;
-}
-
 server {
     listen 8888 default_server;
     listen [::]:8888 default_server ipv6only=on;
 
-    root /usr/share/nginx/html;
-    index index.html index.htm;
+    sccess_log /var/log/nginx/scanboo-api.log main;
+    error_log  /var/log/nginx/scanboo-api-error.log;
 
     server_name localhost;
 
     location / {
-        try_files $uri $uri/ =404;
-    }
-
-    location /api {
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
         proxy_set_header X-NginX-Proxy true;
 
-        rewrite ^/api/?(.*) /$1 break;
+        proxy_intercept_errors on;
+        recursive_error_pages  on;
 
-        proxy_pass http://api_node_js;
-        proxy_redirect off;
+        include          proxy_params;
+
+        proxy_pass http://localhost:3000;
     }
 }
 ```
