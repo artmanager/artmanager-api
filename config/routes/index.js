@@ -1,24 +1,22 @@
-var express = 		require('express'),
-	app = 			express(),
-	
-	usuarios = 			require('./usuarios'),
+var express = 			require('express'),
+	app = 				express(),	
 	pedidos = 			require('./pedidos'),
 	producao = 			require('./producao'),
 	product = 			require('./product'),
 	productCategory= 	require('./productCategory'),
-	usuarios = 			require('./usuarios'),
+	user = 				require('./user'),
 	vendas = 			require('./vendas'),
-	autenticacao = 		require('./autenticacao'),
-	fornecedor = 		require('./fornecedores'),
+	authentication = 	require('./authentication'),
+	fornecedor = 		require('./supplier'),
 	cliente =			require('./cliente');
 
 
 app.use('/', pedidos);
 app.use('/', producao);
 app.use('/', product);
-app.use('/', usuarios);
+app.use('/', user);
 app.use('/', vendas);
-app.use('/', autenticacao);
+app.use('/', authentication);
 app.use('/', fornecedor);
 app.use('/', cliente);
 app.use('/', productCategory);

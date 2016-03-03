@@ -1,6 +1,6 @@
 var usuDao 	= require('../dao/UsuarioDAO'),
 	telDao 	= require('../dao/TelefoneDAO'),
-	endDao 	= require('../dao/EnderecoDAO'),
+	endDao 	= require('../dao/AddressDAO'),
 	md5		= require('md5');
 
 function UsuarioBus(){

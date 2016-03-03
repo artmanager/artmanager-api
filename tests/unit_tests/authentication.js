@@ -1,14 +1,18 @@
 var 	request = require('supertest'),
 		btoa 	= require('btoa'),
 		pg 		= require('../../db/postgres'),
-		token 	= null;
+		token 	= null,
+		config 	= require('../../config/config.js'),
+		common 	= require(config.common.fileCommon);
+
 
 describe.only('Autenthication', function () {
 
 	it('Test Autenthication - user and password wrong', function (done) {
 		var obj = { data : btoa('teste-teste')};
-		request('http://localhost:3000')
-		.post('/autenticacao')
+		
+		request(config.application.url)
+		.post(common.routes.authentication.postGenerateToken)
 		.send(obj)
 		.set('Accept', 'application/json')
       	.expect('Content-Type', /json/)
@@ -26,8 +30,8 @@ describe.only('Autenthication', function () {
 
 	it('Test Autenthication - user and password correct', function (done) {
 		var obj = { data : btoa('artmanager-artmanager')};
-		request('http://localhost:3000')
-		.post('/autenticacao')
+		request(config.application.url)
+		.post(common.routes.authentication.postGenerateToken)
 		.send(obj)
 		.set('Accept', 'application/json')
       	.expect('Content-Type', /json/)

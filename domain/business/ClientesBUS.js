@@ -1,6 +1,6 @@
 var cliDao 	= require('../dao/ClienteDAO'),
 	telDao 	= require('../dao/TelefoneDAO'),
-	endDao 	= require('../dao/EnderecoDAO');
+	endDao 	= require('../dao/AddressDAO');
 
 function ClienteBUS() {
 

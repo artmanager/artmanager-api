@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var routes = require('./config/routes');
 var cors = require('cors');
-var Autenticacao = require('./services/AutenticacaoService');
+var Autenticacao = require('./services/AuthenticationService');
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())

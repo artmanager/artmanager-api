@@ -1,7 +1,7 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    categoriaProduto = require('CategoriaProdutoModel'),
-    fornecedor = require('FornecedorModel');
+    categoriaProduto = require('ProductCategoryModel'),
+    fornecedor = require('SupplierModel');
 
 var produto = sequelize.define('tb_produto', {
 

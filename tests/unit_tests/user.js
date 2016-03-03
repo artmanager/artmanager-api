@@ -1,7 +1,10 @@
 var 	request = require('supertest'),
 		btoa 	= require('btoa'),
 		fs 		= require('fs'),
-		ini 	= require('iniparser');
+		ini 	= require('iniparser'),
+		userDAo = require('../../domain/dao/UsuarioDAO'),
+		config 	= require('../../config/config.js'),
+		common 	= require(config.common.fileCommon);
 
 var token = { "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA"};
 
@@ -14,8 +17,8 @@ describe.only('Users', function (){
 	  		"endereco" : [{"rua": "teste", "numero" : 1, "bairro" : "teste", 
 					  		"cep" : "12312", "cidade" : "sao paulo", "estado" : "SP", "pais" : "BR" }]};
 
-		request('http://localhost:3000')
-		.post('/usuarios')
+		request(config.application.url)
+		.post(common.routes.user.postUsuarios)
 		.send(obj)
 		.set('Accept', 'application/json')
       	.expect('Content-Type', /json/)
@@ -36,8 +39,8 @@ describe.only('Users', function (){
 
 	it('Test User -consult user by login', function (done) {
 		var obj = { login : 'artmanager', "token": token.token };
-		request('http://localhost:3000')
-		.get('/usuarios/')
+		request(config.application.url)
+		.get(common.routes.user.getAllUsers)
 		.send(obj)
 		.set('Accept', 'application/json')
 		.expect('Content-Type', /json/)
@@ -50,8 +53,7 @@ describe.only('Users', function (){
 		});
 	});
 
-	it ('Test User - consult user by id', function (done) {
-
+	it ('Test DAO - insert one, method: ', function (done) {
 		done();
 	});
 

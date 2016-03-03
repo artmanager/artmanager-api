@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "./node_modules/.bin/mocha tests/unit_tests/"
+    "test": "./node_modules/.bin/mocha tests/unit_tests/*.js"
   },
   "bin": {
     "mocha": "./bin/mocha",
@@ -23,6 +23,7 @@
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.2.1",
     "iniparser": "^1.0.5",
+    "jsonfile": "^2.2.3",
     "jsonwebtoken": "^5.4.0",
     "md5": "^2.0.0",
     "method-override": "^2.3.5",
@@ -33,7 +34,8 @@
     "pg-hstore": "^2.3.2",
     "properties": "^1.2.1",
     "sequelize": "^3.8.0",
-    "sequelize-cli": "^1.9.1"
+    "sequelize-cli": "^1.9.1",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "gulp-nodemon": "^2.0.6",

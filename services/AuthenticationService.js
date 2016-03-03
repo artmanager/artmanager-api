@@ -2,20 +2,21 @@ var jwt = require('jsonwebtoken');
 var promise = require('bluebird');
 var decrip = require('atob');
 var usuarioDAO = require('../domain/dao/UsuarioDAO');
-var properties = require('properties');
+var properties = require('properties'),
+	config 	= require('../config/config.js'),
+	common 	= require('../../artmanager-common/common.js');
 
- function Autenticacao(){
+ function Authentication(){
 	 
  }
 
- Autenticacao.prototype.GenerateToken = function (req, res, next)  {
+ Authentication.prototype.GenerateToken = function (req, res, next)  {
 	var body, obj, user;
 	body = this;
 	try	{
 		var param = req.body;
 		param = decrip(param.data);
 		param = param.split('-');
-		
 		user = {
 			usuario : param[0],
 			senha	: param[1]
@@ -44,10 +45,10 @@ var properties = require('properties');
 	}
  };
 
- Autenticacao.prototype.ValidateToken = function(req, res, next) {
+ Authentication.prototype.ValidateToken = function(req, res, next) {
  	try	{
 
- 		if (req.url == '/autenticacao') {
+ 		if (req.url == common.routes.authentication.postGenerateToken) {
  			next(); 		
  			return;
  		}
@@ -77,4 +78,4 @@ var properties = require('properties');
  	}
  };
  
- module.exports = new Autenticacao();
+ module.exports = new Authentication();

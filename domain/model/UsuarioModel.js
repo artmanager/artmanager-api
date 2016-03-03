@@ -1,6 +1,6 @@
 var sequelize = require('../../db/postgres');
 var dataTypes = require('sequelize');
-var endereco = require('./EnderecoModel');
+var endereco = require('./AddressModel');
 var telefone  = require('./TelefoneModel');
 
 

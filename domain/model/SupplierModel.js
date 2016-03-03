@@ -1,7 +1,7 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    endereco = require('EnderecoModel'),
-    telefone = require('TelefoneModel');
+    endereco = require('./AddressModel'),
+    telefone = require('./TelefoneModel');
 
 var forncedor = sequelize.define('tb_fornecedor', {
 

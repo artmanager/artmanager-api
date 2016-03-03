@@ -1,15 +1,15 @@
 var promise = require('bluebird'),
-	enderecoModel = require('../model/EnderecoModel');
+	addressModel = require('../model/AddressModel');
 
 
-function EnderecoDAO(Model) {
+function AddressDAO(Model) {
 	this.Data = promise.promisifyAll(Model);
 }
 
-EnderecoDAO.prototype.insertOne = function (obj, callback) {
+AddressDAO.prototype.insertOne = function (obj, callback) {
 	console.log(obj);
 	try {
-		enderecoModel.findOrCreate({
+		addressModel.findOrCreate({
 			where : {
 				id_cliente	: obj.cliente,
 				id_usuario	: obj.usuario,
@@ -30,4 +30,4 @@ EnderecoDAO.prototype.insertOne = function (obj, callback) {
 };
 
 
-module.exports = new EnderecoDAO(enderecoModel);
+module.exports = new AddressDAO(addressModel);
