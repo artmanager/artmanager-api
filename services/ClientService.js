@@ -1,13 +1,13 @@
 var promise = require('bluebird');
-var cliBuss = require('../domain/business/ClientesBUS');
+var cliBuss = require('../domain/business/ClientBUS');
 
-function ClientesService() {
+function ClientService() {
 
 }
 
-ClientesService.prototype.CadastroCliente = function(req, res) {
+ClientService.prototype.ClientRegister = function(req, res) {
 	try {
-
+		
 		var param = req.body;
 		
 		if (param.nome == null ||  param.nome == undefined)
@@ -28,4 +28,4 @@ ClientesService.prototype.CadastroCliente = function(req, res) {
 	}
 }
 
-module.exports = new ClientesService();
+module.exports = new ClientService();

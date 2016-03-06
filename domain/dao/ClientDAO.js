@@ -1,11 +1,11 @@
 var promise = require('bluebird');
-var ClienteModel = require('../model/ClienteModel');
+var ClientModel = require('../model/ClientModel');
 
-function ClienteDAO(Model) {
+function ClientDAO(Model) {
 	this.Data = promise.promisifyAll(Model);
 }
 
-ClienteDAO.prototype.InsertOne = function(obj, callback) {
+ClientDAO.prototype.InsertOne = function(obj, callback) {
 	console.log('=========================================');
 	console.log(obj);
 	if (obj != null && obj != undefined) {
@@ -22,4 +22,4 @@ ClienteDAO.prototype.InsertOne = function(obj, callback) {
 	}
 }
 
-module.exports = new ClienteDAO(ClienteModel);
+module.exports = new ClientDAO(ClientModel);

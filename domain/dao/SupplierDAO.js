@@ -5,21 +5,26 @@ function SupplierDAO(Model) {
 	this.data = promise.promisifyAll(Model);
 };
 
-SupplierDAO.prototype.InserOne = function(obj, callback) {
-	if (callback.ds_nome != null && callback.ds_nome != undefined) {
-		supplierModel.findOrCreate({
-			where : 
-			{
-				id_endereco: obj.id_endereco,
-    			id_telefone: obj.id_telefone,
-    			ds_nome: obj.ds_nome
-			}
-		}).then(function (supp, created) {
-			callback({ supplier: supp });
-		});
+SupplierDAO.prototype.InsertOne = function(obj, callback) {
+	try {
+		if (callback.name != null) {
+			supplierModel.findOrCreate({
+				where : 
+				{
+	    			ds_name: obj.name,
+	    			ds_email: obj.email
+				}
+			}).spread(function (supp, created) {
+				callback({ supplier: supp, created: created });
+			});
+		}
+		else 
+			callback({ Error : 'Por favor envie o nome do forncedor'});
+
+	} catch (e) {
+		console.log('Erro: ' + e);
+		callback({ Error : e });
 	}
-	else 
-		callback({error: 'Por favor envie o nome do forncedor'});
 };
 
-exports.module = new  SupplierDAO(supplierModel);
+module.exports = new SupplierDAO(supplierModel);

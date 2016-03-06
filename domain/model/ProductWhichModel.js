@@ -1,39 +1,39 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    pedido = require('PedidoModel'),
-    produto = require('ProdutoModel');
+    which = require('WhichModel'),
+    product = require('ProductModel');
 
-var pedidoProduto = sequelize.define('tb_pedido_produto', {
+var productWhich = sequelize.define('tb_product_which', {
 
-    id_pedido: {
+    id_which: {
         type: dataTypes.INTEGER,
-        field: 'id_pedido',
+        field: 'id_which',
         references: {
-            model: pedido,
+            model: which,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_pedido');
+            return this.getDataValue('id_which');
         },
         set : function (val){
-            this.setDataValue('id_pedido', val);
+            this.setDataValue('id_which', val);
         }
     },
 
-    id_produto: {
+    id_product: {
         type: dataTypes.INTEGER,
-        field: 'id_produo',
+        field: 'id_product',
         references: {
-            model: produto,
+            model: product,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_produto');
+            return this.getDataValue('id_product');
         },
         set : function (val) {
-            this.setDataValue('id_produto', val);
+            this.setDataValue('id_product', val);
         }
     }
 
@@ -43,4 +43,4 @@ var pedidoProduto = sequelize.define('tb_pedido_produto', {
 });
 
 
-module.exports = pedidoProduto;
+module.exports = productWhich;

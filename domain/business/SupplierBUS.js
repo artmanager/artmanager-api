@@ -1,84 +1,50 @@
 var supplierDAO = require('../dao/SupplierDAO'),
 	addressDAO 	= require('../dao/AddressDAO'),
-	telefoneDAO = require('../dao/TelefoneDAO');
+	phoneDAO 	= require('../dao/PhoneDAO');
 
 function SupplierBUS() {
 
 }
 
 SupplierBUS.prototype.InsertOne = function(obj, callback) {
-	var id_telefone,
-		id_endereco;
-	if (obj.ds_nome != null && obj.ds_nome != undefined) {
+	var id;
 
-		if (obj.telefone ! undefined) {
-			telefoneDAO.InsertOne(obj.telefone, function (result) {
-				if (result.id != undefined)
-					id_telefone = result.id;
+	if (obj.supplier != null) {
+		supplierDAO.InsertOne(obj.supplier, function (supplier){
+			id = supplier.supplier.id;
 
-				if (obj.endereco != undefined) {
-					addressDAO.InsertOne(obj.endereco, function(result) {
-						if (result.id != undefined)
-							id_endereco = result.id
-
-						var sup = {
-							ds_nome : obj.ds_nome,
-							id_telefone : id_telefone,
-							id_endereco : id_endereco
-						}
-
-						supplierDAO.InsertOne(sup, function (result) {
-							if (result.id != undefined)
-								callback({success: "Forncedor cadastrado com sucesso."});
-						});
+			if (obj.address != null) {
+				obj.address.forEach(function (o) {
+					var a = {
+						id_supplier : id,
+						street : o.street,
+						number : o.number,
+						neighborhood : o.neighborhood,
+						zip_code : o.zip_code,
+						city : o.city,
+						state : o.state,
+						country : o.country
+					};
+					addressDAO.InsertOne(a, function (address) { 
 					});
-				} 
-				else  {
-					var sup = {
-						ds_nome : obj.ds_nome,
-						id_telefone : id_telefone,
-						id_endereco : id_endereco
-					}
-
-					supplierDAO.InsertOne(sup, function (result) {
-						if (result.id != undefined)
-							callback({success: "Forncedor cadastrado com sucesso."});
-					});
-				}
-			});
-		}
-		else if (obj.endereco != undefined) {
-			addressDAO.InsertOne(obj.endereco, function(result) {
-				if (result.id != undefined)
-					id_endereco = result.id
-
-				var sup = {
-					ds_nome : obj.ds_nome,
-					id_telefone : id_telefone,
-					id_endereco : id_endereco
-				}
-
-				supplierDAO.InsertOne(sup, function (result) {
-					if (result.id != undefined)
-						callback({success: "Forncedor cadastrado com sucesso."});
 				});
-			});
-		}
-		else {
-			var sup = {
-				ds_nome : obj.ds_nome,
-				id_telefone : id_telefone,
-				id_endereco : id_endereco
 			}
 
-			supplierDAO.InsertOne(sup, function (result) {
-				if (result.id != undefined)
-					callback({success: "Forncedor cadastrado com sucesso."});
-			});
-		} 
+			if (obj.phone != null) {
+				obj.phone.forEach(function (o) {
+					var p = {
+						id_supplier	: id,
+						ddd 		: o.ddd,
+						number 		: o.number,
+						type 		: o.type
+					}
+					console.log('Send phone DAO');
+					phoneDAO.InsertOne(p, function (ph) {
+					});
+				});
+			}
+		});
 	}
-	else 
-		callback({ error:  'Por favor envie o nome do forncedor' });
 }
 
-exports.module = new SupplierBUS();
+module.exports = new SupplierBUS();

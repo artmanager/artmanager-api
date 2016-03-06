@@ -1,7 +1,8 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize');
 
-var cliente = sequelize.define('tb_cliente', {
+    
+var client = sequelize.define('tb_client', {
     id: {
         type: dataTypes.INTEGER,
         autoIncrement: true,
@@ -12,14 +13,14 @@ var cliente = sequelize.define('tb_cliente', {
         }
     },
 
-    ds_nome: {
+    ds_name: {
         type: dataTypes.STRING,
-        field: 'ds_nome',
+        field: 'ds_name',
         get : function () {
-            return this.getDataValue('ds_nome');
+            return this.getDataValue('ds_name');
         },
         set : function (val) {
-            this.setDataValue('ds_nome', val);
+            this.setDataValue('ds_name', val);
         }
     },
 
@@ -50,4 +51,4 @@ var cliente = sequelize.define('tb_cliente', {
     timestamps: false
 });
 
-module.exports = cliente;
+module.exports = client;

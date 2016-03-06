@@ -1,12 +1,12 @@
-var cliDao 	= require('../dao/ClienteDAO'),
-	telDao 	= require('../dao/TelefoneDAO'),
-	endDao 	= require('../dao/AddressDAO');
+var clintDao 	= require('../dao/ClientDAO'),
+	phoneDao 	= require('../dao/PhoneDAO'),
+	adressDao 	= require('../dao/AddressDAO');
 
-function ClienteBUS() {
+function ClientBUS() {
 
 }
 
-ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
+ClientBUS.prototype.ClientRegister = function(obj, callback) {
 
 	var cliente, tel, end, id;
 	tel 	= obj.telefone;
@@ -18,7 +18,7 @@ ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
 		cpf_cnpj : obj.cpf_cnpj
 	};
 	if (obj != null && obj != undefined) {
-		cliDao.InsertOne(cliente, function (result) {
+		clientDao.InsertOne(cliente, function (result) {
 			id = result.cliente.id;
 			if (tel != null && tel != undefined && tel.length > 0) {
 				tel.forEach(function (o) {
@@ -31,7 +31,7 @@ ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
 						numero		: numero,
 						tipo 		: numero.length >= 9 ? 1 : 0							
 					};
-					telDao.insertOne(telefone, function (e) {
+					telDao.InsertOne(telefone, function (e) {
 					});
 				});
 			}
@@ -54,7 +54,7 @@ ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
 						return;
 					}
 
-					endDao.insertOne(endereco, function (r) {
+					adressDao.insertOne(endereco, function (r) {
 					});
 				});
 			}
@@ -65,4 +65,4 @@ ClienteBUS.prototype.CadastroCliente = function(obj, callback) {
 
 };
 
-module.exports = new ClienteBUS();
+module.exports = new ClientBUS();

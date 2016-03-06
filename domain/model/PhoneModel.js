@@ -1,9 +1,9 @@
 var sequelize = require('../../db/postgres'),
     DataTypes = require('sequelize'),
-    clienteModel = require('./ClienteModel'),
-    usuarioModel = require('./UsuarioModel');
+    clienteModel = require('./ClientModel'),
+    supplierModel = require('./SupplierModel');
 
-var telefone = sequelize.define('tb_telefone', {
+var phone = sequelize.define('tb_phone', {
 
     id: {
         type: DataTypes.INTEGER,
@@ -15,35 +15,35 @@ var telefone = sequelize.define('tb_telefone', {
         }
     },
 
-    id_usuario: {
+    id_client: {
         type: DataTypes.INTEGER,
-        filed: 'id_usuario',
-        references: {
-            model: usuarioModel,
-            key: 'id',
-            deferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_usuario');
-        },
-        set : function (val) {
-            this.setDataValue('id_usuario', val);
-        }
-    },
-
-    id_cliente: {
-        type: DataTypes.INTEGER,
-        field: 'id_cliente',
+        field: 'id_client',
         references : {
             model : clienteModel,
             key: 'id',
             deferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_cliente');
+            return this.getDataValue('id_client');
         },
         set : function (val) {
-            this.setDataValue('id_cliente', val);
+            this.setDataValue('id_client', val);
+        }
+    },
+
+    id_supplier : {
+        type: DataTypes.INTEGER,
+        field: 'id_supplier',
+        references : {
+            model: supplierModel,
+            key: 'id',
+            deferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_supplier');
+        },
+        set : function (val) {
+            this.setDataValue('id_supplier', val);
         }
     },
 
@@ -58,25 +58,25 @@ var telefone = sequelize.define('tb_telefone', {
         }
     },
 
-    ds_numero: {
+    ds_number: {
         type: DataTypes.STRING,
-        field: 'ds_numero',
+        field: 'ds_number',
         get : function () {
-            return this.getDataValue('ds_numero');
+            return this.getDataValue('ds_number');
         },
         set : function (val) {
-            this.setDataValue('ds_numero', val);
+            this.setDataValue('ds_number', val);
         }
     },
 
-    nr_tipo: {
+    nr_type: {
         type: DataTypes.INTEGER,
-        field: 'nr_tipo',
+        field: 'nr_type',
         get : function () {
-            return this.getDataValue('nr_tipo');
+            return this.getDataValue('nr_type');
         },
         set : function (val) {
-            this.setDataValue('nr_tipo', val);
+            this.setDataValue('nr_type', val);
         }
     }
 
@@ -85,4 +85,4 @@ var telefone = sequelize.define('tb_telefone', {
     timestamps: false
 });
 
-module.exports = telefone;
+module.exports = phone;

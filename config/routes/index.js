@@ -1,25 +1,23 @@
 var express = 			require('express'),
 	app = 				express(),	
-	pedidos = 			require('./pedidos'),
-	producao = 			require('./producao'),
+	swich = 			require('./swich'),
+	production = 		require('./production'),
 	product = 			require('./product'),
 	productCategory= 	require('./productCategory'),
 	user = 				require('./user'),
-	vendas = 			require('./vendas'),
+	sales = 			require('./sales'),
 	authentication = 	require('./authentication'),
-	fornecedor = 		require('./supplier'),
-	cliente =			require('./cliente');
+	supplier = 			require('./supplier'),
+	client =			require('./client');
 
-
-app.use('/', pedidos);
-app.use('/', producao);
+app.use('/', swich);
+app.use('/', production);
 app.use('/', product);
 app.use('/', user);
-app.use('/', vendas);
+app.use('/', sales);
 app.use('/', authentication);
-app.use('/', fornecedor);
-app.use('/', cliente);
+app.use('/', sales);
+app.use('/', client);
 app.use('/', productCategory);
-
 
 module.exports = app;

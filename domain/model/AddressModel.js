@@ -1,9 +1,9 @@
-var sequelize = require('../../db/postgres');
-var dataTypes = require('sequelize');
-var clienteModel = require('./ClienteModel');
-var usuarioModel = require('./UsuarioModel');
+var sequelize = require('../../db/postgres'),
+    dataTypes = require('sequelize'),
+    clientModel = require('./ClientModel'),
+    supplierModel = require('./SupplierModel');
 
-var endereco = sequelize.define('tb_endereco', {
+var address = sequelize.define('tb_address', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -15,114 +15,113 @@ var endereco = sequelize.define('tb_endereco', {
         }
     },
 
-    id_usuario: {
+    id_client: {
         type: dataTypes.INTEGER,
-        filed: 'id_usuario',
-        references: {
-            model: usuarioModel,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_usuario');
-        },
-        set : function (val) {
-            this.setDataValue('id_usuario', val);
-        }
-    },
-
-    id_cliente: {
-        type: dataTypes.INTEGER,
-        field: 'id_cliente',
+        field: 'id_client',
         references : {
-            model : clienteModel,
+            model : clientModel,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_cliente');
+            return this.getDataValue('id_client');
         },
         set : function (val) {
-            this.setDataValue('id_cliente', val);
+            this.setDataValue('id_client', val);
         }
     },
 
+    id_supplier : {
+        type : dataTypes.INTEGER,
+        field : 'id_supplier',
+        references : {
+            model: supplierModel,
+            key: 'id',
+            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get : function () {
+            return this.getDataValue('id_supplier');
+        }, 
+        set : function (val) {
+            this.setDataValue('id_supplier', val);
+        }
+    },
 
-    ds_rua: {
+    ds_street: {
         type: dataTypes.STRING,
-        field: 'ds_rua',
+        field: 'ds_street',
         get : function () {
-            return this.getDataValue('ds_rua');
+            return this.getDataValue('ds_street');
         },
         set : function (val) {
-            this.setDataValue('ds_rua', val);
+            this.setDataValue('ds_street', val);
         }
     },
 
-    nr_numero: {
+    nr_number: {
         type: dataTypes.INTEGER,
-        field: 'nr_numero',
+        field: 'nr_number',
         get : function () {
-            return this.getDataValue('nr_numero');
+            return this.getDataValue('nr_number');
         },
         set : function (val) {
-            this.setDataValue('nr_numero', val);
+            this.setDataValue('nr_number', val);
         }
         
     },
 
-    ds_bairro: {
+    ds_neighborhood: {
         type: dataTypes.STRING,
-        field: 'ds_bairro',
+        field: 'ds_neighborhood',
         get : function () {
-            return this.getDataValue('ds_bairro');
+            return this.getDataValue('ds_neighborhood');
         },
         set : function (val) {
-            this.setDataValue('ds_bairro', val);
+            this.setDataValue('ds_neighborhood', val);
         }
     },
 
-    ds_cep: {
+    ds_zip_code: {
         type: dataTypes.STRING,
-        field: 'ds_cep',
+        field: 'ds_zip_code',
         get : function () {
-            return this.getDataValue('ds_cep');
+            return this.getDataValue('ds_zip_code');
         },
         set : function (val) {
-            this.setDataValue('ds_cep', val);
+            this.setDataValue('ds_zip_code', val);
         }
     },
 
-    ds_cidade: {
+    ds_city: {
         type: dataTypes.STRING,
-        field: 'ds_cidade',
+        field: 'ds_city',
         get : function () {
-            return this.getDataValue('ds_cidade');
+            return this.getDataValue('ds_city');
         },
         set : function (val) {
-            this.setDataValue('ds_cidade', val);
+            this.setDataValue('ds_city', val);
         }
     },
 
-    ds_estado: {
+    ds_state: {
         type: dataTypes.STRING,
-        field: 'ds_estado',
+        field: 'ds_state',
         get : function () {
-            return this.getDataValue('ds_estado');
+            return this.getDataValue('ds_state');
         },
         set : function (val) {
-            this.setDataValue('ds_estado', val);
+            this.setDataValue('ds_state', val);
         }
     },
 
-    ds_pais: {
+    ds_country: {
         type: dataTypes.STRING,
-        field: 'ds_pais',
+        field: 'ds_country',
         get : function () {
-            return this.getDataValue('ds_pais');
+            return this.getDataValue('ds_country');
         },
         set : function (val) {
-            this.setDataValue('ds_pais', val);
+            this.setDataValue('ds_country', val);
         }
     }
 
@@ -131,4 +130,4 @@ var endereco = sequelize.define('tb_endereco', {
     timestamps: false
 });
 
-module.exports = endereco;
+module.exports = address;

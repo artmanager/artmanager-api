@@ -3,7 +3,7 @@ var sequelize = require('../../db/postgres'),
     usuario = require('UsuarioModel'),
     cliente = require('ClienteModel');
 
-var pedido = sequelize.define('tb_pedido', {
+var pedido = sequelize.define('tb_which', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -15,68 +15,68 @@ var pedido = sequelize.define('tb_pedido', {
         }
     },
 
-    id_usuario: {
+    id_user: {
         type: dataTypes.INTEGER,
-        field: 'id_usuario',
+        field: 'id_user',
         references: {
             model: usuario,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_usuario');
+            return this.getDataValue('id_user');
         },
         set : function (val) {
-            this.setDataValue('id_usuario', val);
+            this.setDataValue('id_user', val);
         }
     },
 
-    id_cliente: {
+    id_client: {
         type: dataTypes.INTEGER,
-        field: 'id_cliente',
+        field: 'id_client',
         references: {
             model: cliente,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_cliente');
+            return this.getDataValue('id_client');
         },
         set : function (val) {
-            this.setDataValue('id_cliente', val);
+            this.setDataValue('id_client', val);
         }
     },
 
-    dt_data_pedido: {
+    dt_date_which: {
         type: dataTypes.DATE,
-        field: 'dt_data_pedido',
+        field: 'dt_date_which',
         get : function () {
-            return this.getDataValue('dt_data_pedido');
+            return this.getDataValue('dt_date_which');
         },
         set : function (val) {
-            this.setDataValue('dt_data_pedido', val);
+            this.setDataValue('dt_date_which', val);
         }
     },
 
-    vl_valor_total: {
+    vl_total_value: {
         type: dataTypes.DECIMAL,
-        field: 'vl_valor_total',
+        field: 'vl_total_value',
         get : function () {
-            return this.getDataValue('vl_valor_total');
+            return this.getDataValue('vl_total_value');
         },
         set : function (val) {
-            this.setDataValue('vl_valor_total', val);
+            this.setDataValue('vl_total_value', val);
         }
     },
 
-    vl_sinal: {
+    vl_entrance: {
         type: dataTypes.DECIMAL,
-        field: 'vl_sinal',
+        field: 'vl_entrance',
         get : function () {
-            return this.getDataValue('vl_sinal');
+            return this.getDataValue('vl_entrance');
         },
         set : function (val) {
-            this.setDataValue('vl_sinal', val);
+            this.setDataValue('vl_entrance', val);
         }
     }
 

@@ -1,7 +1,7 @@
 var sequelize = require('../../db/postgres');
 var dataTypes = require('sequelize');
 
-var categoriaProduto = sequelize.define('tb_categoria_produto', {
+var productCategory = sequelize.define('tb_product_category', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -10,14 +10,14 @@ var categoriaProduto = sequelize.define('tb_categoria_produto', {
         field: 'id'
     },
 
-    ds_descricao: {
+    ds_describe: {
         type: dataTypes.STRING,
-        field: 'ds_descricao',
+        field: 'ds_describe',
         get : function () {
-            return this.getDataValue('ds_descricao');
+            return this.getDataValue('ds_describe');
         },
         set : function (val) {
-            this.setDataValue('ds_descricao', val);
+            this.setDataValue('ds_describe', val);
         }
     }
 
@@ -26,4 +26,4 @@ var categoriaProduto = sequelize.define('tb_categoria_produto', {
     timestamps: false
 });
 
-module.exports = categoriaProduto;
+module.exports = productCategory;

@@ -4,17 +4,20 @@ var request 	= require('supertest'),
 	config 		= require('../../config/config.js'),
 	common 		= require(config.common.fileCommon);
 
-var token = { "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA"};
+var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA";
 
 describe.only('Product Category', function () {
 	
 	it ('Test Request, insert product category, route: productCategory, method: POST', function(done) {
-		var obj = { "token": token.token, "ds_descricao": "teste" };
-		console.log(common.routes.productCategory.postInsertProductCategory);
+		var obj = { 
+			"describe": "teste" 
+		};
+		
 		request(config.application.url)
 		.post(common.routes.productCategory.postInsertProductCategory)
 		.send(obj)
 		.set('Accept', 'application/json')
+		.set('x-access-token', token)
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {
@@ -28,12 +31,13 @@ describe.only('Product Category', function () {
 	});
 
 	it ('Test Request, get all category, route: productCategory, method: GET', function (done) {
+		
 		var obj = { "token": token.token };
 
 		request(config.application.url)
 		.get(common.routes.productCategory.getGetAllCategory)
-		.send(obj)
 		.set('Accept', 'application/json')
+		.set('x-access-token', token)
 		.expect('Content-Type', /json/)
 		.expect(200)
 		.end(function (err, res) {
@@ -52,23 +56,25 @@ describe.only('Product Category', function () {
 	});
 
 	it ('Test DAO, insert product category, method: insertOne', function (done) {
-		
-		categoryDAO.insertOne('teste', function (callback) {
+		var obj = {	describe : 'teste' }
+
+		categoryDAO.insertOne(obj, function (callback) {
 			if (callback.productCategory.id != undefined && callback.productCategory.id > 0){
 				done();
 			} else {
 				throw 'Unexpected result';
 			}
-
 		});
 	});
 
 	it ('Test DAO, find category by describe, method findByDescribe', function (done) {
-		categoryDAO.findByDescribe('teste', function (callback) {
+		var obj = {	describe : 'teste' }
+
+		categoryDAO.findByDescribe(obj, function (callback) {
 			if (callback != null && callback.id > 0)
 				done();
-
-			throw 'Unexpected result';
+			else 
+				throw 'Unexpected result';
 		});
 	});
 
@@ -93,8 +99,8 @@ describe.only('Product Category', function () {
 	});	
 
 	it ('Test DAO, delete product category, method: deleteByDescribe', function (done) {
-		
-		categoryDAO.deleteByDescribe("teste", function (callback) {
+		var obj = {	describe : 'teste' }
+		categoryDAO.deleteByDescribe(obj, function (callback) {
 			if (callback > 0)
 				done();
 			else 
@@ -126,13 +132,13 @@ describe.only('Product Category', function () {
 
 	it ('Test BUS, insert one, method', function (done) {
 		try {
-			var obj = { "ds_descricao": 'teste buss' };
+			var obj = { "describe": 'teste buss' };
 
 			categoryBUS.InsertProductCategory(obj, function (callback) {
 				if (callback.success) 
 					done();
-
-				throw callback.error;
+				else 
+					throw callback.error;
 			});
 		} catch (e) {
 			throw 'Exception, Não foi possível inserir a categoria. ' + e;

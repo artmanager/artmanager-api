@@ -11,7 +11,7 @@ ProductCategoryDAO.prototype.insertOne = function (obj, callback) {
 		.findOrCreate(
 			{ where : 
 				{ 
-					ds_descricao: obj.ds_descricao
+					ds_describe: obj.describe
 				}
 			})
 			.spread(function (category, created) {
@@ -34,14 +34,14 @@ ProductCategoryDAO.prototype.findById = function (id, callback) {
 	}
 };
 
-ProductCategoryDAO.prototype.findByDescribe = function (describe, callback) {
+ProductCategoryDAO.prototype.findByDescribe = function (obj, callback) {
 	try {
 
 		CategoryModel
 			.findOne (
 				{ where :
 					{ 
-						ds_descricao  : describe
+						ds_describe  : obj.describe
 					}
 				})
 				.then(function (obj) {
@@ -53,14 +53,14 @@ ProductCategoryDAO.prototype.findByDescribe = function (describe, callback) {
 	}
 };
 
-ProductCategoryDAO.prototype.deleteByDescribe  = function (describe, callback) {
+ProductCategoryDAO.prototype.deleteByDescribe  = function (obj, callback) {
 	try {
 
 		CategoryModel
 			.destroy(
 				{ where : 
 					{
-						ds_descricao: describe
+						ds_describe: obj.describe
 					}
 				}).then(function(obj) {
 					callback(obj);

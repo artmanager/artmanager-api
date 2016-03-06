@@ -1,9 +1,9 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
     endereco = require('./AddressModel'),
-    telefone = require('./TelefoneModel');
+    telefone = require('./PhoneModel');
 
-var forncedor = sequelize.define('tb_fornecedor', {
+var supplier = sequelize.define('tb_supplier', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -15,46 +15,25 @@ var forncedor = sequelize.define('tb_fornecedor', {
         }
     },
 
-    id_endereco: {
-        type: dataTypes.INTEGER,
-        field: 'id_endereco',
-        references: {
-            model: endereco,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_endereco');
-        },
-        set : function (val) {
-            this.setDataValue('id_endereco', val);
-        }
-    },
-
-    id_telefone: {
-        type: dataTypes.INTEGER,
-        field: 'id_telefone',
-        references: {
-            model: telefone,
-            key: 'id',
-            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
-        },
-        get : function () {
-            return this.getDataValue('id_telefone');
-        },
-        set : function (val) {
-            this.setDataValue('id_telefone', val);
-        }
-    },
-
-    ds_nome: {
+    ds_name: {
         type: dataTypes.STRING,
-        field: 'ds_nome',
+        field: 'ds_name',
         get : function () {
-            return this.getDataValue('ds_nome');
+            return this.getDataValue('ds_name');
         },
         set : function (val) {
-            this.setDataValue('ds_nome', val);
+            this.setDataValue('ds_name', val);
+        }
+    },
+
+    ds_email: {
+        type: dataTypes.STRING,
+        field: 'ds_email',
+        get : function () {
+            return this.getDataValue('ds_email');
+        },
+        set : function (val) {
+            this.setDataValue('ds_email', val);
         }
     }
 
@@ -63,4 +42,4 @@ var forncedor = sequelize.define('tb_fornecedor', {
     timestamps: false
 });
 
-module.exports = forncedor;
+module.exports = supplier;

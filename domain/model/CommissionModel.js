@@ -1,8 +1,8 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    produto = require('ProdutoModel');
+    product = require('ProductModel');
 
-var comissao = sequelize.define('tb_comissao', {
+var commission = sequelize.define('tb_commission', {
     
     id: {
         type: dataTypes.INTEGER,
@@ -14,30 +14,30 @@ var comissao = sequelize.define('tb_comissao', {
         }
     },
 
-    id_produto: {
+    id_product: {
         type: dataTypes.INTEGER,
-        field: 'id_produto',
+        field: 'id_product',
         references: {
-            model: produto,
+            model: product,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_produto');
+            return this.getDataValue('id_product');
         },
         set : function (val) {
-            this.setDataValue('id_produto', val)
+            this.setDataValue('id_product', val)
         }
     },
 
-    vl_porcentagem: {
+    lv_percentage: {
         type: dataTypes.DECIMAL,
-        field: 'vl_procentagem',
+        field: 'lv_percentage',
         get : function () {
-            return this.getDataValue('vl_porcentagem');
+            return this.getDataValue('lv_percentage');
         },
         set : function (val) {
-            this.setDataValue('vl_porcentagem', val)
+            this.setDataValue('lv_percentage', val)
         }
     }
 
@@ -47,4 +47,4 @@ var comissao = sequelize.define('tb_comissao', {
 });
 
 
-module.exports = comissao;
+module.exports = commission;

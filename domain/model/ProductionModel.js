@@ -1,11 +1,11 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    cliente = require('ClienteModel'),
-    produto = require('ProdutoModel'),
-    pedido = require('PedidoModel'),
-    usuario = require('UsuarioModel');
+    client = require('ClientModel'),
+    product = require('ProductModel'),
+    which = require('WhichModel'),
+    user = require('UserModel');
 
-var producao = sequelize.define('tb_producao', {
+var production = sequelize.define('tb_production', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -18,101 +18,101 @@ var producao = sequelize.define('tb_producao', {
 
     },
 
-    id_cliente: {
+    id_client: {
         type: dataTypes.INTEGER,
-        field: 'id_cliente',
+        field: 'id_client',
         references: {
-            model: cliente,
+            model: client,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_cliente');
+            return this.getDataValue('id_client');
         }, 
         set : function (val) {
-            this.setDataValue('id_cliente', val);
+            this.setDataValue('id_client', val);
         }
 
     },
 
-    id_produto: {
+    id_product: {
         type: dataTypes.INTEGER,
-        field: 'id_producao',
+        field: 'id_product',
         references: {
-            model: produto,
+            model: product,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_produto');
+            return this.getDataValue('id_product');
         }, 
         set : function (val) {
-            this.setDataValue('id_produto', val);
+            this.setDataValue('id_product', val);
         }
     },
 
-    id_pedido: {
+    id_which: {
         type: dataTypes.INTEGER,
-        field: 'id_pedido',
+        field: 'id_which',
         references: {
-            model: pedido,
+            model: which,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_pedido');
+            return this.getDataValue('id_which');
         }, 
         set : function (val) {
-            this.setDataValue('id_pedido', val);
+            this.setDataValue('id_which', val);
         }
     },
 
-    id_usuario: {
+    id_user: {
         type: dataTypes.INTEGER,
-        field: 'id_usuario',
+        field: 'id_user',
         references: {
             model: usuario,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_usuario');
+            return this.getDataValue('id_user');
         }, 
         set : function (val) {
-            this.setDataValue('id_usuario', val);
+            this.setDataValue('id_user', val);
         }
     },
 
-    dt_data_inicio: {
+    dt_start_date: {
         type: dataTypes.DATE,
-        field: 'dt_data_inicio',
+        field: 'dt_start_date',
         get : function () {
-            return this.getDataValue('dt_data_inicio');
+            return this.getDataValue('dt_start_date');
         }, 
         set : function (val) {
-            this.setDataValue('dt_data_inicio', val);
+            this.setDataValue('dt_start_date', val);
         }
     },
 
-    dt_data_entrega: {
+    dt_delivery_date: {
         type: dataTypes.DATE,
-        field: 'dt_data_entrega',
+        field: 'dt_delivery_date',
         get : function () {
-            return this.getDataValue('dt_data_entrega');
+            return this.getDataValue('dt_delivery_date');
         }, 
         set : function (val) {
-            this.setDataValue('dt_data_entrega', val);
+            this.setDataValue('dt_delivery_date', val);
         }
     },
 
-    vl_porcentagem_conclusao: {
+    lv_percentage: {
         type: dataTypes.DECIMAL,
         field: 'vl_porcetagem',
         get : function () {
-            return this.getDataValue('vl_porcentagem_conclusao');
+            return this.getDataValue('lv_percentage');
         }, 
         set : function (val) {
-            this.setDataValue('vl_porcentagem_conclusao', val);
+            this.setDataValue('lv_percentage', val);
         }
     },
 
@@ -121,5 +121,5 @@ var producao = sequelize.define('tb_producao', {
     timestamps: false
 });
 
-module.exports = producao;
+module.exports = production;
 

@@ -3,7 +3,7 @@ var sequelize = require('../../db/postgres'),
     categoriaProduto = require('ProductCategoryModel'),
     fornecedor = require('SupplierModel');
 
-var produto = sequelize.define('tb_produto', {
+var product = sequelize.define('tb_product', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -15,113 +15,113 @@ var produto = sequelize.define('tb_produto', {
         },
     },
 
-    id_categoria_produto: {
+    id_product_category: {
         type: dataTypes.INTEGER,
-        field: 'id_categoria_produto',
+        field: 'id_product_category',
         references: {
             model: categoriaProduto,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_categoria_produto');
+            return this.getDataValue('id_product_category');
         },
         set : function (val) {
-            this.setDataValue('id_categoria_produto', val);
+            this.setDataValue('id_product_category', val);
         }
 
     },
 
-    id_fornecedor: {
+    id_supplier: {
         type: dataTypes.INTEGER,
-        field: 'id_fornecedor',
+        field: 'id_supplier',
         references: {
             model: fornecedor,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
         get : function () {
-            return this.getDataValue('id_fornecedor');
+            return this.getDataValue('id_supplier');
         },
         set : function (val) {
-            this.setDataValue('id_fornecedor', val);
+            this.setDataValue('id_supplier', val);
         }
     },
 
-    ds_nome: {
+    ds_name: {
         type: dataTypes.STRING,
-        field: 'ds_nome',
+        field: 'ds_name',
         get : function () {
-            return this.getDataValue('ds_nome');
+            return this.getDataValue('ds_name');
         },
         set : function (val) {
-            this.setDataValue('ds_nome', val);
+            this.setDataValue('ds_name', val);
         }
     },
 
-    ds_tamanho: {
+    ds_size: {
         type: dataTypes.STRING,
-        field: 'ds_tamanho',
+        field: 'ds_size',
         get : function () {
-            return this.getDataValue('ds_tamanho');
+            return this.getDataValue('ds_size');
         },
         set : function (val) {
-            this.setDataValue('ds_tamanho');
+            this.setDataValue('ds_size');
         }
     },
 
-    ds_peso: {
+    ds_weight: {
         type: dataTypes.STRING,
-        field: 'ds_peso',
+        field: 'ds_weight',
         get : function () {
-            return this.getDataValue('ds_peso');
+            return this.getDataValue('ds_weight');
         },
         set : function (val) {
-            this.setDataValue('ds_peso', val);
+            this.setDataValue('ds_weight', val);
         }
     },
 
-    ds_descricao: {
+    ds_describe: {
         type: dataTypes.STRING,
-        field: 'ds_descricao',
+        field: 'ds_describe',
         get : function () {
-            return this.getDataValue('ds_descricao');
+            return this.getDataValue('ds_describe');
         },
         set : function (val) {
-            this.setDataValue('ds_descricao', val);
+            this.setDataValue('ds_describe', val);
         }
     },
 
-    vl_custo: {
+    vl_cost: {
         type: dataTypes.DECIMAL,
-        field: 'vl_custo',
+        field: 'vl_cost',
         get : function () {
-            return this.getDataValue('vl_custo');
+            return this.getDataValue('vl_cost');
         },
         set : function (val) {
-            this.setDataValue('vl_custo', val);
+            this.setDataValue('vl_cost', val);
         }
     },
 
-    vl_preco_venda: {
+    vl_sale_cost: {
         type: dataTypes.DECIMAL,
-        field: 'vl_preco_venda',
+        field: 'vl_sale_cost',
         get : function () {
-            return this.getDataValue('vl_preco_venda');
+            return this.getDataValue('vl_sale_cost');
         },
         set : function (val) {
-            this.setDataValue('vl_preco_venda', val);
+            this.setDataValue('vl_sale_cost', val);
         }
     },
 
-    nr_quantidade: {
+    nr_quantity: {
         type: dataTypes.INTEGER,
-        field: 'nr_quantidade',
+        field: 'nr_quantity',
         get : function () {
-            return this.getDataValue('nr_quantidade');
+            return this.getDataValue('nr_quantity');
         },
         set : function (val) {
-            this.setDataValue('nr_quantidade', val);
+            this.setDataValue('nr_quantity', val);
         }
     }
 

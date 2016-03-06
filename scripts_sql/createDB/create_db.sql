@@ -18,7 +18,8 @@ create table tb_client (
 create table tb_supplier (
 	id Serial,
 	ds_name varchar(100),
-	constraint pk_id_supplier primary key (ID),
+	ds_email varchar(100),
+	constraint pk_id_supplier primary key (id)
 );
 
 create table tb_address (
@@ -104,11 +105,11 @@ create table tb_production (
 	constraint pk_production_id primary key (id),
 	constraint fk_production_client_id_client foreign key (id_client) references tb_client (id),
 	constraint kf_production_product_id_product foreign key (id_product) references tb_product (id),
-	constraint fk_production_which_id_which ID_PEDIDO foreign key (id_which) references tb_which (id),
+	constraint fk_production_which_id_which foreign key (id_which) references tb_which (id),
 	constraint fk_production_user_id_user foreign key (id_user) references tb_user (id)
 );
 
-create table TB_product_which (
+create table tb_product_which (
 	id_which integer not null,
 	id_product integer not null,
 	constraint fk_id_which foreign key (id_which) references tb_which (id),

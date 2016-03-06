@@ -1,10 +1,7 @@
 var sequelize = require('../../db/postgres');
 var dataTypes = require('sequelize');
-var endereco = require('./AddressModel');
-var telefone  = require('./TelefoneModel');
 
-
-var usuario = sequelize.define('tb_usuario', {
+var user = sequelize.define('tb_user', {
 
     id: {
         type: dataTypes.INTEGER,
@@ -16,47 +13,47 @@ var usuario = sequelize.define('tb_usuario', {
         }
     },
 
-    ds_nome: {
+    ds_name: {
         type: dataTypes.STRING,
-        field: 'ds_nome',
+        field: 'ds_name',
         get : function () {
-            return this.getDataValue('ds_nome');
+            return this.getDataValue('ds_name');
         },
         set : function (val) {
-            this.setDataValue('ds_nome', val);
+            this.setDataValue('ds_name', val);
         }
     },
 
-    ds_usuario: {
+    ds_user: {
         type: dataTypes.STRING,
-        field: 'ds_usuario',
+        field: 'ds_user',
         get : function () {
-            return this.getDataValue('ds_usuario');
+            return this.getDataValue('ds_user');
         },
         set : function (val) {
-            this.setDataValue('ds_usuario', val);
+            this.setDataValue('ds_user', val);
         }
     },
 
-    ds_senha: {
+    ds_password: {
         type: dataTypes.STRING,
-        field: 'ds_senha',
+        field: 'ds_password',
         get : function () {
-            return this.getDataValue('ds_senha');
+            return this.getDataValue('ds_password');
         },
         set : function (val) {
-            this.setDataValue('ds_senha', val);
+            this.setDataValue('ds_password', val);
         }
     },
 
-    nr_perfil: {
+    nr_profile: {
         type: dataTypes.INTEGER,
-        field: 'nr_perfil',
+        field: 'nr_profile',
         get : function () {
-            return this.getDataValue('nr_perfil');
+            return this.getDataValue('nr_profile');
         },
         set : function (val) {
-            this.setDataValue('nr_perfil', val);
+            this.setDataValue('nr_profile', val);
         }
     },
 
@@ -65,4 +62,4 @@ var usuario = sequelize.define('tb_usuario', {
     timestamps: false
 });
 
-module.exports = usuario;
+module.exports = user;

@@ -6,7 +6,7 @@ SupplierService.prototype.InsertOne(req, res) {
 	try {
 		var obj = res.body;
 		
-		if (obj.ds_nome == undefined || obj.ds_nome == null)
+		if (obj.name == undefined || obj.name == null)
 			res.json({ error : 'Por favor envie o nome do fornecedor'});
 
 	} catch (e) {
