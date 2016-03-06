@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 var promise = require('bluebird');
 var decrip = require('atob');
-var usuarioDAO = require('../domain/dao/UsuarioDAO');
+var userDAO = require('../domain/dao/UserDAO');
 var properties = require('properties'),
 	config 	= require('../config/config.js'),
 	common 	= require('../../artmanager-common/common.js');
@@ -11,6 +11,7 @@ var properties = require('properties'),
  }
 
  Authentication.prototype.GenerateToken = function (req, res, next)  {
+ 	console.log('AuthenticationService - GenerateToken - Receive request');
 	var body, obj, user;
 	body = this;
 	try	{
@@ -22,7 +23,7 @@ var properties = require('properties'),
 			senha	: param[1]
 		};
 
-		usuarioDAO.findOne(user, function (r) {
+		userDAO.findOne(user, function (r) {
 			if (r == null || r == undefined) {
 				res.json({erro : 'Usuário ou senha inválidos.'});
 				return;
@@ -47,13 +48,14 @@ var properties = require('properties'),
 
  Authentication.prototype.ValidateToken = function(req, res, next) {
  	try	{
+ 		console.log('AuthenticationService - ValidateToken - Receive request');
 
  		if (req.url == common.routes.authentication.postGenerateToken) {
  			next(); 		
  			return;
  		}
 
- 		var token = req.body.token;
+ 		var token = req.headers['x-access-token'];
  		
  		if (token == null || token == undefined) {
  			res.json({ erro: 'invalid token'});
