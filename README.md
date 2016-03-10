@@ -72,30 +72,79 @@ stderr_logfile_backups=0
 stderr_logfile_maxbytes=0
 ```
 
-## Configuração do proxy reverso com NGINX
-
- - ** Api terá que ser acessada com $endpoint:8888/api **
+## Configuração do NGINX para API
 
 ```
 server {
-    listen 8888 default_server;
-    listen [::]:8888 default_server ipv6only=on;
-
-    sccess_log /var/log/nginx/artmanager-api.log main;
-    error_log  /var/log/nginx/artmanager-api-error.log;
-
-    server_name localhost;
+    listen 80 default_server;
+    access_log /var/log/nginx/artmanager-api.log;
+    error_log  /var/log/nginx/artmanager-api-error.log debug;
+    server_name api.artmanager.com.br;
 
     location / {
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-NginX-Proxy true;
-
-        proxy_intercept_errors on;
-        recursive_error_pages  on;
-
-        include          proxy_params;
-
         proxy_pass http://localhost:3000;
     }
 }
+```
+
+## Configuração do proxy reverso no MONIT
+
+```
+server {
+  listen 80;
+  server_name monit.artmanager.com.br;
+
+  location / {
+    proxy_pass http://localhost:2812;
+ }
+}
+```
+
+## Configuração de monitoramento com o MONIT
+
+```
+set daemon 60
+set logfile /var/log/monit.log
+set idfile /var/.monit.id
+
+####### MONIT UI ######
+
+set httpd
+    port 2812
+    use address 0.0.0.0
+    allow 127.0.0.1
+
+####### SERVICES ######
+
+check system $HOST
+    if loadavg (5min) > 3 then alert
+    if loadavg (15min) > 1 then alert
+    if memory usage > 80% for 2 cycles then alert
+    if swap usage > 20% for 4 cycles then alert
+    if cpu usage (user) > 80% for 2 cycles then alert
+    if cpu usage (system) > 20% for 2 cycles then alert
+    if cpu usage (wait) > 80% for 2 cycles then alert
+
+## nginx
+check process nginx
+  with pidfile /run/nginx.pid
+  start program = "/etc/init.d/nginx start"
+  stop program = "/etc/init.d/nginx stop"
+  if failed host 127.0.0.1 port 80 for 2 cycles then restart
+  if failed host 127.0.0.1 port 80 then exec /etc/monit/slack.rb else if succeeded then exec /etc/monit/slack.rb
+
+## api
+check host api.artmanager with address api.artmanager.com.br
+  start program = "/etc/init.d/supervisor start"
+  stop program = "/etc/init.d/supervisor stop"
+  if failed host api.artmanager.com.br port 80 then exec /etc/monit/slack.rb else if succeeded then exec /etc/monit/slack.rb
+  if failed host api.artmanager.com.br port 80 for 2 cycles then restart
+
+## supervisor
+check process supervisor
+  with pidfile /run/supervisord.pid
+  start program = "/etc/init.d/supervisor start"
+  stop program = "/etc/init.d/supervisor stop"
+  if changed pid for 4 cycles then restart
+  if changed pid then exec /etc/monit/slack.rb
 ```
