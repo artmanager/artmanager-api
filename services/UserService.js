@@ -17,12 +17,12 @@ UserService.prototype.UserRegister = function (req, res) {
 	try {
 		var obj = req.body;	
 		console.log('Request - User - UserRegister');
-		console.log(obj.user.user);
+		console.log(obj.user);
 		if (obj.user.user == undefined || obj.user.user == null || obj.user.user == '') {
-			res.json({ erro : 'Usuario inválido.'});
+			return res.json({ error : 'Usuario inválido.'});
 		}
 		else if (obj.user.password == undefined || obj.user.password == null || obj.user.password == '') {
-			res.json({ erro: 'Senha inválida'});
+			return res.json({ error : 'Senha inválida'});
 		}
 		console.log('Send Business');
 		userBus.UserRegister(obj.user, function (callback) {

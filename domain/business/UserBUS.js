@@ -11,7 +11,7 @@ UserBus.prototype.UserConsult  = function(obj, callback){
 		usuario : obj.usuario
 	};
 
-	userDao.findOne(consult, function (sucesso){
+	userDao.FindOne(consult, function (sucesso){
 		callback = sucesso;
 	}).spread(function (user, created) {
 
@@ -23,7 +23,7 @@ UserBus.prototype.UserRegister = function (obj, callback) {
 	console.log('Bus - UserRegister');
 	console.log('Send to DAO');
 	if (obj != null && obj != undefined) {
-		userDao.insertOne(obj, function (result) {
+		userDao.InsertOne(obj, function (result) {
 			callback({ success : 'Usuário Cadastrado com sucesso.' });
 		});
 	} else {

@@ -27,7 +27,7 @@ class UserDAO {
 	}
 
 	InsertOne(obj, callback) {
-		console.log(obj)
+		console.log(obj);
 		if (obj != null && obj != undefined) {
 			var hash = cripto(obj.password);
 			UserModel.findOrCreate({ 

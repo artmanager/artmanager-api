@@ -32,113 +32,115 @@ describe.only('Users', function (){
 		});
 	});
 
-	// it ('Test DAO - User - find one', function (done) {
-	// 	var obj = {
-	// 		user : 'artmanager',
-	// 		password : 'artmanager'
-	// 	};
+	it ('Test DAO - User - find one', function (done) {
+		var obj = {
+			user : 'artmanager',
+			password : 'artmanager'
+		};
 
-	// 	userDAO.FindOne(obj, function (callback) {
-	// 		if (callback.id > 0 && callback.ds_user == obj.user) {
-	// 			done();
-	// 		}
-	// 		else if (callback == null ){
-	// 			throw 'User not found';
-	// 		}
-	// 		else {
-	// 			throw 'Unexpected result';
-	// 		}
-	// 	});
-	// });
+		userDAO.FindOne(obj, function (callback) {
+			if (callback.id > 0 && callback.ds_user == obj.user) {
+				done();
+			}
+			else if (callback == null ){
+				throw 'User not found';
+			}
+			else {
+				throw 'Unexpected result';
+			}
+		});
+	});
 
-	// it('Test DAO - User - change password of user', function (done) {
-	// 	var obj = {
-	// 		name 	: 'gustavo',
-	// 		user 	: 'artmanager',
-	// 		password: '56',
-	// 		profile: 1
-	// 	};
+	it('Test DAO - User - change password of user', function (done) {
+		var obj = {
+			name 	: 'gustavo',
+			user 	: 'artmanager',
+			password: '56',
+			profile: 1
+		};
 
-	// 	userDAO.UpdatePassword(obj, function (callback) {
+		userDAO.UpdatePassword(obj, function (callback) {
 	
-	// 		if (callback.result.length > 0 && callback.result.length) {
-	// 			done();
-	// 		} else if (callback == null) {
-	// 			throw 'Update failed, Error: ' + callback;
-	// 		} else 
-	// 			throw 'Unexpected result';
-	// 	});
-	// });
+			if (callback.result.length > 0 && callback.result.length) {
+				done();
+			} else if (callback == null) {
+				throw 'Update failed, Error: ' + callback;
+			} else 
+				throw 'Unexpected result';
+		});
+	});
 
-	// it ('Test DAO - User - delete user', function (done) {
-	// 	var obj = {
-	// 		name 	 : 'gustavo',
-	// 		user 	 : 'artmanager',
-	// 		password : '56'
-	// 	};
+	it ('Test DAO - User - delete user', function (done) {
+		var obj = {
+			name 	 : 'gustavo',
+			user 	 : 'artmanager',
+			password : '56'
+		};
 
-	// 	userDAO.DeleteUser(obj, function (callback) {
-	// 		console.log(callback);
-	// 		if (callback > 0) {
-	// 			done();
-	// 		} else if (callback <= 0 != null) {
-	// 			throw 'Usuário não encontrato ' + callback;
-	// 		} else {
-	// 			throw 'Unexpected result: ' + callback; 
-	// 		}
-	// 	});
-	// });
+		userDAO.DeleteUser(obj, function (callback) {
+			console.log(callback);
+			if (callback > 0) {
+				done();
+			} else if (callback <= 0 != null) {
+				throw 'Usuário não encontrato ' + callback;
+			} else {
+				throw 'Unexpected result: ' + callback; 
+			}
+		});
+	});
 
 	
-	// it ('Test User - register user', function (done) {
-	// 	var obj = { 
-	// 		"user"  : { 
-	// 			"name" 	  	: "gustavo", 
-	// 			"user" 		: "artmanager", 
-	// 			"password"  : "artmanager", 
-	// 			"perfil"  	: 1
-	// 		}
-	// 	};
+	it ('Test User - register user', function (done) {
+		var obj = { 
+			"user"  : { 
+				"name" 	  	: "gustavo", 
+				"user" 		: "artmanager", 
+				"password"  : "artmanager", 
+				"perfil"  	: 1
+			}
+		};
 	
-	// 	request(config.application.url)
-	// 	.post(common.routes.user.postUsers)
-	// 	.send(obj)
-	// 	.set('Accept', 'application/json')
-	// 	.set('x-access-token', token)
- //      	.expect('Content-Type', /json/)
- //      	.expect(200)
-	// 	.end(function (err, res) {
-	// 		if (err) 
-	// 			throw err;
+		request(config.application.url)
+		.post(common.routes.user.postUsers)
+		.send(obj)
+		.set('Accept', 'application/json')
+		.set('x-access-token', token)
+      	.expect('Content-Type', /json/)
+      	.expect(200)
+		.end(function (err, res) {
 
-	// 		var result = res.body;
-	// 		if (result.success == 'Usuário Cadastrado com sucesso.') {
-	// 			done();
-	// 		}
-	// 		else {
-	// 			throw result.erro;
-	// 		}
-	// 	});
-	// });
+			console.log(res);
+			if (err) 
+				throw err;
 
-	// it('Test User -consult user by login', function (done) {
-	// 	var obj = { 
-	// 		user : 'artmanager'
-	// 	};
+			var result = res.body;
+			if (result.success) {
+				done();
+			}
+			else {
+				throw result.error;
+			}
+		});
+	});
 
-	// 	request(config.application.url)
-	// 	.get(common.routes.user.getAllUsers)
-	// 	.send(obj)
-	// 	.set('Accept', 'application/json')
-	// 	.set('x-access-token', token)
-	// 	.expect('Content-Type', /json/)
-	// 	.expect(200)
-	// 	.end(function (err, res) {
-	// 		if (err)
-	// 			throw err;
+	it('Test User -consult user by login', function (done) {
+		var obj = { 
+			user : 'artmanager'
+		};
 
-	// 		done();
-	// 	});
-	// });
+		request(config.application.url)
+		.get(common.routes.user.getAllUsers)
+		.send(obj)
+		.set('Accept', 'application/json')
+		.set('x-access-token', token)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.end(function (err, res) {
+			if (err)
+				throw err;
+
+			done();
+		});
+	});
 });
 
