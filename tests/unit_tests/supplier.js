@@ -30,6 +30,8 @@ describe.only('Supplier', function () {
 			
 			if (callback.length > 0){
 				done();
+
+				
 			}
 			else if (callback == null) {
 				throw 'Nenhum fornecedor encontrato';
