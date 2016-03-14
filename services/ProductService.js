@@ -1,24 +1,22 @@
-function ProductService() {
+"use strict"
+var productBUS = require("../domain/business/ProductBUS");
 
-}
+class ProductService {
+	InsertProduct(req, res) {
+		try {
+			var obj = req.body;
+			if (obj == null){
+				return res.json({ error: 'Parametros do produto não localizados'});
+			}
 
-ProductService.prototype.InsertProduct = function(req, res) {
-	try {
-		var obj = res.body;
+			productBUS.InsertOne(obj, function (callback) {
+				return res.json(callback);
+			});
 
-		if (obj == null){
-			res.json({ error: 'Parametros do produto não localizados'});
+		} catch (e) {
+			res.json({error : e });
 		}
-
-		res.json({ success: 'Produto cadastrado com sucesso.'});
-
-	} catch (e) {
-		res.json({error : e });
 	}
-}
-
-ProductService.prototype.GetOneProduct = function(req, res) {
-
 }
 
  

@@ -1,7 +1,7 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    categoriaProduto = require('ProductCategoryModel'),
-    fornecedor = require('SupplierModel');
+    categoriaProduto = require('./ProductCategoryModel'),
+    fornecedor = require('./SupplierModel');
 
 var product = sequelize.define('tb_product', {
 
@@ -66,7 +66,7 @@ var product = sequelize.define('tb_product', {
             return this.getDataValue('ds_size');
         },
         set : function (val) {
-            this.setDataValue('ds_size');
+            this.setDataValue('ds_size', val);
         }
     },
 
@@ -130,4 +130,4 @@ var product = sequelize.define('tb_product', {
     timestamps: false
 });
 
-module.exports = produto;
+module.exports = product;
