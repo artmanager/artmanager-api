@@ -38,6 +38,7 @@
     "util": "^0.10.3"
   },
   "devDependencies": {
+    "async": "^1.5.2",
     "gulp-nodemon": "^2.0.6",
     "mocha": "^2.3.1",
     "nodemon": "^1.8.1",

@@ -49,7 +49,7 @@ var properties = require('properties'),
  Authentication.prototype.ValidateToken = function(req, res, next) {
  	try	{
  		console.log('AuthenticationService - ValidateToken - Receive request');
-
+ 		console.log('Route: ' + req.url);
  		if (req.url == common.routes.authentication.postGenerateToken) {
  			next(); 		
  			return;

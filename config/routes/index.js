@@ -17,6 +17,7 @@ app.use('/', user);
 app.use('/', sales);
 app.use('/', authentication);
 app.use('/', sales);
+app.use('/', supplier);
 app.use('/', client);
 app.use('/', productCategory);
 
