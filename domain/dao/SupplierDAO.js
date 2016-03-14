@@ -33,6 +33,14 @@ class SupplierDAO {
 			callback({ Error : e });
 		}
 	}
+
+	GetAll(callback) {
+		supplierModel
+			.findAll()
+			.then(function (obj) {
+				callback(obj);
+			});
+	}
 }
 
 module.exports = new SupplierDAO(supplierModel);

@@ -20,6 +20,17 @@ class SupplierService {
 			res.json({ error : 'Não foi possível cadastrar o fornecedor. Erro : ' + e });
 		}
 	}
+
+	GetAllSupplier(req, res) {
+		try {
+			supplierBUS.GetAllSupplier(function (result) {
+				
+			});
+		} catch (e) {
+			console.log(e);
+			res.json({ error: 'Não foi possível consultar os fornecedores. ' + e});
+		}
+	};
 }
 
 module.exports = new SupplierService();

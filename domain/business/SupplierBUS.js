@@ -72,6 +72,10 @@ class SupplierBUS {
 		else 
 			callback({ error : 'supplier error' });
 	}
+
+	GetAllCategory(callback) {
+		
+	}
 }
 
 module.exports = new SupplierBUS();

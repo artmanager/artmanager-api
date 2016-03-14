@@ -25,6 +25,20 @@ describe.only('Supplier', function () {
 		});
 	});
 
+	it ('Test DAO, get all suppliers, method: GetAllSupplier', function (done) {
+		supplierDAO.GetAll(function (callback) {
+			
+			if (callback.length > 0){
+				done();
+			}
+			else if (callback == null) {
+				throw 'Nenhum fornecedor encontrato';
+			} else {
+				throw 'Unexpected result';
+			}
+		});
+	});
+
 
 	it ('Test BUS, insert one supplier, with one phone and address', function (done) {
 		var obj = {
