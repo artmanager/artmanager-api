@@ -20,7 +20,7 @@ create table tb_supplier (
 	ds_name varchar(100),
 	ds_cpf_cnpj varchar(20),
 	ds_company_name varchar(200),
-	constraint pk_id_supplier primary key (ID),
+	constraint pk_id_supplier primary key (ID)
 );
 
 create table tb_address (
@@ -106,7 +106,7 @@ create table tb_production (
 	constraint pk_production_id primary key (id),
 	constraint fk_production_client_id_client foreign key (id_client) references tb_client (id),
 	constraint kf_production_product_id_product foreign key (id_product) references tb_product (id),
-	constraint fk_production_which_id_which ID_PEDIDO foreign key (id_which) references tb_which (id),
+	constraint fk_production_which_id_which foreign key (id_which) references tb_which (id),
 	constraint fk_production_user_id_user foreign key (id_user) references tb_user (id)
 );
 
