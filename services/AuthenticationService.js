@@ -19,20 +19,21 @@ var properties = require('properties'),
 		param = decrip(param.data);
 		param = param.split('-');
 		user = {
-			usuario : param[0],
-			senha	: param[1]
+			user 		: param[0],
+			password	: param[1]
 		};
+		console.log(user);
 
-		userDAO.findOne(user, function (r) {
+		userDAO.FindOne(user, function (r) {
+			console.log('Result FindOne');
 			if (r == null || r == undefined) {
-				res.json({erro : 'Usuário ou senha inválidos.'});
-				return;
+				return res.json({ error : 'Usuário ou senha inválidos.'});
 			}
-
+	
 			obj = {
 				id : r.id,
-				name : r.ds_usuario,
-				tipo : r.nr_perfil
+				name : r.ds_user,
+				tipo : r.nr_profile
 			};
 
 			body = { 

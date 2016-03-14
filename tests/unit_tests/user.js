@@ -21,23 +21,15 @@ describe.only('Users', function (){
 				profile		: 1
 		};
 		
-		var result = new Promise ((resolve, reject) => {
-			userDAO.InsertOne = obj;
-			return resolve(userDAO);
-		}); 
-		// userDAO.InsertOne(obj);
-
-		console.log(result);
-		done();
-		// userDAO.InsertOne(obj, function (callback) {
-		// 	if (callback.user.ds_user == obj.user && callback.user.id > 0) {
-		// 		done();
-		// 	} else if (callback == null){
-		// 		throw 'Insert error : ' + callback;
-		// 	} else {
-		// 		throw 'Unexpected result';
-		// 	}
-		// });
+		userDAO.InsertOne(obj, function (callback) {
+			if (callback.user.ds_user == obj.user && callback.user.id > 0) {
+				done();
+			} else if (callback == null){
+				throw 'Insert error : ' + callback;
+			} else {
+				throw 'Unexpected result';
+			}
+		});
 	});
 
 	// it ('Test DAO - User - find one', function (done) {
