@@ -1,47 +1,47 @@
+"use strict"
+
 var categoryDao = require('../dao/ProductCategoryDAO');
 
-function ProductCategoryBUS() {
+class ProductCategoryBUS {
+	
+	InsertProductCategory(obj, callback) {
+		if (obj.describe != null) {
+			categoryDao.FindByDescribe(obj.describe, function (result) {
 
-}
+				if (result != undefined || result != null) {
+					callback({ error: "Categoria já cadastrada"});
+				} else {
+					categoryDao.InsertOne(obj, function (category) {
+						if (category.productCategory.id != undefined && category.productCategory.id > 0)
+							callback({ success : 'Categoria cadastrada com sucesso'});
+						else 
+							callback({ error : 'Não foi possível cadastrar a Categoria' });
+					});
+				}
+			});
 
-ProductCategoryBUS.prototype.InsertProductCategory = function(obj, callback) {
-
-	if (obj.describe != null) {
-		categoryDao.findByDescribe(obj.describe, function (result) {
-
-			if (result != undefined || result != null) {
-				callback({ error: "Categoria já cadastrada"});
-			} else {
-				categoryDao.insertOne(obj, function (category) {
-					if (category.productCategory.id != undefined && category.productCategory.id > 0)
-						callback({ success : 'Categoria cadastrada com sucesso'});
-					else 
-						callback({ error : 'Não foi possível cadastrar a Categoria' });
-				});
-			}
-		});
-
-	} else {
-		callback({ error : "Por favor envie uma descrição valida" });
+		} else {
+			callback({ error : "Por favor envie uma descrição valida" });
+		}
 	}
-};
 
-ProductCategoryBUS.prototype.GetAllCategory = function (callback) {
-	categoryDao.getAll(function (result) {
-		var obj = [];
-		var i = 0;
-		result.forEach(function (e) {
-			var o = { 
-				id: e.id, 
-				describe: e.describe 
-			};
+	GetAllCategory(callback) {
+		categoryDao.GetAll(function (result) {
+			var obj = [];
+			result.forEach(function (e) {
+				var o = { 
+					id: e.id, 
+					describe: e.ds_describe 
+				};
 
-			obj[i] = o;
-			i++;
+				obj.push(o);
+			});
+
+			callback(obj);
 		});
-
-		callback(obj);
-	});
+	}
 }
+
+
 
 module.exports = new ProductCategoryBUS();

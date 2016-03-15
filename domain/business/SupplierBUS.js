@@ -79,6 +79,7 @@ class SupplierBUS {
 
 			result.forEach(function (o) {
 				var obj = {
+					id: o.id,
 					name: o.ds_name,
 					email: o.ds_email
 				}

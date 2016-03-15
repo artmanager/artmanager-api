@@ -1,38 +1,37 @@
+"use strict"
 var ProductCategoryBus = require('../domain/business/ProductCategoryBUS');
 
-function ProductCategoryService() {
+class ProductCategoryService {
 
-};
+	InsertProductCategory(req, res) {
+		try {
+			console.log('Request - ProductCategory - InsertProductCategory');
+			var obj = req.body;
+			if (obj.describe == undefined && obj.describe == null) {
+				res.json({error : "Por favor envie uma descrição valida"});
+			} else {
+				ProductCategoryBus.InsertProductCategory(obj, function (callback) {
+					res.json(callback);
+				});
+			}
 
-ProductCategoryService.prototype.InsertProductCategory = function (req, res) {
-	try {
-		console.log('Request - ProductCategory - InsertProductCategory');
-		var obj = req.body;
-		if (obj.describe == undefined && obj.describe == null) {
-			res.json({error : "Por favor envie uma descrição valida"});
-		} else {
-			ProductCategoryBus.InsertProductCategory(obj, function (callback) {
-				res.json(callback);
-			});
+
+		} catch (e) {
+			res.json({ error : e});
 		}
-
-
-	} catch (e) {
-		res.json({ error : e});
 	}
-};
 
-ProductCategoryService.prototype.GetAllCategory = function(req, res) {
-	try {
+	GetAllCategory(req, res) {
+		try {
+			console.log('Request - ProductCategory - GetAllCategory');
+			ProductCategoryBus.GetAllCategory(function (callback) {
+				res.json({ productCategory: callback });
+			});
 
-		console.log('Request - ProductCategory - GetAllCategory');
-		ProductCategoryBus.GetAllCategory(function (callback) {
-			res.json(callback);
-		});
-
-	} catch (e) {
-		res.json({ error: e });
+		} catch (e) {
+			res.json({ error: e });
+		}
 	}
-};
+}
 
 module.exports = new ProductCategoryService();

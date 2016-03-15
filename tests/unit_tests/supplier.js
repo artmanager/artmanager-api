@@ -27,7 +27,7 @@ describe.only('Supplier', function () {
 
 	it ('Test DAO, get all suppliers, method: GetAll', function (done) {
 		supplierDAO.GetAll(function (callback) {
-			
+
 			if (callback.length > 0){
 				done();
 			}
@@ -98,9 +98,6 @@ describe.only('Supplier', function () {
 		.end(function(err, res) {
 
 			var obj = res.body;
-			obj.supplier.forEach(function (o) {
-				console.log(o);
-			});
 
 			if (obj.supplier != null) {
 				done();
@@ -144,7 +141,6 @@ describe.only('Supplier', function () {
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {
-      		console.log(res);
       		if (res.body.success) {
       			done();
       		} else if (res.body.error) {

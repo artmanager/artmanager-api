@@ -42,11 +42,16 @@ describe.only('Product Category', function () {
 		.expect(200)
 		.end(function (err, res) {
 			var result = res.body;
-			if (result.length <= 0) {
+			
+			result.productCategory.forEach(function (o) {
+				console.log(o);
+			});
+
+			if (result.productCategory.length <= 0) {
 				console.log('Não existem categorias cadastradas.');
 				done();
-			} else if (result.length > 0) {
-				console.log('Existem ' + result.length + ' categorias');
+			} else if (result.productCategory.length > 0) {
+				console.log('Existem ' + result.productCategory.length + ' categorias');
 				done();
 			} else {
 				throw 'Unexpected result';
@@ -58,7 +63,7 @@ describe.only('Product Category', function () {
 	it ('Test DAO, insert product category, method: insertOne', function (done) {
 		var obj = {	describe : 'teste' }
 
-		categoryDAO.insertOne(obj, function (callback) {
+		categoryDAO.InsertOne(obj, function (callback) {
 			if (callback.productCategory.id != undefined && callback.productCategory.id > 0){
 				done();
 			} else {
@@ -70,7 +75,7 @@ describe.only('Product Category', function () {
 	it ('Test DAO, find category by describe, method findByDescribe', function (done) {
 		var obj = {	describe : 'teste' }
 
-		categoryDAO.findByDescribe(obj, function (callback) {
+		categoryDAO.FindByDescribe(obj, function (callback) {
 			if (callback != null && callback.id > 0)
 				done();
 			else 
@@ -80,7 +85,7 @@ describe.only('Product Category', function () {
 
 	it ('Test DAO, consult all category, method: getAll', function (done) {
 		try {
-			categoryDAO.getAll(function(callback) {
+			categoryDAO.GetAll(function(callback) {
 			
 				if (callback.length <= 0) {
 					console.log('Não existe nenhuma categoria cadastrada');
@@ -100,7 +105,7 @@ describe.only('Product Category', function () {
 
 	it ('Test DAO, delete product category, method: deleteByDescribe', function (done) {
 		var obj = {	describe : 'teste' }
-		categoryDAO.deleteByDescribe(obj, function (callback) {
+		categoryDAO.DeleteByDescribe(obj, function (callback) {
 			if (callback > 0)
 				done();
 			else 
