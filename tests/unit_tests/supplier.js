@@ -4,7 +4,7 @@ var request = require('supertest'),
 	config 	= require('../../config/config.js'),
 	common 	= require(config.common.fileCommon);
 
-var token = { "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA"};
+var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA";
 
 describe.only('Supplier', function () {
 
@@ -25,19 +25,32 @@ describe.only('Supplier', function () {
 		});
 	});
 
-	it ('Test DAO, get all suppliers, method: GetAllSupplier', function (done) {
+	it ('Test DAO, get all suppliers, method: GetAll', function (done) {
 		supplierDAO.GetAll(function (callback) {
 			
 			if (callback.length > 0){
 				done();
-
-				
 			}
 			else if (callback == null) {
 				throw 'Nenhum fornecedor encontrato';
 			} else {
 				throw 'Unexpected result';
 			}
+		});
+	});
+
+	it ('Test BUS, get all supplier, method: GetAllSupplier', function (done) {
+		supplierBUS.GetAllSupplier(function (callback) {
+
+			if (callback.length > 0){
+				done();
+			}
+			else if (callback == null) {
+				throw 'Nenhum fornecedor encontrato';
+			} else {
+				throw 'Unexpected result';
+			}
+
 		});
 	});
 
@@ -74,6 +87,32 @@ describe.only('Supplier', function () {
 		
 	});
 
+	it ('Test Request, get all supplier, url: /supplier, method: GET', function (done) {
+
+		request(config.application.url)
+		.get(common.routes.supplier.getGetAllSupplier)
+		.set('Accept', 'application/json')
+		.set('x-access-token', token)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.end(function(err, res) {
+
+			var obj = res.body;
+			obj.supplier.forEach(function (o) {
+				console.log(o);
+			});
+
+			if (obj.supplier != null) {
+				done();
+			} else if (obj.supplier == null) {
+				throw 'Não existe nenhum fornecedor cadastrado';
+			} else {
+				throw 'Unexpected result';
+			}
+
+		});
+	});
+
 	it ('Test Request, insert supplier, url: /supplier, method: POST', function (done) {
 		
 		var obj = {
@@ -101,7 +140,7 @@ describe.only('Supplier', function () {
 		.post(common.routes.supplier.postSupplier)
 		.send(obj)
 		.set('Accept', 'application/json')
-		.set('x-access-token', token.token)
+		.set('x-access-token', token)
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {

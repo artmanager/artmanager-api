@@ -73,8 +73,21 @@ class SupplierBUS {
 			callback({ error : 'supplier error' });
 	}
 
-	GetAllCategory(callback) {
-		
+	GetAllSupplier(callback) {
+		supplierDAO.GetAll(function (result) {
+			var supplier = [];
+
+			result.forEach(function (o) {
+				var obj = {
+					name: o.ds_name,
+					email: o.ds_email
+				}
+
+				supplier.push(obj);
+			});
+
+			callback(supplier);
+		});
 	}
 }
 

@@ -24,7 +24,7 @@ class SupplierService {
 	GetAllSupplier(req, res) {
 		try {
 			supplierBUS.GetAllSupplier(function (result) {
-				
+				res.json({ supplier : result });
 			});
 		} catch (e) {
 			console.log(e);
