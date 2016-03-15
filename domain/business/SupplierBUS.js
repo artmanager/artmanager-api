@@ -17,7 +17,7 @@ class SupplierBUS {
 					supplierDAO.InsertOne(obj.supplier, function (r) {
 						id = r.supplier.id;
 						supplier = r.supplier;
-						 next();
+					 	next();
 					});
 				},
 				function (next) {
