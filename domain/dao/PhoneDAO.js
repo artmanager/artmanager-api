@@ -20,7 +20,8 @@ PhoneDAO.prototype.InsertOne = function(obj, callback) {
 			callback({ Phone: phone, created: created });
 		});
 	} catch (e) {
-
+		console.log('Phone Erro: ' + e);
+		callback({ error : 'Não foi possível inserir o telefone. ' + e});
 	}
 };
 
@@ -31,7 +32,7 @@ PhoneDAO.prototype.InserList = function (obj, callback) {
 			callback(e);
 		});
 	} catch (e) {
-
+		console.log('Phone Erro: ' + e);
 	}
 };
 

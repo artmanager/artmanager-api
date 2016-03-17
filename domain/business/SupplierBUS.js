@@ -33,7 +33,8 @@ class SupplierBUS {
 								city : o.city,
 								state : o.state,
 								country : o.country
-							};
+							}
+							
 							addressDAO.InsertOne(a, function (r) {
 								console.log('Address');
 								n();

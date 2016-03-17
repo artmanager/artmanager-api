@@ -1,6 +1,6 @@
 "use strict"
 var promise = require('bluebird');
-var cliBuss = require('../domain/business/ClientBUS');
+var clientBuss = require('../domain/business/ClientBUS');
 
 class ClientService {
 
@@ -9,17 +9,12 @@ class ClientService {
 			
 			var param = req.body;
 			
-			if (param.nome == null ||  param.nome == undefined)
-				res.json({ erro : 'Por favor envie o nome do cliente.' });
+			if (param.client == null ||  param.client == undefined)
+				res.json({ erro : 'Objeto client não encontrado.' });
 			
-			if (param.email == null || param.email == undefined)
-				res.json({ erro: 'Por favor envie um E-mail valido'});
-
-			cliBuss.CadastroCliente(param, function(obj) {
+			clientBuss.ClientRegister(param, function(obj) {
 				res.json(obj);
 			});
-			
-			res.json({ success : 'Cliente cadastrado com sucesso. ' });
 
 		} catch (e) {
 			console.log(e);

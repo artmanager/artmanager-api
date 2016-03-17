@@ -18,6 +18,8 @@ class ClientDAO {
 					ds_cpf_cnpj : obj.cpf_cnpj
 				}
 			}).spread(function (client, created) {
+				console.log('***************');
+				console.log(client);
 				callback({ client: client, created: created });
 			});
 		}

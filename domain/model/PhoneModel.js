@@ -86,3 +86,5 @@ var phone = sequelize.define('tb_phone', {
 });
 
 module.exports = phone;
+
+

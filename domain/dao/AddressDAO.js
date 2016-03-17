@@ -28,6 +28,7 @@ class AddressDAO {
 				return { Address : addr, created : created }
 			});
 		} catch(e) {
+			console.log('Error Address: ' + e);
 			throw e;
 		}
 	}
