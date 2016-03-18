@@ -4,7 +4,7 @@ var express = require('express'),
 	config 		= require('../config.js');
 	common 		= require(config.common.fileCommon);
 
-router.get('/product',  function(req, res){res.json({'test': 'success'}); });
+router.get(common.routes.product.getAllProducts, Product.FindAllProducts.bind(Product));
 router.get('/product/:id',  function(req, res){res.json({'test': 'success'}); });
 router.post(common.routes.product.postProduct, Product.InsertProduct.bind(Product));
 router.put('/product/:id', function(req, res){res.json({'test': 'success'}); });

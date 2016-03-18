@@ -53,6 +53,15 @@ class ProductDAO  {
 			});
 		}
 	}
+
+	FindAllProducts(callback) {
+		console.log('Find all products');
+		productModel
+			.findAll()
+				.then(function (obj) {
+					callback({ products: obj });
+				});
+	}
 }
 
 module.exports = new ProductDAO(productModel);

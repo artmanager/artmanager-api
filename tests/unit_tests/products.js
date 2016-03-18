@@ -54,6 +54,31 @@ describe.only('Test Products', function () {
 		});
 	});
 
+	it ('Test DAO, find all products, method: FindAllProducts', function (done) {
+
+		productDAO.FindAllProducts(function (callback) {
+			callback.products.forEach(function (o) {
+				console.log(o);
+			});
+
+			if (callback.error == undefined)
+				done();
+			else {
+				throw callback.error;
+			}
+		});
+	});
+
+	it ('Test BUS, find All products, method: FindAllProducts', function (done) {
+		productBUS.FindAllProducts(function (callback) {
+			if (callback.error == undefined)
+				done();
+			else {
+				throw callback.error;
+			}
+		});
+	});
+
 	it ('Test BUS, insert one product, method: InsetOne', function (done) {
 		var obj = {
 			id_product_category: 5,
@@ -68,10 +93,11 @@ describe.only('Test Products', function () {
 		}
 
 		productBUS.InsertOne(obj, function (result) {
-			if (result.success != undefined) {
-				done();
-			} else if (result.error != undefined){
+			
+			if (result.error != undefined) {
 				throw result.error;
+			} else if (result.success != undefined){
+				done();
 			} else  {
 				throw 'Unexpected error';
 			}
@@ -79,7 +105,7 @@ describe.only('Test Products', function () {
 
 	});
 
-	it ('Test request, insert one product, route: /produtc, method: POST ', function (done) {
+	it ('Test request, insert one product, route: /product, method: POST ', function (done) {
 		var obj = {
 			id_product_category: 5,
 			id_supplier : null,
@@ -100,12 +126,31 @@ describe.only('Test Products', function () {
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {
-      		if (res.body.success){
+      		if (res.body.success) {
       			done();
       		} else if (res.body.error) {
-      			throw res.body.error
-      		} else  {
-      			throw 'Unexpected result';
+      			throw 'Não foi possível inserir o produto. Erro: ' + res.error;
+      		} else {
+      			throw 'Unexpected result ' + (err || res.body.error);
+      		}
+      	});
+	});
+
+	it ('Test request, Get all products, route: /product, method: GET', function (done) {
+
+		request(config.application.url)
+		.get(common.routes.product.getAllProducts)
+		.set('Accept', 'application/json')
+		.set('x-access-token', token)
+      	.expect('Content-Type', /json/)
+      	.expect(200)
+      	.end(function (err, res) {
+      		if (res.body.error == undefined) {
+      			done();
+      		} else if (res.body.error) {
+      			throw 'Não foi possível consultar os produtos. Erro: ' + res.error;
+      		} else {
+      			throw 'Unexpected result ' + (err || res.body.error);
       		}
       	});
 	});

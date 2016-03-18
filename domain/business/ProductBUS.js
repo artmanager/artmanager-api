@@ -14,6 +14,8 @@ class ProductcBUS {
 						product = r;
 						next();
 					});
+				} else {
+					callback({ error: 'Parametros do produto invalidos'});
 				}
 			},
 			function (next) {
@@ -24,11 +26,21 @@ class ProductcBUS {
 						if (r.product.id > 0) {
 							next({ success: 'Produto cadastrado com sucesso.'});
 						}
+						else {
+							next({ error: 'Não foi possível cadastrar o produto.'});
+						}
 					});
 				} 
 			}	
-		], (res) =>  {
+		], 	(res) => {
 			callback(res);
+		});
+	}
+
+	FindAllProducts(callback) {
+		console.log('Find all products BUS');
+		productDAO.FindAllProducts(function(result) {
+			callback(result);
 		});
 	}
 }
