@@ -78,6 +78,16 @@ var pedido = sequelize.define('tb_which', {
         set : function (val) {
             this.setDataValue('vl_entrance', val);
         }
+    },
+    vl_discount:  {
+        type: dataTypes.DECIMAL,
+        field: 'vl_discount',
+        get : function () {
+            return this.getDataValue('vl_discount');
+        },
+        set : function (val) {
+            this.setDataValue('vl_discount', val);
+        }
     }
 
 }, {
