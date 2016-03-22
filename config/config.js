@@ -12,6 +12,6 @@ module.exports = {
 		"url" : "http://localhost:3000"
 	},
 	"common" : {
-		"fileCommon" : "../../../artmanager-common/common.js"
+		"fileCommon" : "../../artmanager-common/common.js"
 	}
 }
