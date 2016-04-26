@@ -1,9 +1,19 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    which = require('WhichModel'),
-    product = require('ProductModel');
+    which = require('./WhichModel.js'),
+    product = require('./ProductModel.js');
 
 var productWhich = sequelize.define('tb_product_which', {
+
+    id: {
+        type: dataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'id',
+        get: function () {
+            return this.getDataValue('id');
+        }
+    },
 
     id_which: {
         type: dataTypes.INTEGER,
@@ -35,7 +45,19 @@ var productWhich = sequelize.define('tb_product_which', {
         set : function (val) {
             this.setDataValue('id_product', val);
         }
+    },
+
+    ds_describe: {
+        type: dataTypes.STRING,
+        field: 'ds_describe',
+        get: function () {
+            return this.getDataValue('ds_describe');
+        },
+        set: function (val) {
+            this.setDataValue('ds_describe', val);
+        }
     }
+    
 
 }, {
     freezeTableName: true,

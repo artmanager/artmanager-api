@@ -1,21 +1,20 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    client = require('ClientModel'),
-    product = require('ProductModel'),
-    which = require('WhichModel'),
-    user = require('UserModel');
+    client = require('./ClientModel'),
+    product = require('./ProductModel'),
+    which = require('./WhichModel'),
+    user = require('./UserModel');
 
 var production = sequelize.define('tb_production', {
 
     id: {
         type: dataTypes.INTEGER,
         autoIncrement: true,
-        primariKey: true,
+        primaryKey: true,
         field: 'id',
-        get : function () {
+        get: function () {
             return this.getDataValue('id');
-        }
-
+        },
     },
 
     id_client: {
@@ -71,7 +70,7 @@ var production = sequelize.define('tb_production', {
         type: dataTypes.INTEGER,
         field: 'id_user',
         references: {
-            model: usuario,
+            model: user,
             key: 'id',
             deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
         },
@@ -105,14 +104,14 @@ var production = sequelize.define('tb_production', {
         }
     },
 
-    lv_percentage: {
+    vl_percentage: {
         type: dataTypes.DECIMAL,
-        field: 'vl_porcetagem',
+        field: 'vl_percentage',
         get : function () {
-            return this.getDataValue('lv_percentage');
+            return this.getDataValue('vl_percentage');
         }, 
         set : function (val) {
-            this.setDataValue('lv_percentage', val);
+            this.setDataValue('vl_percentage', val);
         }
     },
 

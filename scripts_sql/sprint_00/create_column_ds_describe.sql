@@ -1,0 +1,1 @@
+﻿alter table tb_product_which add ds_describe varchar(7000);

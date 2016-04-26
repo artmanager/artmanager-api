@@ -88,7 +88,7 @@ create table tb_which (
 	dt_date_which timestamp not null,
 	vl_total_value numeric (15,2),
 	vl_entrance numeric (15,2),
-	vl_discount numeric (15,2) 
+	vl_discount numeric (15,2),
 	constraint pf_which_id primary key (id),
 	constraint fk_which_user_id_user foreign key (id_user) references tb_user (id),
 	constraint fk_which_client_id_client foreign key (id_client) references tb_client (ID)

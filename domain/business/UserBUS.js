@@ -27,7 +27,7 @@ UserBus.prototype.UserRegister = function (obj, callback) {
 			callback({ success : 'Usuário Cadastrado com sucesso.' });
 		});
 	} else {
-		callback({ Error: 'Por favor' })
+	    callback({ Error: 'Não foi possível cadastrar o usuário' });
 	}
 
 }

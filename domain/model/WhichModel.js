@@ -1,18 +1,18 @@
 var sequelize = require('../../db/postgres'),
     dataTypes = require('sequelize'),
-    usuario = require('UsuarioModel'),
-    cliente = require('ClienteModel');
+    usuario = require('./UserModel.js'),
+    cliente = require('./ClientModel.js');
 
 var pedido = sequelize.define('tb_which', {
-
+   
     id: {
         type: dataTypes.INTEGER,
         autoIncrement: true,
-        foreignKey: true,
+        primaryKey: true,
         field: 'id',
-        get : function () {
+        get: function () {
             return this.getDataValue('id');
-        }
+        },
     },
 
     id_user: {

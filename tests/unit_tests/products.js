@@ -10,7 +10,7 @@ describe.only('Test Products', function () {
 
 	it ('Test DAO, insert one product, method: InserOne', function (done) {
 		var obj = {
-			id_product_category: 5,
+			id_product_category: 2,
 			id_supplier : null,
 			name : "Product Test",
 		    size : "20cm",
@@ -81,7 +81,7 @@ describe.only('Test Products', function () {
 
 	it ('Test BUS, insert one product, method: InsetOne', function (done) {
 		var obj = {
-			id_product_category: 5,
+			id_product_category: 2,
 			id_supplier : null,
 			name : "Product Test 2",
 		    size : "20cm",
@@ -107,7 +107,7 @@ describe.only('Test Products', function () {
 
 	it ('Test request, insert one product, route: /product, method: POST ', function (done) {
 		var obj = {
-			id_product_category: 5,
+			id_product_category: 2,
 			id_supplier : null,
 			name : "Product Test 3",
 		    size : "20cm",
