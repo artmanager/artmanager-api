@@ -1,6 +1,6 @@
 var express = 			require('express'),
 	app = 				express(),	
-	swich = 			require('./swich'),
+	swich = 			require('./which.js'),
 	production = 		require('./production'),
 	product = 			require('./product'),
 	productCategory= 	require('./productCategory'),

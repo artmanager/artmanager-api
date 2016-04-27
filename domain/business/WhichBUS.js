@@ -3,11 +3,17 @@
 let whichDao = require('../dao/WhichDAO.js');
 let productWhich = require('../dao/ProductWhichDAO.js');
 let production = require('../dao/ProductionDAO.js');
-let asyc = require('async');
+let async = require('async');
 
 class WhichBuss {
 
     InsertOne(obj, callback) {
+        console.log('Inicio do cadastro de pedido');
+        console.log('which');
+        console.log(obj.which);
+
+        console.log('products');
+        console.log(obj.products);
         if (obj.which == null || obj.products == null)
             callback({ error: 'Dados do pedido invalido' });
 
@@ -20,18 +26,23 @@ class WhichBuss {
             discount: obj.which.discount
         };
 
+        console.log('call InserOne which with model ');
         whichDao.InsertOne(which, function (res) {
             async.eachSeries(obj.products, function (o, n) {
+                console.log(o);
                 var product = {
                     id_which: res.which.id,
-                    id_product: o.id_product,
+                    id_product: o.id,
                     describe: o.describe
                 }
 
-                if (o.production != null) {
+                console.log(o.production);
+
+                if (o.production != null && o.production.delivery_date != null) {
+                    console.log('cadastrando produto a produção');
                     let prod = {
                         id_client: obj.client.id,
-                        id_product: o.id_product,
+                        id_product: o.id,
                         id_which: res.which.id,
                         id_user: obj.user.id,
                         start_date: new Date(),
@@ -39,16 +50,17 @@ class WhichBuss {
                     }
 
                     production.InsertOne(prod, function (prodRes) {
-
+                        console.log(prodRes);
                     });
                 }
 
                 productWhich.InsertOne(product, function (resP) {
-                    n(resP.product.Id);
+                    n(resP.productWhich.id);
                 });
 
             }, (o) => {
                 console.log(o);
+                callback({ success: 'Pedido gerado com sucesso. ' });
             });
         });
     }

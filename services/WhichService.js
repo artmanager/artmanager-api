@@ -1,17 +1,23 @@
 'use strict'
-
+let whichBus = require('../domain/business/WhichBUS.js')
+    
 class WhichService {
 
-    InsertProduct(req, res) {
+    InsertWhich(req, res) {
+
         try {
             var obj = req.body;
             if (obj.client == undefined || obj.client.id <= 0) {
-
+                res.json({ error: 'Cliente invalido' });
             }
 
             if (obj.user == undefined || obj.user.id <= 0) {
-
+                res.json({ error: 'Usuário invalido ' });
             }
+
+            whichBus.InsertOne(obj, function (callback) {
+                res.json(callback);
+            });
 
 
         } catch (e) {
@@ -20,4 +26,4 @@ class WhichService {
     }
 }
 
-module.exports = new PedidosService();
+module.exports = new WhichService();
