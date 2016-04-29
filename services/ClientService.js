@@ -18,8 +18,19 @@ class ClientService {
 
 		} catch (e) {
 			console.log(e);
-			res.json({ erro : e });
+			res.json({ error : e });
 		}
+	}
+
+	GetAll(req, res) {
+	    try {
+	        clientBuss.GetAll(function (callback) {
+	            res.json(callback);
+	        });
+	    } catch (e) {
+	        console.log(e);
+	        res.json({ error: 'Não foi possível consultar os clientes. ' + e });
+	    }
 	}
 }
 

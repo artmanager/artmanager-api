@@ -24,6 +24,36 @@ describe.only('Test Client', function () {
 		});
 	});
 
+	it('Test DAO, get all clients, method: GetAll', function (done) {
+	    clientDAO.GetAll(function (callback) {
+	        
+	        if (callback.clients){
+	            
+	            callback.clients.forEach(function (o) {
+	                console.log(o.ds_name);
+	            });
+	            done();
+	        }
+	        else
+	            throw 'Não foi possível consultar os clientes';
+
+	    });
+	});
+
+	it('Test BUS, get all clients, method: GetAll', function (done) {
+	    clientBUS.GetAll(function (callback) {
+	        if (callback.clients) {
+	            callback.clients.forEach(function (o) {
+	                console.log(o.id);
+	                console.log(o.name);
+	            });
+	            done();
+	        }
+	        else
+	            throw 'Não foi possível consultar os clientes';
+	    });
+	});
+
 	it ('Test BUS, insert one client, method: InsertOne', function (done) {
 		var obj = { 
 			client: {
@@ -57,6 +87,30 @@ describe.only('Test Client', function () {
 			}
 
 		});
+	});
+
+	it('Test Request, get all, url: /client method: GET', function (done) {
+	    request(config.application.url)
+        .get(common.routes.client.getAllClients)
+        .set('Accept', 'application/json')
+		.set('x-access-token', token)
+      	.expect('Content-Type', /json/)
+      	.expect(200)
+      	.end(function (err, res) {
+      	    if (res.body.clients) {
+      	        res.body.clients.forEach(function (o) {
+      	            console.log(o);
+      	        });
+
+      	        done();
+      	    } else if (res.body.error) {
+      	        throw 'Não foi possível inserir usuário. Erro: ' + res.error;
+      	    } else {
+      	        throw 'Unexpected result ' + (err || res.error);
+      	    }
+      	});
+        
+
 	});
 
 	it ('Test Request, insert one client, url: /client method: POST', function (done) {

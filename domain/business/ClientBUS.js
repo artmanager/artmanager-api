@@ -76,7 +76,21 @@ class ClientBUS {
 		} else {
 			callback({ error: 'Dados do client invalidos' });
 		}
-	}	
+	}
+
+	GetAll(callback) {
+	    
+	    clientDao.GetAll(function (res) {
+	        var list = [];
+
+	        res.clients.forEach(function (o) {
+	            console.log(o);
+	            list.push({ id: o.id, name: o.ds_name, cpf_cpnj: o.ds_cpf_cnpj, email: o.ds_email });
+	        });
+
+	        callback({ clients: list });
+	    });
+	}
 }
 
 module.exports = new ClientBUS();
