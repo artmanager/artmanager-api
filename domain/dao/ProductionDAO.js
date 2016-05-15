@@ -1,6 +1,7 @@
 'use strict';
 
 let productionModel = require('../model/ProductionModel.js');
+let sequelize = require('../../db/postgres.js');
 
 class PruductionDAO {
 
@@ -25,6 +26,27 @@ class PruductionDAO {
             .findAll()
             .then(function (result) {
                 callback({ production: result });
+            });
+    }
+
+    GetRowProduction(callback) {
+        let query = 'select '
+                        + 'c.productionid as id,'
+                        + 'c.name as client,'
+                        + 'c.supplier as supplier,'
+                        + 'c.delivery_date,'
+                        + 'c.productname as name,'
+                        + 'c.height,'
+                        + 'c.weight,'
+                        + 'c.describe '
+	        + 'from consult_which c '
+            + 'where c.percentage < 100 or c.percentage is null '
+            + 'order by delivery_date '
+            + 'limit 200 ';
+        sequelize
+            .query(query)
+            .spread(function (result, metadata) {
+                callback({ view: result });
             });
     }
 }

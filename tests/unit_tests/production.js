@@ -1,6 +1,11 @@
 'use strict';
-let pruduction = require('../../domain/dao/ProductionDAO.js');
 
+let productionDAO = require('../../domain/dao/ProductionDAO.js'),
+    productionBUS = require('../../domain/business/ProductionBUS.js'),
+    request = require('supertest'),
+    config = require('../../config/config.js'),
+    common = require(config.common.fileCommon),
+    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA";
 
 describe.only('Production', function () {
 
@@ -15,7 +20,7 @@ describe.only('Production', function () {
             percentage: 10
         }
         
-        pruduction.InsertOne(obj, function (callback) {
+        productionDAO.InsertOne(obj, function (callback) {
             
             if (callback.production.id > 0)
                 done();
@@ -26,4 +31,50 @@ describe.only('Production', function () {
 
     });
 
+    it('Test DAO, get row production, method: GetRowProduction', function (done) {
+        productionDAO.GetRowProduction(function (callback) {
+
+            if (callback.view.length > 0) {
+                done();
+            } else if (callback.view.length <= 0) {
+                return done('Não existe produtos a serem produzidos');
+            } else {
+                return done('Unexpected result');
+            }
+
+        });
+    });
+
+    it('Test BUSS, get row produciton, method: GetRowProduction', function (done) {
+        productionBUS.GetRowProduction(function (callback) {
+            if (callback.success.length > 0)
+                done();
+            else if (callback.success.length <= 0)
+                return done('Não existe produtos a serem produzidos');
+            else
+                return done('Unexpected result');
+        });
+    });
+
+    it('Test Request, get row production, method: GET', function (done) {
+
+        request(config.application.url)
+        .get(common.routes.production.getProduction)
+        .set('x-access-token', token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+
+            if (err)
+                return done(err);
+
+            var result = res.body;
+            if (result.success) 
+                done();
+            else 
+                return done(result.error);
+            
+        });
+
+    });
 });

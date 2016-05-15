@@ -3,6 +3,7 @@ as
 select 
 	w.Id,
 	c.id as clientId,
+	pd.id as productionId,
 	w.dt_date_which creationDate,
 	u.ds_name as name,
 	s.ds_name supplier,
@@ -16,7 +17,8 @@ select
 	w.vl_discount discount,
 	w.vl_entrance entrance,
 	w.vl_total_value total_value,
-	pd.vl_quantity as quantity
+	pd.vl_quantity as quantity,
+	pd.vl_percentage as percentage
 from tb_which w
 	join tb_user u
 		on u.id = w.id_user

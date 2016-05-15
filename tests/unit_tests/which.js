@@ -82,18 +82,18 @@ describe.only('Which', function () {
         });
     });
 
-    //it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
-    //    let obj = {
-    //        name: "gustavo",
-    //        cpf_cnpj: "211312",
-    //        email: "gustavo_sk@live.com"
-    //    };
+    it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
+        let obj = {
+            name: "gustavo",
+            cpf_cnpj: "211312",
+            email: "gustavo_sk@live.com"
+        };
 
-    //    whichBUS.ConsultWhichByClient(obj, function (callback) {
+        whichBUS.ConsultWhichByClient(obj, function (callback) {
 
-    //    });
+        });
 
-    //});
+    });
 
     it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
         request(config.application.url)
