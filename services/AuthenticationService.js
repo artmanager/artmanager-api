@@ -22,7 +22,6 @@ var properties = require('properties'),
 			user 		: param[0],
 			password	: param[1]
 		};
-		console.log(user);
 
 		userDAO.FindOne(user, function (r) {
 			console.log('Result FindOne');
@@ -33,10 +32,13 @@ var properties = require('properties'),
 			obj = {
 				id : r.id,
 				name : r.ds_user,
-				tipo : r.nr_profile
+				profile : r.nr_profile
 			};
 
-			body = { 
+			body = {
+			    id: obj.id,
+			    name: obj.name,
+                profile : obj.profile,
 				token : jwt.sign(obj, 'n3JZZm27T4yccdVf')
 			};
 

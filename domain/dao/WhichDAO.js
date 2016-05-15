@@ -1,5 +1,6 @@
 "use strict"
 const whichModel = require('../model/WhichModel.js'); 
+let sequelize = require('../../db/postgres.js');
 
 class WhichDAO {
 
@@ -21,6 +22,21 @@ class WhichDAO {
 		} catch (e) {
 		    throw e;
 		}
+	}
+
+	ConsultAllWhich(callback) {
+	    try {
+	        sequelize.query('select * from consult_which limit 50')
+                .spread(function (result, metadata) {
+                    callback({ view: result });
+                });
+	    } catch (e) {
+	        callback({ error: e });
+	    }
+	}
+
+	ConsultOneWhich(obj, callback) {
+
 	}
 }
 

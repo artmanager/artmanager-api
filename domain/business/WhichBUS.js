@@ -1,19 +1,16 @@
 'use strict';
 
 let whichDao = require('../dao/WhichDAO.js');
+let clientDao = require('../dao/ClientDAO.js');
 let productWhich = require('../dao/ProductWhichDAO.js');
-let production = require('../dao/ProductionDAO.js');
+let production   = require('../dao/ProductionDAO.js');
 let async = require('async');
 
 class WhichBuss {
 
     InsertOne(obj, callback) {
         console.log('Inicio do cadastro de pedido');
-        console.log('which');
-        console.log(obj.which);
-
-        console.log('products');
-        console.log(obj.products);
+        
         if (obj.which == null || obj.products == null)
             callback({ error: 'Dados do pedido invalido' });
 
@@ -28,15 +25,15 @@ class WhichBuss {
 
         console.log('call InserOne which with model ');
         whichDao.InsertOne(which, function (res) {
-            async.eachSeries(obj.products, function (o, n) {
-                console.log(o);
+            
+            console.log('***************' + obj.products.length);
+
+            obj.products.forEach(function (o) {
                 var product = {
                     id_which: res.which.id,
                     id_product: o.id,
                     describe: o.describe
                 }
-
-                console.log(o.production);
 
                 if (o.production != null && o.production.delivery_date != null) {
                     console.log('cadastrando produto a produção');
@@ -46,22 +43,135 @@ class WhichBuss {
                         id_which: res.which.id,
                         id_user: obj.user.id,
                         start_date: new Date(),
-                        delivery_date: o.production.delivery_date
+                        delivery_date: o.production.delivery_date,
+                        quantity: o.quantity
                     }
 
                     production.InsertOne(prod, function (prodRes) {
-                        console.log(prodRes);
+                        console.log('production');
+                        productWhich.InsertOne(product, function (resP) {
+                                
+                        });
+                    });
+                } else {
+                    productWhich.InsertOne(product, function (resP) {
+                        
                     });
                 }
-
-                productWhich.InsertOne(product, function (resP) {
-                    n(resP.productWhich.id);
-                });
-
-            }, (o) => {
-                console.log(o);
-                callback({ success: 'Pedido gerado com sucesso. ' });
             });
+
+            callback({ success: 'Pedido gerado com sucesso. ' });
+        });
+    }
+
+    ConsultWhich(callback) {
+        whichDao.ConsultAllWhich(function (result) {
+            let list = [];
+            let i = 0;
+            
+            result.view.forEach(function (o) {
+                if (i != o.id) {
+                    console.log('new');
+                    i = o.id;
+                    let obj = {
+                        id: o.id,
+                        creationDate: o.creationDate,
+                        user: {
+                            name: o.name
+                        },
+                        order: {
+                            products: [{
+                                supplier: o.supplier,
+                                delivery_date: o.delivery_date,
+                                name: o.productname,
+                                height: o.height,
+                                weight: o.weight,
+                                describe: o.describe,
+                                quantity: o.quantity
+                            }],
+                            discount: o.discount,
+                            entrance: o.entrance,
+                            total: o.total_value
+                        }
+                    }
+                    list.push(obj);
+                }
+                else {
+                    let res = list.forEach(function(r) {
+                        if (r.id == o.id) {
+                            let obj = {
+                                supplier: o.supplier,
+                                delivery_date: o.delivery_date,
+                                name: o.productname,
+                                height: o.height,
+                                weight: o.weight,
+                                describe: o.describe
+                            };
+
+                            let i = 0;
+                            r.order.products.push(obj);
+                        }
+                    });
+                }
+            });
+
+            callback({ success : list });
+        });
+    }
+
+    ConsultWhichByClient(obj, callback) {
+
+        clientDao.ConsultClient(obj, function (result) {
+            let list = [];
+            let i = 0;
+
+            result.view.forEach(function (o) {
+                if (i != o.id) {
+                    console.log('new');
+                    i = o.id;
+                    let obj = {
+                        id: o.id,
+                        creationDate: o.creationDate,
+                        user: {
+                            name: o.name
+                        },
+                        order: {
+                            products: [{
+                                supplier: o.supplier,
+                                delivery_date: o.delivery_date,
+                                name: o.productname,
+                                height: o.height,
+                                weight: o.weight,
+                                describe: o.describe,
+                                quantity: o.quantity
+                            }],
+                            discount: o.discount,
+                            entrance: o.entrance,
+                            total: o.total_value
+                        }
+                    }
+                    list.push(obj);
+                }
+                else {
+                    let res = list.forEach(function (r) {
+                        if (r.id == o.id) {
+                            let obj = {
+                                supplier: o.supplier,
+                                delivery_date: o.delivery_date,
+                                name: o.productname,
+                                height: o.height,
+                                weight: o.weight,
+                                describe: o.describe
+                            };
+
+                            let i = 0;
+                            r.order.products.push(obj);
+                        }
+                    });
+                }
+            });
+
+            callback({ success: list });
         });
     }
 }

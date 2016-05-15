@@ -7,7 +7,7 @@ var Usuario = require('../../services/UserService'),
 router.get(common.routes.user.getAllUsers, function(req, res){res.json({'test': 'success'}); });
 router.get('/users/:id',  function(req, res){res.json({'test': 'success'}); });
 router.post(common.routes.user.postUsers, Usuario.UserRegister.bind(Usuario));
-router.put(common.routes.user.putUsersId, Usuario.UserRegister.bind(Usuario));
+router.put(common.routes.user.putEditPassword, Usuario.UpdatePassword.bind(Usuario));
 router.delete('/users/:id', function(req, res){res.json({'test': 'success'}); });
 
 

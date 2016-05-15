@@ -6,7 +6,7 @@ let which = require('../../services/WhichService.js'),
 	common = require(config.common.fileCommon);
 
 
-router.get('/pedidos',  function(req, res){res.json({'test': 'success'}); });
+router.get(common.routes.which.getWhich, which.GetWhich.bind(which));
 router.get('/pedidos/:id',  function(req, res){res.json({'test': 'success'}); });
 router.post(common.routes.which.postWhich, which.InsertWhich.bind(which));
 router.put('/pedidos/:id', function(req, res){res.json({'test': 'success'}); });

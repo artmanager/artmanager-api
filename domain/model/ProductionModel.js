@@ -115,6 +115,17 @@ var production = sequelize.define('tb_production', {
         }
     },
 
+    vl_quantity: {
+        type: dataTypes.INTEGER,
+        field: 'vl_quantity',
+        get: function () {
+            return this.getDataValue('vl_quantity');
+        },
+        set: function (val) {
+            this.setDataValue('vl_quantity', val);
+        }
+    }
+
 }, {
     freezeTableName: true,
     timestamps: false

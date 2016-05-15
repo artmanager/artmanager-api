@@ -53,18 +53,17 @@ describe.only('Users', function (){
 
 	it('Test DAO - User - change password of user', function (done) {
 		var obj = {
-			name 	: 'gustavo',
-			user 	: 'artmanager',
-			password: '56',
+		    user: 'artmanager',
+            old: 'artmanager123',
+			password: 'artmanager',
 			profile: 1
 		};
 
 		userDAO.UpdatePassword(obj, function (callback) {
-	
-			if (callback.result.length > 0 && callback.result.length) {
+			if (callback.success) {
 				done();
-			} else if (callback == null) {
-				throw 'Update failed, Error: ' + callback;
+			} else if (callback.error) {
+			    return done(callback.error);
 			} else 
 				throw 'Unexpected result';
 		});
@@ -90,7 +89,7 @@ describe.only('Users', function (){
 	});
 
 	
-	it ('Test User - register user', function (done) {
+	it ('Test Service - register user, method: POST ', function (done) {
 		var obj = { 
 			"user"  : { 
 				"name" 	  	: "gustavo", 
@@ -108,22 +107,20 @@ describe.only('Users', function (){
       	.expect('Content-Type', /json/)
       	.expect(200)
 		.end(function (err, res) {
-
-			console.log(res);
 			if (err) 
-				throw err;
+				return done(err);
 
 			var result = res.body;
 			if (result.success) {
 				done();
 			}
 			else {
-				throw result.error;
+				return done(result.error);
 			}
 		});
 	});
 
-	it('Test User -consult user by login', function (done) {
+	it('Test Service -consult user by login', function (done) {
 		var obj = { 
 			user : 'artmanager'
 		};
@@ -141,6 +138,32 @@ describe.only('Users', function (){
 
 			done();
 		});
+	});
+
+	it('Test Service, edit password by user and password, method: PUT', function (done) {
+	    var obj = {
+	        old: 'artmanager',
+	        password: 'artmanager123',
+	        user: 'artmanager',
+	    }
+
+	    request(config.application.url)
+        .put(common.routes.user.putEditPassword)
+        .send(obj)
+        .set('Accept', 'application/json')
+        .set('x-access-token', token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+            let result = res.body;
+            if (result.success) {
+                done();
+            } else if (result.error) {
+                return done(result.error);
+            } else {
+                return done('Unexpected result');
+            }
+        });
 	});
 });
 

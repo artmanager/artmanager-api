@@ -9,6 +9,7 @@ let whichDAO = require('../../domain/dao/WhichDAO.js'),
 let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA";
 
 describe.only('Which', function () {
+
     it('Test DAO, Insert one which, method: InsertOne', function (done) {
         var obj = {
             id_user: 2,
@@ -23,8 +24,28 @@ describe.only('Which', function () {
             console.log(callback);
             if (callback.which.id > 0)
                 done();
-            else 
-                throw 'Não foi possível cadastrar pedido'
+            else
+                return done('Não foi possível cadastrar pedido');
+        });
+    });
+
+    it('Test DAO, Consult all which, method: ConsultAllWhich', function (done) {
+        whichDAO.ConsultAllWhich(function (callback) {
+            done();
+        });
+    });
+
+
+    it('Test BUS, Consult all which, method: ConsultWhich', function (done) {
+        whichBUS.ConsultWhich(function (callback) {
+            if (callback.success.length > 1) {
+                done();
+            } else if (callback.success.length <= 0) {
+                return done('Nenhum pedido encontrato');
+            } else {
+                return done('Unexpected result');
+            }
+
         });
     });
 
@@ -46,7 +67,7 @@ describe.only('Which', function () {
                 {
                     id: 7,
                     describe: 'Teste which BUS',
-                    pruduct: {
+                    production: {
                         delivery_date: new Date()
                     }
                 }
@@ -57,7 +78,42 @@ describe.only('Which', function () {
             if (callback.success != null)
                 done();
             else
-                throw 'Erro ao cadastrar pedido. '+ callback.error;
+                return done('Erro ao cadastrar pedido. '+ callback.error);
+        });
+    });
+
+    //it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
+    //    let obj = {
+    //        name: "gustavo",
+    //        cpf_cnpj: "211312",
+    //        email: "gustavo_sk@live.com"
+    //    };
+
+    //    whichBUS.ConsultWhichByClient(obj, function (callback) {
+
+    //    });
+
+    //});
+
+    it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
+        request(config.application.url)
+        .get(common.routes.which.getWhich)
+        .set('Accept', 'application/json')
+        .set('x-access-token', token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+
+            let result = res.body;
+
+            if (result.success) {
+                done();
+            } else if(result.error) {
+                return done(result.error);
+            } else {
+                return done('Unexpected result');
+            }
+
         });
     });
 
@@ -79,7 +135,16 @@ describe.only('Which', function () {
                 {
                     id: 7,
                     describe: 'Teste which BUS',
-                    pruduct: {
+                    quantity: 2,
+                    production: {
+                        delivery_date: new Date()
+                    }
+                },
+                {
+                    id: 7,
+                    describe: 'Teste which BUS 2',
+                    quantity: 1,
+                    production: {
                         delivery_date: new Date()
                     }
                 }
@@ -95,17 +160,18 @@ describe.only('Which', function () {
       	.expect(200)
 		.end(function (err, res) {
 
-		    console.log(res);
 		    if (err)
-		        throw err;
+		        return done(err);
 
 		    var result = res.body;
 		    if (result.success) {
 		        done();
 		    }
 		    else {
-		        throw result.error;
+		        return done(result.error);
 		    }
 		});
+
     });
+
 });

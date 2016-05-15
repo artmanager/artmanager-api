@@ -24,6 +24,18 @@ class WhichService {
             res.json({ error: 'Não foi possível cadastrar o pedido. ' + e });
         }
     }
+
+    GetWhich(req, res) {
+        try {
+            console.log('Service');
+            whichBus.ConsultWhich(function (callback) {
+                res.json(callback);
+            });
+
+        } catch (e) {
+            res.json({ error: 'Não foi possível consultar os pedidos. ' + e });
+        }
+    };
 }
 
 module.exports = new WhichService();
