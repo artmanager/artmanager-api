@@ -45,6 +45,38 @@ describe.only('Production', function () {
         });
     });
 
+    it('Test DAO, update percentage production, method: UpdatePercentage', function (done) {
+        let obj = {
+            id: 1,
+            percentage: 100
+        }
+        productionDAO.UpdatePercentage(obj, function (callback) {
+            
+            if (callback.success)
+                done();
+            else if (callback.error)
+                return done(callback.error);
+            else
+                return done('Unexpected result');
+            
+        });
+    });
+
+    it('Test BUS, update percentage production, method: UpdatePercentage', function (done) {
+        var obj = {
+            id: 2,
+            percentage: 100
+        }
+        productionBUS.UpdatePercentage(obj, function (callback) {
+            if (callback.success)
+                done();
+            else if (callback.error)
+                return done(callback.error);
+            else
+                return done('Unexpected result');
+        });
+    })
+
     it('Test BUSS, get row produciton, method: GetRowProduction', function (done) {
         productionBUS.GetRowProduction(function (callback) {
             if (callback.success.length > 0)
@@ -76,5 +108,33 @@ describe.only('Production', function () {
             
         });
 
+    });
+
+    it('Test Request, update production, method: PUT, route: /production', function (done) {
+        let obj = {
+            id: 3,
+            percentage: 100
+        }
+
+        request(config.application.url)
+        .put(common.routes.production.putUpdateProduction)
+        .send(obj)
+        .set('Accept', 'application/json')
+		.set('x-access-token', token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+
+            if (err)
+                return done(err);
+
+            var result = res.body;
+            if (result.success)
+                done();
+            else if (result.error)
+                return done(result.error);
+            else
+                return done(result.error);
+        });
     });
 });

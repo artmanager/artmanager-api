@@ -8,7 +8,7 @@ let express = require('express'),
 router.get(common.routes.production.getProduction, production.GetRowProduction.bind(production));
 router.get('/producao/:id',  function(req, res){res.json({'test': 'success'}); });
 router.post('/producao/', function(req, res){res.json({'test': 'success'}); });
-router.put('/producao/:id', function(req, res){res.json({'test': 'success'}); });
+router.put(common.routes.production.putUpdateProduction, production.UpdatePercentage.bind(production));
 router.delete('/producao/:id', function(req, res){res.json({'test': 'success'}); });
 
 

@@ -49,6 +49,23 @@ class PruductionDAO {
                 callback({ view: result });
             });
     }
+
+    UpdatePercentage(obj, callback) {
+        productionModel.update({
+            vl_percentage: obj.percentage
+        }, {
+            where: {
+                id: obj.id
+            }
+        }).then(function (update) {
+            console.log(update);
+            if (update == 1) {
+                callback({ success: 'Senha atualizada com sucesso.' });
+            } else {
+                callback({ error: 'Usuário ou senha invalidos.' });
+            }
+        });
+    }
 }
 
 module.exports = new PruductionDAO();

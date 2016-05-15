@@ -9,6 +9,12 @@ class ProductionBUS {
             callback({ success: result.view });
         });
     }
+
+    UpdatePercentage(obj, callback) {
+        productionDAO.UpdatePercentage(obj, function (result) {
+            callback(result);
+        });
+    }
 }
 
 module.exports = new ProductionBUS();

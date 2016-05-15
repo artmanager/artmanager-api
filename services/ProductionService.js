@@ -13,6 +13,18 @@ class ProductionService {
         }
     }
 
+    UpdatePercentage(req, res) {
+        try {
+            let obj = req.body;
+            productionBUS.UpdatePercentage(obj, function (callback) {
+                res.json(callback);
+            });
+
+        } catch (e) {
+            res.json({ error: 'Não foi possível atualizar o status do produto. ' + e });
+        }
+    }
+
 }
 
 module.exports = new ProductionService();
