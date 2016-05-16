@@ -79,6 +79,9 @@ class WhichBuss {
                         user: {
                             name: o.name
                         },
+                        client: {
+                            name: o.clientName
+                        },
                         order: {
                             products: [{
                                 supplier: o.supplier,
@@ -87,7 +90,8 @@ class WhichBuss {
                                 height: o.height,
                                 weight: o.weight,
                                 describe: o.describe,
-                                quantity: o.quantity
+                                quantity: o.quantity,
+                                percentage: o.percentage
                             }],
                             discount: o.discount,
                             entrance: o.entrance,
@@ -105,7 +109,8 @@ class WhichBuss {
                                 name: o.productname,
                                 height: o.height,
                                 weight: o.weight,
-                                describe: o.describe
+                                describe: o.describe,
+                                percentage: o.percentage
                             };
 
                             let i = 0;
@@ -135,6 +140,9 @@ class WhichBuss {
                         user: {
                             name: o.name
                         },
+                        client: {
+                            name: o.clientName
+                        },
                         order: {
                             products: [{
                                 supplier: o.supplier,
@@ -143,7 +151,8 @@ class WhichBuss {
                                 height: o.height,
                                 weight: o.weight,
                                 describe: o.describe,
-                                quantity: o.quantity
+                                quantity: o.quantity,
+                                percentage: o.percentage
                             }],
                             discount: o.discount,
                             entrance: o.entrance,
@@ -161,7 +170,8 @@ class WhichBuss {
                                 name: o.productname,
                                 height: o.height,
                                 weight: o.weight,
-                                describe: o.describe
+                                describe: o.describe,
+                                percentage: o.percentage
                             };
 
                             let i = 0;
