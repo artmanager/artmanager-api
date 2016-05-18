@@ -84,8 +84,8 @@ describe.only('Test Products', function () {
 			id_product_category: 2,
 			id_supplier : null,
 			name : "Product Test 2",
-		    size : "20cm",
-		    weight : "20cm",
+		    size : "244cm",
+		    weight : "210cm",
 		    describe : "Produto teste",
 		    cost : 25.2,
 		    sale_cost: 55.1,
@@ -109,10 +109,10 @@ describe.only('Test Products', function () {
 		var obj = {
 			id_product_category: 2,
 			id_supplier : null,
-			name : "Product Test 3",
-		    size : "20cm",
-		    weight : "20cm",
-		    describe : "Produto teste post",
+			name : "Apps 24",
+		    size : "34cm",
+		    weight : "41cm",
+		    describe : "Produto teste post request",
 		    cost : 25.2,
 		    sale_cost: 55.1,
 		    quantity: 20
@@ -126,12 +126,13 @@ describe.only('Test Products', function () {
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {
+
       		if (res.body.success) {
       			done();
       		} else if (res.body.error) {
-      			throw 'Não foi possível inserir o produto. Erro: ' + res.error;
+      			return done('Não foi possível inserir o produto. Erro: ' + res.body.error);
       		} else {
-      			throw 'Unexpected result ' + (err || res.body.error);
+      			return done('Unexpected result ' + res.body.error);
       		}
       	});
 	});
@@ -148,9 +149,9 @@ describe.only('Test Products', function () {
       		if (res.body.error == undefined) {
       			done();
       		} else if (res.body.error) {
-      			throw 'Não foi possível consultar os produtos. Erro: ' + res.error;
+      			return done('Não foi possível consultar os produtos. Erro: ' + res.error);
       		} else {
-      			throw 'Unexpected result ' + (err || res.body.error);
+      			return done('Unexpected result ' + (err || res.body.error));
       		}
       	});
 	});

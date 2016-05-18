@@ -11,7 +11,7 @@ class ProductcBUS {
 			function (next) {
 				if (obj != null) {
 					productDAO.FindOne(obj, function (r) {
-						product = r;
+					    product = r;
 						next();
 					});
 				} else {
@@ -19,11 +19,14 @@ class ProductcBUS {
 				}
 			},
 			function (next) {
-				if (product != null && product != undefined) {
+			    if (product != null && product != undefined) {
+			        console.log(product.id);
+			        console.log('Produto já cadastrado');
 					next({ error: 'Produto já cadastrado'});
 				} else {
 					productDAO.InsertOne(obj, function (r) {
-						if (r.product.id > 0) {
+					    if (r.product.id > 0) {
+					        console.log({ success: 'Produto cadastrado com sucesso.' });
 							next({ success: 'Produto cadastrado com sucesso.'});
 						}
 						else {

@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 var supplierModel = require('../model/SupplierModel'),
 	promise = require('bluebird');

@@ -18,8 +18,7 @@ create table tb_client (
 create table tb_supplier (
 	id Serial,
 	ds_name varchar(100),
-	ds_cpf_cnpj varchar(20),
-	ds_company_name varchar(200),
+	ds_email varchar(200),	
 	constraint pk_id_supplier primary key (ID)
 );
 

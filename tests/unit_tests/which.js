@@ -151,7 +151,7 @@ describe.only('Which', function () {
             ]
         }
 
-        request(config.application.url)
+        request('api.artmanager.com.br')
 		.post(common.routes.which.postWhich)
 		.send(obj)
 		.set('Accept', 'application/json')

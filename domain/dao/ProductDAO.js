@@ -39,7 +39,7 @@ class ProductDAO  {
 	}
 
 	FindOne(obj, callback) {
-		console.log('FindOne Supplier');
+		console.log('FindOne Product');
 		if (obj != null) {
 			productModel.findOne( {
 				where : {

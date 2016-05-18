@@ -30,14 +30,14 @@ var commission = sequelize.define('tb_commission', {
         }
     },
 
-    lv_percentage: {
+    vl_percentage: {
         type: dataTypes.DECIMAL,
-        field: 'lv_percentage',
+        field: 'vl_percentage',
         get : function () {
-            return this.getDataValue('lv_percentage');
+            return this.getDataValue('vl_percentage');
         },
         set : function (val) {
-            this.setDataValue('lv_percentage', val)
+            this.setDataValue('vl_percentage', val)
         }
     }
 
