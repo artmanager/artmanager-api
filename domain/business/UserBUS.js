@@ -24,7 +24,7 @@ class UserBus {
         if (obj != null) {
             
             userDao.FindByUser(obj, function (res) {
-                if (res.id <= 0) {
+                if (res.id == null || res.id == undefined) {
                     console.log('Usuário não existe');
                     userDao.InsertOne(obj, function (result) {
                         callback({ success: 'Usuário Cadastrado com sucesso.' });
