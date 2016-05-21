@@ -81,7 +81,7 @@ describe.only('Test Products', function () {
 
 	it ('Test BUS, insert one product, method: InsetOne', function (done) {
 		var obj = {
-			id_product_category: 2,
+			id_product_category: 1,
 			id_supplier : null,
 			name : "Product Test 2",
 		    size : "244cm",
@@ -107,16 +107,28 @@ describe.only('Test Products', function () {
 
 	it ('Test request, insert one product, route: /product, method: POST ', function (done) {
 		var obj = {
-			id_product_category: 2,
-			id_supplier : null,
-			name : "Apps 24",
-		    size : "34cm",
-		    weight : "41cm",
+			id_product_category: 1,
+			id_supplier : 1,
+			name : "App123s 24.4",
+		    size : "24cm",
+		    weight : "24cm",
 		    describe : "Produto teste post request",
-		    cost : 25.2,
+		    cost : 30.2,
 		    sale_cost: 55.1,
 		    quantity: 20
 		}
+
+		//var obj = {
+		//    "id_supplier": 2,
+		//    "name": "TESTE",
+		//    "describe": "teste",
+		//    "id_product_category": 2,
+		//    "size": "0.01",
+		//    "weight": "0.01",
+		//    "cost": 0.01,
+		//    "sale_cost": 0.01,
+		//    "quantity": 1
+		//}
 
 		request(config.application.url)
 		.post(common.routes.product.postProduct)

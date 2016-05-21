@@ -1,7 +1,9 @@
+'use strict';
+
 var express = require('express'),
 	router = express.Router(),
 	Product = require('../../services/ProductService'),
-	config 		= require('../config.js');
+	config 		= require('../config.js'),
 	common 		= require(config.common.fileCommon);
 
 router.get(common.routes.product.getAllProducts, Product.FindAllProducts.bind(Product));

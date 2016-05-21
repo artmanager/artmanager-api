@@ -7,7 +7,8 @@ var express = 			require('express'),
 	user = 				require('./user'),
 	sales = 			require('./sales'),
 	authentication = 	require('./authentication'),
-	supplier = 			require('./supplier'),
+	supplier =          require('./supplier'),
+    report =            require('./report.js'),
 	client =			require('./client');
 
 app.use('/', swich);
@@ -20,5 +21,6 @@ app.use('/', sales);
 app.use('/', supplier);
 app.use('/', client);
 app.use('/', productCategory);
+app.use('/', report);
 
 module.exports = app;

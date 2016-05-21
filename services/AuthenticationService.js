@@ -54,6 +54,7 @@ var properties = require('properties'),
  		console.log('AuthenticationService - ValidateToken - Receive request');
  		console.log('Route: ' + req.url);
  		if (req.url == common.routes.authentication.postGenerateToken) {
+ 		    console.log('Next Autentication');
  			next(); 		
  			return;
  		}
@@ -61,6 +62,7 @@ var properties = require('properties'),
  		var token = req.headers['x-access-token'];
  		
  		if (token == null || token == undefined) {
+ 		    console.log('invalid token');
  			res.json({ erro: 'invalid token'});
  			return;
  		}
@@ -71,7 +73,8 @@ var properties = require('properties'),
 				return;
 			}
 
-			if (decoded.id != null && decoded.id > 0){
+			if (decoded.id != null && decoded.id > 0) {
+			    console.log('NEXT');
 				next();
 				return;
 			}	

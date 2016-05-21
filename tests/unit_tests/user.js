@@ -54,7 +54,7 @@ describe.only('Users', function (){
 	it('Test DAO - User - change password of user', function (done) {
 		var obj = {
 		    user: 'artmanager',
-            old: 'artmanager123',
+            old: 'artmanager',
 			password: 'artmanager',
 			profile: 1
 		};
@@ -143,7 +143,7 @@ describe.only('Users', function (){
 	it('Test Service, edit password by user and password, method: PUT', function (done) {
 	    var obj = {
 	        old: 'artmanager',
-	        password: 'artmanager123',
+	        password: 'artmanager',
 	        user: 'artmanager',
 	    }
 

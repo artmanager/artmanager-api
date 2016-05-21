@@ -144,6 +144,7 @@ describe.only('Test Client', function () {
       	.expect('Content-Type', /json/)
       	.expect(200)
       	.end(function (err, res) {
+      	    console.log(res.body.success);
       		if (res.body.success) {
       			done();
       		} else if (res.body.error) {
