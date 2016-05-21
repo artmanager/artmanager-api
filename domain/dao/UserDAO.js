@@ -22,6 +22,8 @@ class UserDAO {
                     ds_password: hash
                 }
             }).then(function (user) {
+                console.log('DAO');
+                console.logo(user);
                 callback(user);
             });
         }
