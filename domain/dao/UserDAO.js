@@ -23,7 +23,7 @@ class UserDAO {
                 }
             }).then(function (user) {
                 console.log('DAO');
-                console.logo(user);
+                console.log(user);
                 callback(user);
             });
         }
