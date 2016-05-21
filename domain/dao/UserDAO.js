@@ -36,8 +36,7 @@ class UserDAO {
                 where: {
                     ds_name: obj.name,
                     ds_user: user,
-                    ds_password: hash,
-                    nr_profile: 1
+                    ds_password: hash
                 }
             }).spread(function (result, created) {
                 console.log(result);
