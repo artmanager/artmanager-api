@@ -38,6 +38,41 @@ class WhichDAO {
 	ConsultOneWhich(obj, callback) {
 
 	}
+
+
+	UpdateEntrance(obj, callback) {
+	    whichModel.update({
+	        vl_entrance: obj.entrance
+	    }, {
+	        where: {
+	            id: obj.id
+	        }
+	    }).then(function (update) {
+	        console.log(update);
+	        if (update == 1) {
+	            callback({ success: 'Valor atualizado com sucesso..' });
+	        } else {
+	            callback({ error: 'Não foi possível atualizar valor.' });
+	        }
+	    });
+	}
+
+	UpdatePendingFallback(obj, callback) {
+	    whichModel.update({
+	        bl_pendingfallback: obj.pendingfallback
+	    }, {
+	        where: {
+	            id: obj.id
+	        }
+	    }).then(function (update) {
+	        console.log(update);
+	        if (update == 1) {
+	            callback({ success: 'Retirada atualizada com sucesso.' });
+	        } else {
+	            callback({ error: 'Não foi possível marcar a saída do prodido' });
+	        }
+	    });
+	}
 }
 
 module.exports = new WhichDAO(whichModel);

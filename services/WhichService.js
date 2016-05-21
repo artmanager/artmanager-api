@@ -36,6 +36,23 @@ class WhichService {
             res.json({ error: 'Não foi possível consultar os pedidos. ' + e });
         }
     };
+
+    UpdateEntrancePending(req, res) {
+        try {
+            let obj = req.body;
+            console.log(obj);
+            if (obj.id == null) {
+                res.json({ error: 'Pedido invalido' });
+            }
+            
+            whichBus.UpdateEntrancePending(obj, function (callback) {
+                res.json(callback);
+            });
+
+        } catch (e) {
+            res.json({ error: 'Não foi possível atualizar os dados. ' + e });
+        }
+    }
 }
 
 module.exports = new WhichService();

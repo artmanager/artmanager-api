@@ -88,6 +88,16 @@ var pedido = sequelize.define('tb_which', {
         set : function (val) {
             this.setDataValue('vl_discount', val);
         }
+    },
+    bl_pendingfallback: {
+        type: dataTypes.BOOLEAN,
+        field: 'bl_pendingfallback',
+        get: function () {
+            return this.getDataValue('bl_pendingfallback');
+        },
+        set: function (val) {
+            this.setDataValue('bl_pendingfallback', val);
+        }
     }
 
 }, {

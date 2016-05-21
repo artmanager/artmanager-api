@@ -35,6 +35,51 @@ describe.only('Which', function () {
         });
     });
 
+    it('Test DAO, update pendingfallback, method updatePendingfallback', function (done) {
+        var obj = {
+            id: 1,
+            pendingfallback: false
+        };
+
+        whichDAO.UpdatePendingFallback(obj, function (callback) {
+            if (callback.success != null) {
+                done();
+            } else if (callback.error != null) {
+                done(callback.error);
+            }
+        });
+    });
+
+    it('Test DAO, update UpdateEntrance, method UpdateEntrance', function (done) {
+        var obj = {
+            id: 1,
+            entrance: 100
+        };
+
+        whichDAO.UpdateEntrance(obj, function (callback) {
+            if (callback.success != null) {
+                done();
+            } else if (callback.error != null) {
+                done(callback.error);
+            }
+        });
+    });
+
+    it('Test BUS, update pedingfallback and entrance, method: UpdateEntrancePending', function (done) {
+        let obj = {
+            id: 1,
+            entrance: 120,
+            pendingfallback: true
+        };
+        whichBUS.UpdateEntrancePending(obj, function (callback) {
+            console.log(callback);
+            if (callback.success) {
+                done();
+            } else {
+                done(callback.error);
+            }
+        });
+    });
 
     it('Test BUS, Consult all which, method: ConsultWhich', function (done) {
         whichBUS.ConsultWhich(function (callback) {
@@ -174,4 +219,32 @@ describe.only('Which', function () {
 
     });
 
+    it('Test request, update pending and entrance, method PUT, route: /updateEntrancePending', function (done) {
+        let obj = {
+            id: 1,
+            entrance: 1120,
+            pendingfallback: false
+        };
+
+        request(config.application.url)
+        .put(common.routes.which.putUpdateEntrancePending)
+        .send(obj)
+        .set('Accept', 'application/json')
+        .set('x-access-token', token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+
+            let result = res.body;
+
+            if (result.success) {
+                done();
+            } else if (result.error) {
+                return done(result.error);
+            } else {
+                return done('Unexpected result');
+            }
+        });
+
+    });
 });

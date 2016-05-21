@@ -184,6 +184,50 @@ class WhichBuss {
             callback({ success: list });
         });
     }
+
+    UpdateEntrancePending(obj, callback) {
+        let pending = false;
+        let entrance = false;
+        let end = false;
+        async.series([
+            function (n) {
+                if (obj.pendingfallback != null) {
+                    whichDao.UpdatePendingFallback(obj, function (res) {
+                        if (res.success) {
+                            pending = true;
+                        }
+
+                        n();
+                    });
+                } else {
+                    n();
+                }
+            },
+            function (n) {
+                if (obj.entrance != null) {
+                    whichDao.UpdateEntrance(obj, function (res) {
+                        if (res.success) {
+                            entrance = true;
+                        }
+                        n();
+                    });
+                } else {
+                    n();
+                }
+
+            },
+            function (n) {
+                end = true;
+                n();
+            }
+
+        ], () => {
+            
+            if (end == true && (entrance == true || pending == true)) {
+                callback({ success: 'Atualização efetuada com sucesso. ' });
+            }
+        });
+    }
 }
 
 module.exports = new WhichBuss();
