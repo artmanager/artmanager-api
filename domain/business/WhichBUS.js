@@ -95,7 +95,8 @@ class WhichBuss {
                             }],
                             discount: o.discount,
                             entrance: o.entrance,
-                            total: o.total_value
+                            total: o.total_value,
+                            pendingfallback: o.pendingfallback
                         }
                     }
                     list.push(obj);
@@ -156,7 +157,8 @@ class WhichBuss {
                             }],
                             discount: o.discount,
                             entrance: o.entrance,
-                            total: o.total_value
+                            total: o.total_value,
+                            pendingfallback: o.pendingfallback
                         }
                     }
                     list.push(obj);

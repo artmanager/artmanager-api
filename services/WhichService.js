@@ -7,6 +7,7 @@ class WhichService {
 
         try {
             var obj = req.body;
+            console.log(obj);
             if (obj.client == undefined || obj.client.id <= 0) {
                 res.json({ error: 'Cliente invalido' });
             }

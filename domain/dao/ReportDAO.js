@@ -27,6 +27,34 @@ class ReportDAO {
         });
     }
 
+    ReportSupplier(obj, callback) {
+        let query = "select distinct "
+                        + "s.id,"
+                        + "s.ds_name 	as name, "
+                        + "sum(p.vl_sale_cost - p.vl_cost) as Total,"
+                        + "p.ds_name 	as productName,"
+                        + "p.ds_size 	as height,"
+                        + "p.ds_weight	as weight,"
+                        + "count(p.id) 	as quantity "
+                    + "from tb_supplier s "
+                        + "join tb_product p "
+                        + "on p.id_supplier = s.id "
+                        + "join tb_product_which pw "
+                        + "on pw.id_product = p.id "
+                        + "join tb_which w "
+                        + "on pw.id_which = w.id "
+                        + "where w.dt_date_which between '" + obj.dt_from + "' and '" + obj.dt_to + "'"
+                        + "group by s.id, name, productName, height, weight "
+                        + "order by s.id";
+
+        console.log(query);
+        sequelize
+            .query(query)
+            .then(function (res) {
+                callback({ result: res[0] });
+            });
+    }
+
 }
 
 module.exports = new ReportDAO();

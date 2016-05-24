@@ -16,12 +16,19 @@ var properties = require('properties'),
 	body = this;
 	try	{
 		var param = req.body;
+		console.log(param);
+		if (param.data == undefined) {
+		    res.json({ error: ' Usuário ou senha invalidos' });
+		}
+
 		param = decrip(param.data);
 		param = param.split('-');
 		user = {
 			user 		: param[0],
 			password	: param[1]
 		};
+
+		
 
 		userDAO.FindOne(user, function (r) {
 			console.log('Result FindOne');

@@ -1,4 +1,5 @@
-﻿create view consult_which 
+﻿drop view consult_which;
+create view consult_which 
 as 
 select 
 	w.Id,
@@ -18,7 +19,8 @@ select
 	w.vl_entrance entrance,
 	w.vl_total_value total_value,
 	pd.vl_quantity as quantity,
-	pd.vl_percentage as percentage
+	pd.vl_percentage as percentage,
+	w.bl_pendingfallback as pendingfallback
 from tb_which w
 	join tb_user u
 		on u.id = w.id_user
@@ -35,4 +37,5 @@ from tb_which w
 	left join tb_supplier s
 		on s.id = p.id_supplier
 order by w.id desc;
+
 

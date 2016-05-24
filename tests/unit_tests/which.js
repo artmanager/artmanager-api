@@ -127,18 +127,18 @@ describe.only('Which', function () {
         });
     });
 
-    it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
-        let obj = {
-            name: "gustavo",
-            cpf_cnpj: "211312",
-            email: "gustavo_sk@live.com"
-        };
+    //it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
+    //    let obj = {
+    //        name: "gustavo",
+    //        cpf_cnpj: "211312",
+    //        email: "gustavo_sk@live.com"
+    //    };
 
-        whichBUS.ConsultWhichByClient(obj, function (callback) {
+    //    whichBUS.ConsultWhichByClient(obj, function (callback) {
 
-        });
+    //    });
 
-    });
+    //});
 
     it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
         request(config.application.url)
@@ -150,8 +150,9 @@ describe.only('Which', function () {
         .end(function (err, res) {
 
             let result = res.body;
-
+           
             if (result.success) {
+                console.log(result.success);
                 done();
             } else if(result.error) {
                 return done(result.error);
@@ -168,7 +169,7 @@ describe.only('Which', function () {
                 id: 1
             },
             user: {
-                id: 2
+                id: 1
             },
             which: {
                 date_which: '2016-03-23 00:00:00',
@@ -178,7 +179,7 @@ describe.only('Which', function () {
             },
             products: [
                 {
-                    id: 7,
+                    id: 5,
                     describe: 'Teste which BUS',
                     quantity: 2,
                     production: {
@@ -186,7 +187,7 @@ describe.only('Which', function () {
                     }
                 },
                 {
-                    id: 7,
+                    id: 6,
                     describe: 'Teste which BUS 2',
                     quantity: 1,
                     production: {
@@ -196,7 +197,7 @@ describe.only('Which', function () {
             ]
         }
 
-        request('api.artmanager.com.br')
+        request(config.application.url)
 		.post(common.routes.which.postWhich)
 		.send(obj)
 		.set('Accept', 'application/json')
@@ -209,6 +210,7 @@ describe.only('Which', function () {
 		        return done(err);
 
 		    var result = res.body;
+		    console.log(result);
 		    if (result.success) {
 		        done();
 		    }
@@ -221,7 +223,7 @@ describe.only('Which', function () {
 
     it('Test request, update pending and entrance, method PUT, route: /updateEntrancePending', function (done) {
         let obj = {
-            id: 1,
+            id: 5,
             entrance: 1120,
             pendingfallback: false
         };
