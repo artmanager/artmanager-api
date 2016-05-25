@@ -127,19 +127,6 @@ describe.only('Which', function () {
         });
     });
 
-    //it('Test BUS, Consult which by client, method: ConsultWhichByClient', function (done) {
-    //    let obj = {
-    //        name: "gustavo",
-    //        cpf_cnpj: "211312",
-    //        email: "gustavo_sk@live.com"
-    //    };
-
-    //    whichBUS.ConsultWhichByClient(obj, function (callback) {
-
-    //    });
-
-    //});
-
     it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
         request(config.application.url)
         .get(common.routes.which.getWhich)
@@ -152,7 +139,6 @@ describe.only('Which', function () {
             let result = res.body;
            
             if (result.success) {
-                console.log(result.success);
                 done();
             } else if(result.error) {
                 return done(result.error);

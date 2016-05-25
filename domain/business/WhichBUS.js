@@ -84,6 +84,7 @@ class WhichBuss {
                         },
                         order: {
                             products: [{
+                                id_production: o.productionid,
                                 supplier: o.supplier,
                                 delivery_date: o.delivery_date,
                                 name: o.productname,
