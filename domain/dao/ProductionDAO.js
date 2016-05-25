@@ -38,7 +38,8 @@ class PruductionDAO {
                         + 'c.productname as name,'
                         + 'c.height,'
                         + 'c.weight,'
-                        + 'c.describe '
+                        + 'c.describe, '
+                        + 'c.percentage '
 	        + 'from consult_which c '
             + 'where c.percentage < 100 or c.percentage is null '
             + 'order by delivery_date '
@@ -60,9 +61,9 @@ class PruductionDAO {
         }).then(function (update) {
             console.log(update);
             if (update == 1) {
-                callback({ success: 'Senha atualizada com sucesso.' });
+                callback({ success: 'Porcentagem atualizada com sucesso.' });
             } else {
-                callback({ error: 'Usuário ou senha invalidos.' });
+                callback({ error: 'Não foi possível atualizar a porcentagem.' });
             }
         });
     }
