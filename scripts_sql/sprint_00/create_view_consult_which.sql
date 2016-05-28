@@ -30,7 +30,7 @@ from tb_which w
 		on pw.id_which = w.id
 	join tb_product p
 		on p.id = pw.id_product
-	join tb_production pd
+	left join tb_production pd
 		on pd.id_which = w.id
 		and pd.id_product = p.id
 		and pd.id_user = u.id

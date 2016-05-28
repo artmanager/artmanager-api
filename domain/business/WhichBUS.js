@@ -71,16 +71,17 @@ class WhichBuss {
             
             result.view.forEach(function (o) {
                 if (i != o.id) {
-                    console.log('new');
+                    //console.log('new');
                     i = o.id;
+                    
                     let obj = {
                         id: o.id,
-                        creationDate: o.creationDate,
+                        creationDate: o.creationdate,
                         user: {
                             name: o.name
                         },
                         client: {
-                            name: o.clientName
+                            name: o.clientname
                         },
                         order: {
                             products: [{
