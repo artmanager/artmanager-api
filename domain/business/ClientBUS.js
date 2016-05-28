@@ -41,6 +41,8 @@ class ClientBUS {
 						}, () => {
 							next();
 						});
+					} else {
+					    next();
 					}
 				},
 				function (next) {
@@ -65,7 +67,10 @@ class ClientBUS {
 								n();
 							});
 						}, next());
+					} else {
+					    next();
 					}
+
 				}
 			], () => {
 				if (idClient != null)
