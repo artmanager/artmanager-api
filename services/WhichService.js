@@ -54,6 +54,24 @@ class WhichService {
             res.json({ error: 'Não foi possível atualizar os dados. ' + e });
         }
     }
+
+    WhichByClient(req, res) {
+        try {
+            let obj = req.body;
+
+            if (obj.name != null || obj.cpf_cnpj != null || obj.email != null) {
+                whichBus.ConsultWhichByClient(obj, function (callback) {
+                    res.json(callback);
+                });
+            } else {
+                res.json({ error: "Por favor envie ao menos um parametro para consultar o pedido "});
+            }
+
+
+        } catch (e) {
+            res.json({ error: 'Não foi possível consultar o pedido. ' + e });
+        }
+    }
 }
 
 module.exports = new WhichService();

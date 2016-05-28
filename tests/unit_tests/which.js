@@ -65,6 +65,21 @@ describe.only('Which', function () {
     //    });
     //});
 
+    //it('Test DAO, consult whish by client, method: GetWhishByClient', function (done) {
+
+    //    let obj = {
+    //        cpf_cnpj: null,
+    //        name: 'gustavo',
+    //        email: null
+    //    }
+
+    //    whichDAO.GetWhishByClient(obj, function (callback) {
+
+    //        console.log(callback.view);
+    //        console.log(callback.error);
+    //    });
+    //});
+
     //it('Test BUS, update pedingfallback and entrance, method: UpdateEntrancePending', function (done) {
     //    let obj = {
     //        id: 1,
@@ -127,27 +142,76 @@ describe.only('Which', function () {
     //    });
     //});
 
-    it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
-        request(config.application.url)
-        .get(common.routes.which.getWhich)
-        .set('Accept', 'application/json')
-        .set('x-access-token', token)
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end(function (err, res) {
+    //it('Test BUS, consult whish by cliente', function (done) {
 
-            let result = res.body;
-           
-            if (result.success) {
-                done();
-            } else if(result.error) {
-                return done(result.error);
-            } else {
-                return done('Unexpected result');
+    //    let obj = {
+    //        cpf_cnpj: null,
+    //        name: 'gustavo',
+    //        email: null
+    //    }
+
+    //    whichBUS.ConsultWhichByClient(obj, function (callback) {
+
+    //        if (callback.success != null) {
+    //            done();
+    //        } else if (callback.error != null) {
+    //            return done(callback.error);
+    //        }
+            
+    //    });
+
+    //});
+
+    it('Test Service, consult whish by client, method: GET, url: /getwhichbyclient', function (done) {
+            let obj = {
+                cpf_cnpj: null,
+                name: 'gustavo',
+                email: null
             }
 
-        });
+            request(config.application.url)
+            .get(common.routes.which.getWhichByClient)
+            .send(obj)
+            .set('Accept', 'application/json')
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function (err, res) {
+
+                let result = res.body;
+                console.log(result.success);
+                if (result.success) {
+                    done();
+                } else if(result.error) {
+                    return done(result.error);
+                } else {
+                    return done('Unexpected result');
+                }
+
+            });
     });
+
+    //it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
+    //    request(config.application.url)
+    //    .get(common.routes.which.getWhich)
+    //    .set('Accept', 'application/json')
+    //    .set('x-access-token', token)
+    //    .expect('Content-Type', /json/)
+    //    .expect(200)
+    //    .end(function (err, res) {
+
+    //        let result = res.body;
+           
+    //        if (result.success) {
+    //            done();
+    //        } else if(result.error) {
+    //            return done(result.error);
+    //        } else {
+    //            return done('Unexpected result');
+    //        }
+
+    //    });
+    //});
 
     //it('Test Service, Insert one, method: POST, InsertOne', function (done) {
     //    var obj = {

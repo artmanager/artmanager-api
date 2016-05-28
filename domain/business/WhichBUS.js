@@ -129,9 +129,14 @@ class WhichBuss {
 
     ConsultWhichByClient(obj, callback) {
 
-        clientDao.ConsultClient(obj, function (result) {
+        whichDao.GetWhishByClient(obj, function (result) {
             let list = [];
             let i = 0;
+
+            if (result.error != null) {
+                callback(result.error);
+                return;
+            }
 
             result.view.forEach(function (o) {
                 if (i != o.id) {
@@ -139,12 +144,12 @@ class WhichBuss {
                     i = o.id;
                     let obj = {
                         id: o.id,
-                        creationDate: o.creationDate,
+                        creationDate: o.creationdate,
                         user: {
                             name: o.name
                         },
                         client: {
-                            name: o.clientName
+                            name: o.clientname
                         },
                         order: {
                             products: [{

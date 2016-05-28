@@ -33,37 +33,6 @@ class ClientDAO {
             }
         )
     }
-
-    GetOneClient(obj, callback) {
-        let query = 'select w.* from tb_client c join consult_which w on c.id = w.clientId where ';
-        let qtdFil = 0;
-        if (obj.name != null) {
-            qtdFil++;
-
-            query += 'replace(ltrim(rtrim(ds_name)), " ", "") = ' + obj.name.replace(/ /g, '').toLowerCase();
-        }
-
-        if (obj.cpf_cnpj) {
-            if (qtdFil > 0)
-                query += ' and ds_cpf_cnpj = ' + obj.cpf_cnpj.replace(/ /g, '').toLowerCase();
-            else
-                query += 'ds_cpf_cnpj = ' + obj.cpf_cnpj.replace(/ /g, '').toLowerCase();
-        }
-
-        if (obj.email) {
-            if (qtdFil > 0)
-                query += ' and ds_email = ' + obj.email.replace(/ /g, '').toLowerCase();
-            else
-                query += 'ds_email = ' + obj.email.replace(/ /g, '').toLowerCase();
-        }
-
-        sequelize
-            .query(query)
-            .spread(function (result, metadata) {
-                callback({ view: result });
-            });
-
-    }
 }
 
 module.exports = new ClientDAO(ClientModel);
