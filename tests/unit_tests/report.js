@@ -8,6 +8,7 @@ let request     = require('supertest'),
 
 describe.only('Report', function () {
 
+    //DAO
     it('Test DAO, report products, method: ReportProduct', function (done) {
         var obj = {
             dt_from: '2016-05-01',
@@ -17,6 +18,7 @@ describe.only('Report', function () {
         reportDAO.ReportProducts(obj, function (callback) {
             
             if (callback.result != null && callback.result.length > 0) {
+                console.log(callback.result);
                 done();
             } else if (callback.result != null && callback.result.length <= 0) {
                 done('Nenum produto foi vendido');
@@ -44,6 +46,7 @@ describe.only('Report', function () {
         });
     });
 
+    // BUS
     it('Test BUS, report supplier, method ReporSupplier', function (done) {
         let obj = {
             dt_from: '2000-05-01',
@@ -59,7 +62,6 @@ describe.only('Report', function () {
             done();
         });
     });
-
 
     it('Test BUS, report products, method Reportproduct', function (done) {
         var obj = {
@@ -79,6 +81,7 @@ describe.only('Report', function () {
         });
     });
 
+    //Request
     it('Test Request, report supplier, method GET, url: /reportSupplier', function (done) {
         let obj = {
             dt_from: '2011-05-01',
