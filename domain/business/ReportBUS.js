@@ -71,6 +71,20 @@ class ReportBUS {
     }
 
 
+    ReportSales(obj, callback) {
+        if (obj.dt_to != null && obj.dt_from != null) {
+            reportDAO.ReportSales(obj, function (result) {
+                console.log(result.result);
+                if (result.result != null)
+                    callback({ success: result.result });
+                else
+                    callback({ error: 'Nenhuma venda encontrada' });
+            });
+        } else {
+            callback({ error: 'Por favor envie uma data valida' });
+        }
+    }
+
 }
 
 module.exports = new ReportBUS();

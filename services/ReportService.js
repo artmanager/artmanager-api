@@ -49,6 +49,28 @@ class ReportService {
             res.json({ error: 'Não foi possível cosultar o relatório de produtos. ' + e });
         }
     }
+
+    ReportSales(req, res) {
+        try {
+
+            let obj = req.body;
+
+            if (obj.dt_to == null) {
+                res.json({ error: 'Data final inválida' });
+            }
+
+            if (obj.dt_from == null) {
+                res.json({ error: 'Data inicial inválida' });
+            }
+
+            reportBUS.ReportSales(obj, function (callback) {
+                res.json(callback);
+            });
+
+        } catch (e) {
+            res.json({ error: 'Não foi possível consultar o relatório de produtos. ' + e });
+        }
+    }
 }
 
 module.exports = new ReportService();

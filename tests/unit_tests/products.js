@@ -1,63 +1,63 @@
 var request 	= require('supertest'),
-	productDAO 	= require('../../domain/dao/ProductDAO'),
-	productBUS 	= require('../../domain/business/ProductBUS'),
+	productdao 	= require('../../domain/dao/productdao'),
+	productbus 	= require('../../domain/business/productbus'),
 	config 		= require('../../config/config.js'),
-	common 		= require(config.common.fileCommon);
+	common 		= require(config.common.filecommon);
 
-var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OCwibmFtZSI6ImFydG1hbmFnZXIiLCJ0aXBvIjoxLCJpYXQiOjE0NTU0NzIzODl9.0yH_rgL5ZBvwdjjqG3mPmG86zhcBLmpb7C2D_fraVKA";
+var token = "eyj0exaioijkv1qilcjhbgcioijiuzi1nij9.eyjpzci6ocwibmftzsi6imfydg1hbmfnzxiilcj0axbvijoxlcjpyxqioje0ntu0nzizodl9.0yh_rgl5zbvwdjjqg3mpmg86zhcblmpb7c2d_fravka";
 
-describe.only('Test Products', function () {
+describe.only('test products', function () {
 
-	it ('Test DAO, insert one product, method: InserOne', function (done) {
+	it ('test dao, insert one product, method: inserone', function (done) {
 		var obj = {
 			id_product_category: 2,
 			id_supplier : null,
-			name : "Product Test",
+			name : "product test",
 		    size : "20cm",
 		    weight : "20cm",
-		    describe : "Produto teste",
+		    describe : "produto teste",
 		    cost : 25.2,
 		    sale_cost: 55.1,
 		    quantity: 20
 		}
 
-		productDAO.InsertOne(obj, function (result) {
+		productdao.insertone(obj, function (result) {
 			if (result.product.id > 0) {
 				done();
 			} else if (result.error) {
-				throw 'Não foi possível adicionar um produto. Erro' + result.error;
+				throw 'não foi possível adicionar um produto. erro' + result.error;
 			} else {
-				throw 'Unexpected result';
+				throw 'unexpected result';
 			}
 		});
 						
 	});
 
-	it ('Test DAO, find one product, method: FindOne', function (done) {
+	it ('test dao, find one product, method: findone', function (done) {
 		var obj = {
-			name : "Product Test",
+			name : "product test",
 		    size : "20cm",
 		    weight : "20cm",
-		    describe : "Produto teste",
+		    describe : "produto teste",
 		}
 
-		productDAO.FindOne(obj, function(result) {
+		productdao.findone(obj, function(result) {
 			if (result == null) {
-				throw 'Produto não existe';
+				throw 'produto não existe';
 			}
 			else if (result.id > 0) {
 				done();
 			}
 			else {
-				throw 'Unexpected result';
+				throw 'unexpected result';
 			}
 		});
 	});
 
-	it ('Test DAO, find all products, method: FindAllProducts', function (done) {
+	it ('test dao, find all products, method: findallproducts', function (done) {
 
-		productDAO.FindAllProducts(function (callback) {
-			callback.products.forEach(function (o) {
+		productdao.findallproducts(function (callback) {
+			callback.products.foreach(function (o) {
 				console.log(o);
 			});
 
@@ -69,8 +69,8 @@ describe.only('Test Products', function () {
 		});
 	});
 
-	it ('Test BUS, find All products, method: FindAllProducts', function (done) {
-		productBUS.FindAllProducts(function (callback) {
+	it ('test bus, find all products, method: findallproducts', function (done) {
+		productbus.findallproducts(function (callback) {
 			if (callback.error == undefined)
 				done();
 			else {
@@ -79,91 +79,79 @@ describe.only('Test Products', function () {
 		});
 	});
 
-	it ('Test BUS, insert one product, method: InsetOne', function (done) {
+	it ('test bus, insert one product, method: insetone', function (done) {
 		var obj = {
 			id_product_category: 1,
 			id_supplier : null,
-			name : "Product Test 2",
+			name : "product test 2",
 		    size : "244cm",
 		    weight : "210cm",
-		    describe : "Produto teste",
+		    describe : "produto teste",
 		    cost : 25.2,
 		    sale_cost: 55.1,
 		    quantity: 20
 		}
 
-		productBUS.InsertOne(obj, function (result) {
+		productbus.insertone(obj, function (result) {
 			
 			if (result.error != undefined) {
 				throw result.error;
 			} else if (result.success != undefined){
 				done();
 			} else  {
-				throw 'Unexpected error';
+				throw 'unexpected error';
 			}
 		});	
 
 	});
 
-	it ('Test request, insert one product, route: /product, method: POST ', function (done) {
+	it ('test request, insert one product, route: /product, method: post ', function (done) {
 		var obj = {
-			id_product_category: 1,
+			id_product_category: 2,
 			id_supplier : 1,
-			name : "App123s 24.4",
+			name : "app123s 24.44",
 		    size : "24cm",
 		    weight : "24cm",
-		    describe : "Produto teste post request",
+		    describe : "produto teste post request",
 		    cost : 30.2,
 		    sale_cost: 55.1,
 		    quantity: 20
 		}
 
-		//var obj = {
-		//    "id_supplier": 2,
-		//    "name": "TESTE",
-		//    "describe": "teste",
-		//    "id_product_category": 2,
-		//    "size": "0.01",
-		//    "weight": "0.01",
-		//    "cost": 0.01,
-		//    "sale_cost": 0.01,
-		//    "quantity": 1
-		//}
-
 		request(config.application.url)
-		.post(common.routes.product.postProduct)
+		.post(common.routes.product.postproduct)
 		.send(obj)
-		.set('Accept', 'application/json')
+		.set('accept', 'application/json')
 		.set('x-access-token', token)
-      	.expect('Content-Type', /json/)
+      	.expect('content-type', /json/)
       	.expect(200)
       	.end(function (err, res) {
 
       		if (res.body.success) {
       			done();
       		} else if (res.body.error) {
-      			return done('Não foi possível inserir o produto. Erro: ' + res.body.error);
+      			return done('não foi possível inserir o produto. erro: ' + res.body.error);
       		} else {
-      			return done('Unexpected result ' + res.body.error);
+      			return done('unexpected result ' + res.body.error);
       		}
       	});
 	});
 
-	it ('Test request, Get all products, route: /product, method: GET', function (done) {
+	it ('test request, get all products, route: /product, method: get', function (done) {
 
 		request(config.application.url)
-		.get(common.routes.product.getAllProducts)
-		.set('Accept', 'application/json')
+		.get(common.routes.product.getallproducts)
+		.set('accept', 'application/json')
 		.set('x-access-token', token)
-      	.expect('Content-Type', /json/)
+      	.expect('content-type', /json/)
       	.expect(200)
       	.end(function (err, res) {
       		if (res.body.error == undefined) {
       			done();
       		} else if (res.body.error) {
-      			return done('Não foi possível consultar os produtos. Erro: ' + res.error);
+      			return done('não foi possível consultar os produtos. erro: ' + res.error);
       		} else {
-      			return done('Unexpected result ' + (err || res.body.error));
+      			return done('unexpected result ' + (err || res.body.error));
       		}
       	});
 	});
