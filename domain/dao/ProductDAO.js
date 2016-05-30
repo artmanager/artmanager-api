@@ -1,6 +1,7 @@
 "use strict"
 
-var productModel 	= require('../model/ProductModel'),
+var productModel = require('../model/ProductModel'),
+    sequelize = require('../../db/postgres.js'),
 	promise 		= require('bluebird');
 
 class ProductDAO  {
@@ -55,12 +56,30 @@ class ProductDAO  {
 	}
 
 	FindAllProducts(callback) {
-		console.log('Find all products');
-		productModel
-			.findAll()
-				.then(function (obj) {
-					callback({ products: obj });
-				});
+	    console.log('Find all products');
+	    let query = "select " 
+	                    + "p.id, "
+                        + "p.id_supplier, "
+                        + "p.id_product_category, "
+                        + "p.ds_name as name, "
+                        + "p.ds_size as size, "
+                        + "p.ds_weight as weight, "
+                        + "p.ds_describe as describe, "
+                        + "p.vl_cost as cost, "
+                        + "p.vl_sale_cost as sale_cost, "
+                        + "p.nr_quantity as quantity, "
+                        + "s.ds_name as supplier, "
+                        + "pc.ds_describe as category "
+	                + "from tb_product p "
+	                + "join tb_product_category pc "
+	                    + "on pc.id = p.id_product_category "
+	                + "left join tb_supplier s "
+	                    + "on s.id = p.id_supplier ";
+	    sequelize
+            .query(query)
+            .then(function (obj) {
+                callback({ products: obj });
+            });
 	}
 }
 
