@@ -29,6 +29,22 @@ class UserDAO {
         }
     }
 
+    FindOneByUser(obj, callback) {
+        if (obj != null && obj != undefined) {
+            console.log(obj);
+            let user = obj.user.toLowerCase().trim();
+            UserModel.findOne({
+                where: {
+                    ds_user: user,
+                }
+            }).then(function (user) {
+                console.log('DAO');
+                console.log(user);
+                callback(user);
+            });
+        }
+    }
+
     InsertOne(obj, callback) {
         console.log(obj);
         if (obj != null && obj != undefined) {
@@ -65,44 +81,68 @@ class UserDAO {
         }
     }
 
-	UpdatePassword(obj, callback) {
-		if (obj != null && obj != undefined) {
-		    var hash = cripto(obj.password);
-		    var oldHash  = cripto(obj.old);
-			UserModel.update({
-				ds_password : hash
-			}, {
-			where: {
-				ds_user     : obj.user.toLowerCase(),
-                ds_password : oldHash,
-			}
-			}).then(function (update) {
-			    console.log(update);
-			    if (update == 1) {
-			        callback({ success: 'Senha atualizada com sucesso.' });
-			    } else {
-			        callback({ error: 'Usuário ou senha invalidos.' });
-			    }
-			});
-		}
-	}
+    UpdatePassword(obj, callback) {
+        if (obj != null && obj != undefined) {
+            var hash = cripto(obj.password);
+            var oldHash = cripto(obj.old);
+            UserModel.update({
+                ds_password: hash
+            }, {
+                where: {
+                    ds_user: obj.user.toLowerCase(),
+                    ds_password: oldHash,
+                }
+            }).then(function (update) {
+                console.log(update);
+                if (update == 1) {
+                    callback({ success: 'Senha atualizada com sucesso.' });
+                } else {
+                    callback({ error: 'Usuário ou senha invalidos.' });
+                }
+            });
+        }
+    }
 
-	DeleteUser(obj, callback) {
-		try {
-			let hash = cripto(obj.password);
-			let user = obj.user.toLowerCase().trim();
-		    UserModel.destroy({
-		        where: {
-					ds_password : hash,
-					ds_user : user
-				}
-				}).then(function(obj) {
-					callback(obj);
-			});
-		} catch (e) {
-			callback({ Error :  e });
-		}
-	}
+    UpdatePasswordById(obj, callback) {
+        try {
+            if (obj != null && obj != undefined) {
+                let hash = cripto(obj.password);
+                UserModel.update({
+                    ds_password: hash
+                }, {
+                    where: {
+                        id: obj.id,
+                    }
+                }).then(function (update) {
+                    console.log(update);
+                    if (update == 1) {
+                        callback({ success: 'Senha atualizada com sucesso.' });
+                    } else {
+                        callback({ error: 'Não foi possível atualizar a senha.' });
+                    }
+                });
+            }
+        } catch (e) {
+            callback({ error: 'Não foi possível alterar a senha. ' + e });
+        }
+    }
+
+    DeleteUser(obj, callback) {
+        try {
+            let hash = cripto(obj.password);
+            let user = obj.user.toLowerCase().trim();
+            UserModel.destroy({
+                where: {
+                    ds_password: hash,
+                    ds_user: user
+                }
+            }).then(function (obj) {
+                callback(obj);
+            });
+        } catch (e) {
+            callback({ Error: e });
+        }
+    }
 }
 
 module.exports = new UserDAO(UserModel);

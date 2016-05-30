@@ -60,7 +60,7 @@ var properties = require('properties'),
  	try	{
  		console.log('AuthenticationService - ValidateToken - Receive request');
  		console.log('Route: ' + req.url);
- 		if (req.url == common.routes.authentication.postGenerateToken) {
+ 		if (req.url == common.routes.authentication.postGenerateToken || req.url == common.routes.forgotPassword.sendEmail || req.url == common.routes.forgotPassword.receiveToken) {
  		    console.log('Next Autentication');
  			next(); 		
  			return;

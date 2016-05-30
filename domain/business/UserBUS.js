@@ -54,6 +54,14 @@ class UserBus {
             callback(result);
         });
     }
+
+    UpdatePasswordById(obj, callback) {
+
+        userDao.UpdatePasswordById(obj, function (res) {
+            console.log(res);
+            callback(res);
+        });
+    }
 }
 
 

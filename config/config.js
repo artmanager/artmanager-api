@@ -9,9 +9,13 @@ module.exports = {
         "storeDb": "path/to/database.postgres"
     },
     "application": {
-        "url": "http://localhost:3000"
+        "url": "http://localhost:3000",
+        "landingPage": "http://localhost:64409"
     },
     "common": {
         "fileCommon": "../../../artmanager-common/common.js"
+    },
+    "resetPassword": {
+        "strSMTP": "smtps://email@gmail.com:senha@smtp.gmail.com",
     }
 }
