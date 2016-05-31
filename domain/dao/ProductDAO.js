@@ -81,6 +81,7 @@ class ProductDAO  {
                 callback({ products: obj });
             });
 	}
+
 }
 
 module.exports = new ProductDAO(productModel);

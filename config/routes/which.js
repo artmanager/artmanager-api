@@ -8,10 +8,9 @@ let which = require('../../services/WhichService.js'),
 
 router.post(common.routes.which.getWhich, which.GetWhich.bind(which));
 router.post(common.routes.which.getWhichByClient, which.WhichByClient.bind(which));
-router.get('/pedidos/:id',  function(req, res){res.json({'test': 'success'}); });
 router.post(common.routes.which.postWhich, which.InsertWhich.bind(which));
 router.put(common.routes.which.putUpdateEntrancePending, which.UpdateEntrancePending.bind(which));
-router.delete('/pedidos/:id', function(req, res){res.json({'test': 'success'}); });
+router.delete(common.routes.which.deleteWhich, which.DeleteWhich.bind(which));
 
 
 module.exports = router;

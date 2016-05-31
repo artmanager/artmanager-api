@@ -1,5 +1,6 @@
 'use strict';
-let productWhichModel = require('../model/ProductWhichModel.js');
+let productWhichModel = require('../model/ProductWhichModel.js'),
+    sequelize = require('../../db/postgres.js');
 
 class ProductWhichDAO {
 
@@ -14,6 +15,14 @@ class ProductWhichDAO {
         }).spread(function(productWhich, created) {
             callback({ productWhich: productWhich, created: created });
         });
+    }
+
+    DeleteByWhich(obj, callback) {
+        sequelize
+            .query('delete from tb_product_which where id_which = ' + obj.id)
+            .then(function (update) {
+                callback({ success: 'Tabela product_which deletada' });
+            });
     }
 }
 

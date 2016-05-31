@@ -26,7 +26,7 @@ class WhichDAO {
 
 	ConsultAllWhich(obj, callback) {
 	    try {
-	        sequelize.query("select * from consult_which where creationdate between '" + obj.dt_from +"' and '" + obj.dt_to + "' limit 200")
+	        sequelize.query("select distinct * from consult_which where creationdate between '" + obj.dt_from +"' and '" + obj.dt_to + "' limit 200")
                 .spread(function (result, metadata) {
                     callback({ view: result });
                 });
@@ -103,6 +103,14 @@ class WhichDAO {
 	            callback({ error: 'Não foi possível marcar a saída do prodido' });
 	        }
 	    });
+	}
+
+	DeleteById(obj, callback) {
+	    sequelize
+            .query('delete from tb_which where id = ' + obj.id)
+            .then(function (update) {
+                callback({ success: 'Tabela de pedido deletada' });
+            });
 	}
 }
 

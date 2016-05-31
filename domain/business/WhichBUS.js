@@ -127,6 +127,40 @@ class WhichBuss {
         });
     }
 
+    DeleteWhich(obj, callback) {
+        let end = false;
+        try {
+
+            async.series([
+                function (n) {
+                    production.DeleteByWhich(obj, function (res) {
+                        n();
+                    });
+                },
+                function (n) {
+                    productWhich.DeleteByWhich(obj, function (res) {
+                        n()
+                    })
+                },
+                function (n) {
+                    whichDao.DeleteById(obj, function (res) {
+                        end = true;
+                        n(res);
+                    });
+                }
+            ], (res) => {
+                if (end) {
+                    console.log('teste');
+                    console.log(res);
+                    callback(res);
+                }
+            });
+
+        } catch (e) {
+            callback({ error: 'Não foi possível deletar o pedido. ' + e });
+        }
+    }
+
     ConsultWhichByClient(obj, callback) {
 
         whichDao.GetWhishByClient(obj, function (result) {

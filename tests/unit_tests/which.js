@@ -237,7 +237,7 @@ describe.only('Which', function () {
             products: [
                 {
                     id: 5,
-                    describe: 'Teste which BUS',
+                    describe: 'Mochila azul',
                     quantity: 2,
                     production: {
                         delivery_date: new Date()
@@ -245,7 +245,7 @@ describe.only('Which', function () {
                 },
                 {
                     id: 5,
-                    describe: 'Teste which BUS 2',
+                    describe: 'Mochila rosa',
                     quantity: 1,
                     production: {
                         delivery_date: new Date()
@@ -361,5 +361,26 @@ describe.only('Which', function () {
       			return done('unexpected result ' + (err || res.body.error));
       		}
       	});
+    });
+
+    it('test request, delete one which, route: /product, method: get', function (done) {
+
+        request(config.application.url)
+        .delete(common.routes.which.deleteWhich)
+        .send({ id: 31 })
+        .set('accept', 'application/json')
+        .set('x-access-token', token)
+        .expect('content-type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+
+            if (res.body.error == undefined) {
+                done();
+            } else if (res.body.error) {
+                return done('não foi possível consultar os produtos. erro: ' + res.error);
+            } else {
+                return done('unexpected result ' + (err || res.body.error));
+            }
+        });
     });
 });

@@ -30,7 +30,7 @@ class PruductionDAO {
     }
 
     GetRowProduction(callback) {
-        let query = 'select '
+        let query = 'select distinct '
                         + 'c.productionid as id,'
                         + 'c.name as client,'
                         + 'c.supplier as supplier,'
@@ -48,6 +48,14 @@ class PruductionDAO {
             .query(query)
             .spread(function (result, metadata) {
                 callback({ view: result });
+            });
+    }
+
+    DeleteByWhich(obj, callback) {
+        sequelize
+            .query('delete from tb_production where id_which = ' + obj.id)
+            .then(function (update) {
+                callback({ success: 'Tabela de produção deletada' });
             });
     }
 

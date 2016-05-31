@@ -81,6 +81,22 @@ class WhichService {
             res.json({ error: 'Não foi possível consultar o pedido. ' + e });
         }
     }
+
+    DeleteWhich(req, res) {
+        try {
+            let obj = req.body;
+            if (obj.id == null || obj.id <= 0) {
+                res.json({ error: 'Id inválido' });
+            }
+
+            whichBus.DeleteWhich(obj, function (callback) {
+                console.log(callback);
+                res.json(callback);
+            });
+        } catch (e) {
+            res.json({ error: 'Não foi possível deletar o pedido. ' + e });
+        }
+    }
 }
 
 module.exports = new WhichService();
