@@ -26,15 +26,18 @@ class ForgotPasswordService {
 
             if (obj.password == null || obj.password == '') {
                 res.json({ error: 'Senha inválida' });
+                return;
             }
 
             if (obj.token == null || obj.token == '') {
                 res.json({ error: 'Token invalido' });
+                return;
             }
 
             let decod = jwt.verify(obj.token, 'n3JZZm27T4yccdVf', function (err, decoded) {
                 if (err) {
                     res.json({ error: 'Não foi possível validar token. Erro: ' + err });
+                    return;
                 }
 
                 if (decoded.id != null && decoded.id > 0) {
@@ -46,14 +49,17 @@ class ForgotPasswordService {
                     userBUS.UpdatePasswordById(user, function (callback) {
                         console.log('Respondendo');
                         res.json(callback);
+                        return;
                     });
                 } else {
                     res.json({ error: 'Token invalido' });
+                    return;
                 }
             });
 
         } catch (e) {
             res.json({ error: 'Não foi possível alterar a senha. ' + e });
+            return;
         }
 
     };
