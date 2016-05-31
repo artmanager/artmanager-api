@@ -15,14 +15,30 @@ class ForgotPasswordBUS {
             if (obj.user != null) {
                 userDAO.FindOneByUser(obj, function (res) {
                     if (res != null && res.id != null) {
-
+                        console.log('Diretorio');
+                        console.log(require('path').dirname(require.main.filename) + '\\config\\templatesHTML\\resetPassword.html');
                         fs.readFile(require('path').dirname(require.main.filename) + '\\config\\templatesHTML\\resetPassword.html', function (err, html) {
                             
+                            if (err) {
+                                console.log('ERRO');
+                                console.log(err);
+                            }
+
                             var tkn = {
                                 id: res.id,
                                 date: new Date()
                             };
+
                             var token = jwt.sign(tkn, 'n3JZZm27T4yccdVf');
+                            console.log('Token');
+                            console.log(token);
+
+                            console.log('Arquivo html');
+                            console.log(html)
+
+                            if (html == null || html == undefined) {
+                                callback({ error: 'Não foi possível ler o layout do e-mail' });
+                            }
 
                             html = html.toString().replace('http://artmanager.com.br', config.application.landingPage + "/reset.html?token=" + token);
 
