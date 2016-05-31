@@ -92,7 +92,7 @@ describe.only('Users', function (){
 		var obj = { 
 			"user"  : { 
 				"name" 	  	: "gustavo", 
-				"user" 		: "gustavo123", 
+				"user" 		: "gustavo_sk2@live.com", 
 				"password"  : "artmanager123", 
 				"perfil"  	: 1
 			}

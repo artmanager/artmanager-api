@@ -1,7 +1,8 @@
 'use strict';
 
-var promise = require('bluebird');
-var userBus = require('../domain/business/UserBUS');
+let promise = require('bluebird');
+let userBus = require('../domain/business/UserBUS');
+let regexEmail = require('regex-email');
 
 class UserService {
     GetOne(req, res) {
@@ -24,6 +25,10 @@ class UserService {
             else if (obj.user.password == undefined || obj.user.password == null || obj.user.password == '') {
                 return res.json({ error : 'Senha inválida'});
             }
+            if (!regexEmail.test(obj.user.user)) {
+                return res.json({ error: 'Por favor envie um e-mail valido' });
+            }
+
             console.log('Send Business');
             userBus.UserRegister(obj.user, function (callback) {
                 res.json(callback);

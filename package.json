@@ -36,7 +36,8 @@
     "properties": "^1.2.1",
     "sequelize": "^3.8.0",
     "sequelize-cli": "^1.9.1",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "regex-email": "^1.0.2"
   },
   "devDependencies": {
     "async": "^1.5.2",

@@ -10,12 +10,12 @@ module.exports = {
     },
     "application": {
         "url": "http://localhost:3000",
-        "landingPage": "http://localhost:64409"
+        "landingPage": "http://artmanager.com.br"
     },
     "common": {
         "fileCommon": "../../../artmanager-common/common.js"
     },
     "resetPassword": {
-        "strSMTP": "smtps://email@gmail.com:senha@smtp.gmail.com",
+        "strSMTP": "smtps://artmanager.app@gmail.com:download666@smtp.gmail.com",
     }
 }
