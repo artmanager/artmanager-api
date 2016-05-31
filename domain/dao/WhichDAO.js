@@ -24,9 +24,9 @@ class WhichDAO {
 		}
 	}
 
-	ConsultAllWhich(callback) {
+	ConsultAllWhich(obj, callback) {
 	    try {
-	        sequelize.query('select * from consult_which limit 200')
+	        sequelize.query("select * from consult_which where creationdate between '" + obj.dt_from +"' and '" + obj.dt_to + "' limit 200")
                 .spread(function (result, metadata) {
                     callback({ view: result });
                 });

@@ -41,7 +41,7 @@ class PruductionDAO {
                         + 'c.describe, '
                         + 'c.percentage '
 	        + 'from consult_which c '
-            + 'where c.percentage < 100 or c.percentage is null '
+            + 'where (c.percentage < 100 or c.percentage is null) and c.productionid is not null '
             + 'order by delivery_date '
             + 'limit 200 ';
         sequelize

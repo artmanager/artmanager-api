@@ -64,8 +64,8 @@ class WhichBuss {
         });
     }
 
-    ConsultWhich(callback) {
-        whichDao.ConsultAllWhich(function (result) {
+    ConsultWhich(obj, callback) {
+        whichDao.ConsultAllWhich(obj, function (result) {
             let list = [];
             let i = 0;
             

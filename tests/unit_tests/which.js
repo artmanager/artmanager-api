@@ -192,8 +192,15 @@ describe.only('Which', function () {
     });
 
     it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
+
+        var obj = {
+            dt_from: '2016-05-20',
+            dt_to: '2016-05-30'
+        };
+
         request(config.application.url)
-        .get(common.routes.which.getWhich)
+        .post(common.routes.which.getWhich)
+        .send(obj)
         .set('Accept', 'application/json')
         .set('x-access-token', token)
         .expect('Content-Type', /json/)
@@ -201,7 +208,7 @@ describe.only('Which', function () {
         .end(function (err, res) {
 
             let result = res.body;
-           
+            console.log(result.success);
             if (result.success) {
                 done();
             } else if(result.error) {
@@ -300,7 +307,6 @@ describe.only('Which', function () {
 
     });
 
-
     it('test request, insert one product, route: /product, method: post ', function (done) {
         var obj = {
             id_product_category: 2,
@@ -334,7 +340,6 @@ describe.only('Which', function () {
       	    }
       	});
     });
-
 
     it ('test request, get all products, route: /product, method: get', function (done) {
 

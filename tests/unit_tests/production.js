@@ -88,41 +88,11 @@ describe.only('Production', function () {
     //    });
     //});
 
-    //it('Test Request, get row production, method: GET', function (done) {
-
-    //    request(config.application.url)
-    //    .get(common.routes.production.getProduction)
-    //    .set('x-access-token', token)
-    //    .expect('Content-Type', /json/)
-    //    .expect(200)
-    //    .end(function (err, res) {
-
-    //        if (err)
-    //            return done(err);
-
-
-    //        var result = res.body;
-    //        console.log(result);
-    //        if (result.success) 
-    //            done();
-    //        else 
-    //            return done(result.error);
-            
-    //    });
-
-    //});
-
-    it('Test Request, update production, method: PUT, route: /production', function (done) {
-        let obj = {
-            id: 5,
-            percentage: 100
-        }
+    it('Test Request, get row production, method: GET', function (done) {
 
         request(config.application.url)
-        .put(common.routes.production.putUpdateProduction)
-        .send(obj)
-        .set('Accept', 'application/json')
-		.set('x-access-token', token)
+        .get(common.routes.production.getProduction)
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, res) {
@@ -131,12 +101,41 @@ describe.only('Production', function () {
                 return done(err);
 
             var result = res.body;
-            if (result.success)
+            console.log(result);
+            if (result.success) 
                 done();
-            else if (result.error)
+            else 
                 return done(result.error);
-            else
-                return done(result.error);
+            
         });
+
     });
+
+    //it('Test Request, update production, method: PUT, route: /production', function (done) {
+    //    let obj = {
+    //        id: 5,
+    //        percentage: 100
+    //    }
+
+    //    request(config.application.url)
+    //    .put(common.routes.production.putUpdateProduction)
+    //    .send(obj)
+    //    .set('Accept', 'application/json')
+	//	.set('x-access-token', token)
+    //    .expect('Content-Type', /json/)
+    //    .expect(200)
+    //    .end(function (err, res) {
+
+    //        if (err)
+    //            return done(err);
+
+    //        var result = res.body;
+    //        if (result.success)
+    //            done();
+    //        else if (result.error)
+    //            return done(result.error);
+    //        else
+    //            return done(result.error);
+    //    });
+    //});
 });

@@ -29,7 +29,16 @@ class WhichService {
     GetWhich(req, res) {
         try {
             console.log('Service');
-            whichBus.ConsultWhich(function (callback) {
+            let obj = req.body;
+            if (obj.dt_from == null || obj.dt_from == '') {
+                res.json({ error: 'Por favor envie uma data valida.' });
+            }
+
+            if (obj.dt_to == null || obj.dt_to == '') {
+                res.json({ error: 'Por favor envie uma data valida.' });
+            }
+
+            whichBus.ConsultWhich(obj, function (callback) {
                 res.json(callback);
             });
 
@@ -57,6 +66,7 @@ class WhichService {
 
     WhichByClient(req, res) {
         try {
+
             let obj = req.body;
 
             if (obj.name != null || obj.cpf_cnpj != null || obj.email != null) {
@@ -66,7 +76,6 @@ class WhichService {
             } else {
                 res.json({ error: "Por favor envie ao menos um parametro para consultar o pedido "});
             }
-
 
         } catch (e) {
             res.json({ error: 'Não foi possível consultar o pedido. ' + e });
