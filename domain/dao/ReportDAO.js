@@ -58,6 +58,7 @@ class ReportDAO {
     }
 
     ReportSales(obj, callback) {
+        console.log('ReportSales');
         let query = "select distinct "
                         + "sum(vl_total_value) as Total, "
                         + "sum(vl_discount) as Total_Discount, "

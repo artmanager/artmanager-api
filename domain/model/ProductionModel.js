@@ -3,7 +3,8 @@ var sequelize = require('../../db/postgres'),
     client = require('./ClientModel'),
     product = require('./ProductModel'),
     which = require('./WhichModel'),
-    user = require('./UserModel');
+    user = require('./UserModel'),
+    productWhich = require('./ProductWhichModel.js');
 
 var production = sequelize.define('tb_production', {
 
@@ -123,6 +124,22 @@ var production = sequelize.define('tb_production', {
         },
         set: function (val) {
             this.setDataValue('vl_quantity', val);
+        }
+    },
+
+    id_product_which : {
+        type: dataTypes.INTEGER,
+        field: 'id_product_which',
+        references: {
+            model: productWhich,
+            key: 'id_product_which',
+            deferrable: dataTypes.Deferrable.INITIALLY_IMMEDIATE
+        },
+        get: function () {
+            return this.getDataValue('id_product_which');
+        },
+        set: function (val) {
+            this.setDataValue('id_product_which', val);
         }
     }
 

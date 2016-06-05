@@ -1,0 +1,1 @@
+﻿alter table tb_production add ds_describe varchar(200)

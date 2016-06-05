@@ -6,6 +6,10 @@ let sequelize = require('../../db/postgres.js');
 class PruductionDAO {
 
     InsertOne(obj, callback) {
+
+        console.log('ProductionDAO +++++++++ ');
+        console.log(obj);
+
         productionModel.findOrCreate({
             where: {
                 id_client: obj.id_client,
@@ -14,7 +18,8 @@ class PruductionDAO {
                 id_user: obj.id_user,
                 dt_start_date: obj.start_date,
                 dt_delivery_date: obj.delivery_date,
-                vl_quantity: obj.quantity
+                vl_quantity: obj.quantity,
+                id_product_which: obj.id_product_which
             }
         }).spread(function (production, created) {
             callback({ production: production, created: created });

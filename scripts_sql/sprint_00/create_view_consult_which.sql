@@ -32,10 +32,7 @@ from tb_which w
 		on p.id = pw.id_product
 	left join tb_production pd
 		on pd.id_which = w.id
-		and pd.id_product = p.id
-		and pd.id_user = u.id
+ 		and pd.id_product_which = pw.id
 	left join tb_supplier s
 		on s.id = p.id_supplier
 order by w.id desc;
-
-

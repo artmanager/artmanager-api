@@ -16,6 +16,6 @@ module.exports = {
         "fileCommon": "../../../artmanager-common/common.js"
     },
     "resetPassword": {
-        "strSMTP": "smtps://artmanager.app@gmail.com:download666@smtp.gmail.com",
+        "strSMTP": "smtps://artmanager.app@gmail.com:senha@smtp.gmail.com",
     }
 }

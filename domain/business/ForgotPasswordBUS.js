@@ -16,7 +16,7 @@ class ForgotPasswordBUS {
                 userDAO.FindOneByUser(obj, function (res) {
                     if (res != null && res.id != null) {
                         console.log('Diretorio');
-                        console.log(require('path').dirname(require.main.filename) + '\\config\\templatesHTML\\resetPassword.html');
+                        console.log(require('path').dirname(require.main.filename) + '\config\\templatesHTML\\resetPassword.html');
                         fs.readFile(require('path').dirname(require.main.filename) + '\\config\\templatesHTML\\resetPassword.html', function (err, html) {
                             
                             if (err) {

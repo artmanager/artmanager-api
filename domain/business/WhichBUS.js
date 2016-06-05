@@ -37,20 +37,22 @@ class WhichBuss {
 
                 if (o.production != null && o.production.delivery_date != null) {
                     console.log('cadastrando produto a produção');
-                    let prod = {
-                        id_client: obj.client.id,
-                        id_product: o.id,
-                        id_which: res.which.id,
-                        id_user: obj.user.id,
-                        start_date: new Date(),
-                        delivery_date: o.production.delivery_date,
-                        quantity: o.quantity
-                    }
+                    console.log('production');
+                    productWhich.InsertOne(product, function (resP) {
 
-                    production.InsertOne(prod, function (prodRes) {
-                        console.log('production');
-                        productWhich.InsertOne(product, function (resP) {
-                                
+                        let prod = {
+                            id_client: obj.client.id,
+                            id_product: o.id,
+                            id_which: res.which.id,
+                            id_user: obj.user.id,
+                            start_date: new Date(),
+                            delivery_date: o.production.delivery_date,
+                            quantity: o.quantity,
+                            id_product_which: resP.productWhich.id
+                        }
+
+                        production.InsertOne(prod, function (prodRes) {
+
                         });
                     });
                 } else {

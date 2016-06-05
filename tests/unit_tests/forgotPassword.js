@@ -24,7 +24,7 @@ describe.only('ForgotPassword', function () {
     //});
 
     it('Test Request, report sales, method: GET, url: /reportSales', function (done) {
-        this.timeout(10000);
+        this.timeout(30000);
         let obj = {
             user: 'gustavo_sk@live.com'
         };

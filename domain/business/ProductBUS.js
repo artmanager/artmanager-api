@@ -6,8 +6,6 @@ class ProductcBUS {
 
     InsertOne(obj, callback) {
         try {
-
-
             var product;
 
             async.series([

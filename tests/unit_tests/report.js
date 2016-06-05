@@ -162,7 +162,7 @@ describe.only('Report', function () {
         };
 
         request(config.application.url)
-		.get(common.routes.report.getReportSales)
+		.post(common.routes.report.getReportSales)
 		.send(obj)
 		.set('Accept', 'application/json')
         .set('x-access-token', token)
