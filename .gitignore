@@ -1,3 +1,5 @@
 node_modules
 config/config.js
 npm-debug.log*
+newrelic.js
+newrelic_agent.log
