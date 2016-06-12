@@ -23,6 +23,7 @@ class ReportBUS {
             reportDAO.ReportSupplier(obj, function (result) {
                 let id = 0;
                 let list = [];
+                console.log(result.result);
                 result.result.forEach(function (o) {
                     if (o.id != id) {
                         id = o.id;
@@ -70,7 +71,6 @@ class ReportBUS {
         }
     }
 
-
     ReportSales(obj, callback) {
         if (obj.dt_to != null && obj.dt_from != null) {
             reportDAO.ReportSales(obj, function (result) {
@@ -82,6 +82,29 @@ class ReportBUS {
             });
         } else {
             callback({ error: 'Por favor envie uma data valida' });
+        }
+    }
+
+    ReportTimeProduts(obj, callback) {
+        try {
+
+            reportDAO.ReportTimeProduts(obj, function (res) {
+                callback({ success: res.result });
+            });
+        } catch (e) {
+            callback({ error: 'Não foi possível consultar produtos vendidos. ' + e });
+        }
+    }
+    
+    RerportTimeProductsToDay(obj, callback) {
+        console.log(obj);
+        try {
+            reportDAO.ReportTimeProductsToDay(obj, function (res) {
+                callback({ success: res.result });
+            });
+        } catch (error) {
+            console.log(callback);
+            callback({ error: "Não foi possível consultar os produtos vendidos. " + e});
         }
     }
 

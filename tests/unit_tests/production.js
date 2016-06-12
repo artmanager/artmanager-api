@@ -9,88 +9,88 @@ let productionDAO = require('../../domain/dao/ProductionDAO.js'),
 
 describe.only('Production', function () {
 
-    it('Test DAO, insert one production, method: InsertOne', function (done) {
-        var obj = {
-            id_client: 1,
-            id_user: 2,
-            id_which: 1,
-            id_product: 8,
-            start_date: new Date(),
-            delivery_date: new Date(),
-            percentage: 10
-        }
+    // it('Test DAO, insert one production, method: InsertOne', function (done) {
+    //     var obj = {
+    //         id_client: 1,
+    //         id_user: 2,
+    //         id_which: 1,
+    //         id_product: 8,
+    //         start_date: new Date(),
+    //         delivery_date: new Date(),
+    //         percentage: 10
+    //     }
         
-        productionDAO.InsertOne(obj, function (callback) {
+    //     productionDAO.InsertOne(obj, function (callback) {
             
-            if (callback.production.id > 0)
-                done();
-            else
-                throw 'Não foi possível adicionar produto a fila de produção. ' + callback.error;
+    //         if (callback.production.id > 0)
+    //             done();
+    //         else
+    //             throw 'Nï¿½o foi possï¿½vel adicionar produto a fila de produï¿½ï¿½o. ' + callback.error;
 
-        });
+    //     });
 
-    });
+    // });
 
-    it('Test DAO, get row production, method: GetRowProduction', function (done) {
-        productionDAO.GetRowProduction(function (callback) {
+    // it('Test DAO, get row production, method: GetRowProduction', function (done) {
+    //     productionDAO.GetRowProduction(function (callback) {
 
-            if (callback.view.length > 0) {
-                done();
-            } else if (callback.view.length <= 0) {
-                return done('Não existe produtos a serem produzidos');
-            } else {
-                return done('Unexpected result');
-            }
+    //         if (callback.view.length > 0) {
+    //             done();
+    //         } else if (callback.view.length <= 0) {
+    //             return done('Nï¿½o existe produtos a serem produzidos');
+    //         } else {
+    //             return done('Unexpected result');
+    //         }
 
-        });
-    });
+    //     });
+    // });
 
-    it('Test DAO, update percentage production, method: UpdatePercentage', function (done) {
-        let obj = {
-            id: 1,
-            percentage: 100
-        }
-        productionDAO.UpdatePercentage(obj, function (callback) {
+    // it('Test DAO, update percentage production, method: UpdatePercentage', function (done) {
+    //     let obj = {
+    //         id: 1,
+    //         percentage: 100
+    //     }
+    //     productionDAO.UpdatePercentage(obj, function (callback) {
             
-            if (callback.success)
-                done();
-            else if (callback.error)
-                return done(callback.error);
-            else
-                return done('Unexpected result');
+    //         if (callback.success)
+    //             done();
+    //         else if (callback.error)
+    //             return done(callback.error);
+    //         else
+    //             return done('Unexpected result');
             
-        });
-    });
+    //     });
+    // });
 
-    it('Test BUS, update percentage production, method: UpdatePercentage', function (done) {
-        var obj = {
-            id: 2,
-            percentage: 100
-        }
-        productionBUS.UpdatePercentage(obj, function (callback) {
-            if (callback.success)
-                done();
-            else if (callback.error)
-                return done(callback.error);
-            else
-                return done('Unexpected result');
-        });
-    })
+    // it('Test BUS, update percentage production, method: UpdatePercentage', function (done) {
+    //     var obj = {
+    //         id: 2,
+    //         percentage: 100
+    //     }
+    //     productionBUS.UpdatePercentage(obj, function (callback) {
+    //         if (callback.success)
+    //             done();
+    //         else if (callback.error)
+    //             return done(callback.error);
+    //         else
+    //             return done('Unexpected result');
+    //     });
+    // })
 
-    it('Test BUSS, get row produciton, method: GetRowProduction', function (done) {
-        productionBUS.GetRowProduction(function (callback) {
-            if (callback.success.length > 0)
-                done();
-            else if (callback.success.length <= 0)
-                return done('Não existe produtos a serem produzidos');
-            else
-                return done('Unexpected result');
-        });
-    });
+    // it('Test BUSS, get row produciton, method: GetRowProduction', function (done) {
+    //     productionBUS.GetRowProduction(function (callback) {
+    //         if (callback.success.length > 0)
+    //             done();
+    //         else if (callback.success.length <= 0)
+    //             return done('Nï¿½o existe produtos a serem produzidos');
+    //         else
+    //             return done('Unexpected result');
+    //     });
+    // });
 
     it('Test Request, get row production, method: GET', function (done) {
 
-        request(config.application.url)
+        request('http://api.artmanager.com.br')
         .get(common.routes.production.getProduction)
         .set('x-access-token', token)
         .expect('Content-Type', /json/)
@@ -111,31 +111,31 @@ describe.only('Production', function () {
 
     });
 
-    it('Test Request, update production, method: PUT, route: /production', function (done) {
-        let obj = {
-            id: 5,
-            percentage: 100
-        }
+    // it('Test Request, update production, method: PUT, route: /production', function (done) {
+    //     let obj = {
+    //         id: 5,
+    //         percentage: 100
+    //     }
 
-        request(config.application.url)
-        .put(common.routes.production.putUpdateProduction)
-        .send(obj)
-        .set('Accept', 'application/json')
-		.set('x-access-token', token)
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end(function (err, res) {
+    //     request(config.application.url)
+    //     .put(common.routes.production.putUpdateProduction)
+    //     .send(obj)
+    //     .set('Accept', 'application/json')
+	// 	.set('x-access-token', token)
+    //     .expect('Content-Type', /json/)
+    //     .expect(200)
+    //     .end(function (err, res) {
 
-            if (err)
-                return done(err);
+    //         if (err)
+    //             return done(err);
 
-            var result = res.body;
-            if (result.success)
-                done();
-            else if (result.error)
-                return done(result.error);
-            else
-                return done(result.error);
-        });
-    });
+    //         var result = res.body;
+    //         if (result.success)
+    //             done();
+    //         else if (result.error)
+    //             return done(result.error);
+    //         else
+    //             return done(result.error);
+    //     });
+    // });
 });

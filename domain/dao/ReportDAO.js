@@ -88,6 +88,50 @@ class ReportDAO {
                 callback({ result: res[0] });
             });
     }
+
+    ReportTimeProduts(obj, callback) {
+        try {
+            let query = "select "
+                    + "count(x.productName) quantity, "
+                    + "x.creationDate "
+                    + "from (select c.productName, to_char(c.creationDate, 'dd-mm-yyyy') creationDate from consult_which c where creationDate between '" + obj.dt_from +"' and '" + obj.dt_to + "') as x "
+                    + "group by x.creationDate "
+                    + "order by x.creationDate ";
+
+            sequelize
+                .query(query)
+                .then(function (res) {
+                    callback({ result: res[0] });
+                });
+
+        } catch (e) {
+            callback({ error: 'Não foi possível consultar os produtos. ' + e });
+        }
+    }
+    
+    ReportTimeProductsToDay(obj, callback) {
+        try {
+            let query = "select " 
+                        + " count(x.productName) quantity, "  
+                        + " x.creationDate "
+                        + " from (select c.productName, to_char(c.creationDate, 'hh') creationDate from consult_which c " 
+                        + " where creationDate between '" + obj.dt_from +"' and '" + obj.dt_to + "' "
+                        + " ) as x "
+                        + " group by x.creationDate "
+                        + " order by x.creationdate ";
+                        
+            console.log(query);
+            sequelize
+                .query(query)
+                .then(function (res) {
+                    console.log(res[0]);
+                    callback({result: res[0]});
+                })
+                      
+        } catch (error) {
+            callback({ error: 'Não foi possível consultar os produtos. ' + error});
+        }
+    }
 }
 
 module.exports = new ReportDAO();
