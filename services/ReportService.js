@@ -50,6 +50,35 @@ class ReportService {
         }
     }
 
+    ReportOneSupplier(req, res) {
+        try {
+
+            let obj = req.body;
+
+            if (obj.dt_from == null || obj.dt_from == '') {
+                res.json({ error: 'Por favor envie uma data de inicio.' });
+            }
+
+            if (obj.dt_to == null || obj.dt_to == '') {
+                res.json({ error: 'Por favor envie uma data de fim.' });
+            }
+
+            if (obj.supplier == null || obj.supplier == '') {
+                res.json({ error: 'Nome do fornecedor invalido'});
+            }
+
+            reportBUS.ReportOneSupplier(obj, function (callback) {
+                res.json(callback);
+            });
+
+        } catch (e) {
+            console.log('Error postReporOnetSupplier');
+            console.log('Não foi possível cosultar o relatório de produtos. ');
+            res.json({ error: 'Não foi possível cosultar o relatório de produtos. ' + e });
+        }
+    }
+
+
     ReportSales(req, res) {
         try {
 
