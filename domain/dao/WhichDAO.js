@@ -109,7 +109,9 @@ class WhichDAO {
 	    sequelize
             .query('delete from tb_which where id = ' + obj.id)
             .then(function (update) {
-                callback({ success: 'Tabela de pedido deletada' });
+                console.log(update);
+                console.log('---------------');
+                callback({ success: 'Pedido de pedido deletado' });
             });
 	}
 }

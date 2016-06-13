@@ -37,7 +37,7 @@ class PruductionDAO {
     GetRowProduction(callback) {
         let query = 'select distinct '
                         + 'c.productionid as id,'
-                        + 'c.name as client,'
+                        + 'c.clientname as client,'
                         + 'c.supplier as supplier,'
                         + 'c.delivery_date,'
                         + 'c.productname as name,'
@@ -60,7 +60,7 @@ class PruductionDAO {
         sequelize
             .query('delete from tb_production where id_which = ' + obj.id)
             .then(function (update) {
-                callback({ success: 'Tabela de produção deletada' });
+                callback({ success: 'Tabela de produï¿½ï¿½o deletada' });
             });
     }
 
@@ -76,7 +76,7 @@ class PruductionDAO {
             if (update == 1) {
                 callback({ success: 'Porcentagem atualizada com sucesso.' });
             } else {
-                callback({ error: 'Não foi possível atualizar a porcentagem.' });
+                callback({ error: 'Nï¿½o foi possï¿½vel atualizar a porcentagem.' });
             }
         });
     }

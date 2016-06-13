@@ -29,7 +29,46 @@ class ReportDAO {
         });
     }
 
+    ReportOneSupplier(obj, callback) {
+        try {           
+            let query = "select distinct "
+                            + "s.id,"
+                            + "s.ds_name 	as name, "
+                            + "sum(p.vl_sale_cost - p.vl_cost) as Total,"
+                            + "p.ds_name 	as productName,"
+                            + "p.ds_size 	as height,"
+                            + "p.ds_weight	as weight,"
+                            + "count(p.id) 	as quantity "
+                        + "from tb_supplier s "
+                            + "join tb_product p "
+                            + "on p.id_supplier = s.id "
+                            + "join tb_product_which pw "
+                            + "on pw.id_product = p.id "
+                            + "join tb_which w "
+                            + "on pw.id_which = w.id "
+                            + "where w.dt_date_which between '" + obj.dt_from + "' and '" + obj.dt_to + "'"
+                            + "and s.ds_name like '%" + obj.supplier.trim() + "%' "
+                            + " group by s.id, name, productName, height, weight "
+                            + "order by s.id";
+
+            console.log(query);
+            sequelize
+                .query(query)
+                .then(function (res) {
+                    callback({ result: res[0] });
+                });
+        } catch (e) {
+            callback({ error: e});   
+        }
+    }
+
     ReportSupplier(obj, callback) {
+        let querySup = '';
+
+        if (obj.supplier != null && obj.supplier != '') {
+            querySup = ' and s.ds_name = ' + obj.supplier + ' ';
+        }
+        
         let query = "select distinct "
                         + "s.id,"
                         + "s.ds_name 	as name, "
@@ -46,7 +85,8 @@ class ReportDAO {
                         + "join tb_which w "
                         + "on pw.id_which = w.id "
                         + "where w.dt_date_which between '" + obj.dt_from + "' and '" + obj.dt_to + "'"
-                        + "group by s.id, name, productName, height, weight "
+                        + querySup
+                        + " group by s.id, name, productName, height, weight "
                         + "order by s.id";
 
         console.log(query);
@@ -87,6 +127,50 @@ class ReportDAO {
             .then(function (res) {
                 callback({ result: res[0] });
             });
+    }
+
+    ReportTimeProduts(obj, callback) {
+        try {
+            let query = "select "
+                    + "count(x.productName) quantity, "
+                    + "x.creationDate "
+                    + "from (select c.productName, to_char(c.creationDate, 'dd-mm-yyyy') creationDate from consult_which c where creationDate between '" + obj.dt_from +"' and '" + obj.dt_to + "') as x "
+                    + "group by x.creationDate "
+                    + "order by x.creationDate ";
+
+            sequelize
+                .query(query)
+                .then(function (res) {
+                    callback({ result: res[0] });
+                });
+
+        } catch (e) {
+            callback({ error: 'Não foi possível consultar os produtos. ' + e });
+        }
+    }
+    
+    ReportTimeProductsToDay(obj, callback) {
+        try {
+            let query = "select " 
+                        + " count(x.productName) quantity, "  
+                        + " x.creationDate "
+                        + " from (select c.productName, to_char(c.creationDate, 'hh') creationDate from consult_which c " 
+                        + " where creationDate between '" + obj.dt_from +"' and '" + obj.dt_to + "' "
+                        + " ) as x "
+                        + " group by x.creationDate "
+                        + " order by x.creationdate ";
+                        
+            console.log(query);
+            sequelize
+                .query(query)
+                .then(function (res) {
+                    console.log(res[0]);
+                    callback({result: res[0]});
+                })
+                      
+        } catch (error) {
+            callback({ error: 'Não foi possível consultar os produtos. ' + error});
+        }
     }
 }
 

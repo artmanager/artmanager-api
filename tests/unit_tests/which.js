@@ -220,63 +220,63 @@ describe.only('Which', function () {
     //    });
     //});
 
-    it('Test Service, Insert one, method: POST, InsertOne', function (done) {
-        var obj = {
-            client: {
-                id: 1
-            },
-            user: {
-                id: 6
-            },
-            which: {
-                date_which: '2016-03-23 00:00:00',
-                total_value: 1000.0,
-                entrance: 100,
-                discount: 100
-            },
-            products: [
-                {
-                    id: 11,
-                    describe: 'Bolsa deve ser azul',
-                    quantity: 2,
-                    production: {
-                        delivery_date: new Date()
-                    }
-                },
-                {
-                    id: 11,
-                    describe: 'Bolsa deve ser rosa',
-                    quantity: 1,
-                    production: {
-                        delivery_date: new Date()
-                    }
-                }
-            ]
-        }
+    //it('Test Service, Insert one, method: POST, InsertOne', function (done) {
+    //    var obj = {
+    //        client: {
+    //            id: 37
+    //        },
+    //        user: {
+    //            id: 6
+    //        },
+    //        which: {
+    //            date_which: '2016-03-23 00:00:00',
+    //            total_value: 1000.0,
+    //            entrance: 100,
+    //            discount: 100
+    //        },
+    //        products: [
+    //            {
+    //                id: 77,
+    //                describe: 'Bolsa deve ser azul',
+    //                quantity: 2,
+    //                production: {
+    //                    delivery_date: new Date()
+    //                }
+    //            },
+    //            {
+    //                id: 77,
+    //                describe: 'Bolsa deve ser rosa',
+    //                quantity: 1,
+    //                production: {
+    //                    delivery_date: new Date()
+    //                }
+    //            }
+    //        ]
+    //    }
 
-        request(config.application.url)
-		.post(common.routes.which.postWhich)
-		.send(obj)
-		.set('Accept', 'application/json')
-		.set('x-access-token', token)
-      	.expect('Content-Type', /json/)
-      	.expect(200)
-		.end(function (err, res) {
+    //    request(config.application.url)
+	//	.post(common.routes.which.postWhich)
+	//	.send(obj)
+	//	.set('Accept', 'application/json')
+	//	.set('x-access-token', token)
+    //  	.expect('Content-Type', /json/)
+    //  	.expect(200)
+	//	.end(function (err, res) {
 
-		    if (err)
-		        return done(err);
+	//	    if (err)
+	//	        return done(err);
 
-		    var result = res.body;
-		    console.log(result);
-		    if (result.success) {
-		        done();
-		    }
-		    else {
-		        return done(result.error);
-		    }
-		});
+	//	    var result = res.body;
+	//	    console.log(result);
+	//	    if (result.success) {
+	//	        done();
+	//	    }
+	//	    else {
+	//	        return done(result.error);
+	//	    }
+	//	});
 
-    });
+    //});
 
     //it('Test request, update pending and entrance, method PUT, route: /updateEntrancePending', function (done) {
     //    let obj = {
@@ -363,24 +363,25 @@ describe.only('Which', function () {
     //  	});
     //});
 
-    //it('test request, delete one which, route: /product, method: get', function (done) {
+    it('test request, delete one which, route: /product, method: get', function (done) {
 
-    //    request(config.application.url)
-    //    .delete(common.routes.which.deleteWhich)
-    //    .send({ id: 31 })
-    //    .set('accept', 'application/json')
-    //    .set('x-access-token', token)
-    //    .expect('content-type', /json/)
-    //    .expect(200)
-    //    .end(function (err, res) {
+        request("http://api.artmanager.com.br")
+        .delete(common.routes.which.deleteWhich)
+        .send({ id: 1 })
+        .set('accept', 'application/json')
+        .set('x-access-token', token)
+        .expect('content-type', /json/)
+        .expect(200)
+        .end(function (err, res) {
 
-    //        if (res.body.error == undefined) {
-    //            done();
-    //        } else if (res.body.error) {
-    //            return done('não foi possível consultar os produtos. erro: ' + res.error);
-    //        } else {
-    //            return done('unexpected result ' + (err || res.body.error));
-    //        }
-    //    });
-    //});
+            console.log(res.body);
+            if (res.body.error == undefined) {
+                done();
+            } else if (res.body.error) {
+                return done('não foi possível consultar os produtos. erro: ' + res.error);
+            } else {
+                return done('unexpected result ' + (err || res.body.error));
+            }
+        });
+    });
 });
