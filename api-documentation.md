@@ -2,7 +2,7 @@
 
 ---------------
 
-### Gerar Token ### 
+### Gerar Token
 
     Rota: /authentication
     Method: POST
