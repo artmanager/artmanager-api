@@ -38,7 +38,7 @@ var properties = require('properties'),
 	
 			obj = {
 				id : r.id,
-				name : r.ds_user,
+				name : r.ds_name,
 				profile : r.nr_profile
 			};
 
