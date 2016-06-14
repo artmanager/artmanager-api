@@ -1,5 +1,7 @@
 # ArtManager Project API
 
+ - [Documentação técnica da api](https://github.com/artmanager/artmanager-api/blob/master/api-documentation.md)
+
  - Instalação do NodeJS v5.6.0 e NPM
 
 ```
