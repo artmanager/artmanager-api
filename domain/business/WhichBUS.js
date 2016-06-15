@@ -36,7 +36,7 @@ class WhichBuss {
                 }
 
                 if (o.production != null && o.production.delivery_date != null) {
-                    console.log('cadastrando produto a produção');
+                    console.log('cadastrando produto a produï¿½ï¿½o');
                     console.log('production');
                     productWhich.InsertOne(product, function (resP) {
 
@@ -132,7 +132,7 @@ class WhichBuss {
     DeleteWhich(obj, callback) {
         let end = false;
         try {
-
+            console.log('DeleteWhichBUS id = ' + obj.id);
             async.series([
                 function (n) {
                     production.DeleteByWhich(obj, function (res) {
@@ -152,14 +152,13 @@ class WhichBuss {
                 }
             ], (res) => {
                 if (end) {
-                    console.log('teste');
                     console.log(res);
                     callback(res);
                 }
             });
 
         } catch (e) {
-            callback({ error: 'Não foi possível deletar o pedido. ' + e });
+            callback({ error: 'Nï¿½o foi possï¿½vel deletar o pedido. ' + e });
         }
     }
 
@@ -269,7 +268,7 @@ class WhichBuss {
         ], () => {
             
             if (end == true && (entrance == true || pending == true)) {
-                callback({ success: 'Atualização efetuada com sucesso. ' });
+                callback({ success: 'Atualizaï¿½ï¿½o efetuada com sucesso. ' });
             }
         });
     }

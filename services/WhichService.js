@@ -13,7 +13,7 @@ class WhichService {
             }
 
             if (obj.user == undefined || obj.user.id <= 0) {
-                res.json({ error: 'Usuário invalido ' });
+                res.json({ error: 'Usuï¿½rio invalido ' });
             }
 
             whichBus.InsertOne(obj, function (callback) {
@@ -22,7 +22,7 @@ class WhichService {
 
 
         } catch (e) {
-            res.json({ error: 'Não foi possível cadastrar o pedido. ' + e });
+            res.json({ error: 'Nï¿½o foi possï¿½vel cadastrar o pedido. ' + e });
         }
     }
 
@@ -43,7 +43,7 @@ class WhichService {
             });
 
         } catch (e) {
-            res.json({ error: 'Não foi possível consultar os pedidos. ' + e });
+            res.json({ error: 'Nï¿½o foi possï¿½vel consultar os pedidos. ' + e });
         }
     };
 
@@ -60,7 +60,7 @@ class WhichService {
             });
 
         } catch (e) {
-            res.json({ error: 'Não foi possível atualizar os dados. ' + e });
+            res.json({ error: 'Nï¿½o foi possï¿½vel atualizar os dados. ' + e });
         }
     }
 
@@ -78,15 +78,16 @@ class WhichService {
             }
 
         } catch (e) {
-            res.json({ error: 'Não foi possível consultar o pedido. ' + e });
+            res.json({ error: 'Nï¿½o foi possï¿½vel consultar o pedido. ' + e });
         }
     }
 
     DeleteWhich(req, res) {
         try {
             let obj = req.body;
+            console.log('DeleteWhichService. Id ' + obj.id);
             if (obj.id == null || obj.id <= 0) {
-                res.json({ error: 'Id inválido' });
+                res.json({ error: 'Id invï¿½lido' });
             }
 
             whichBus.DeleteWhich(obj, function (callback) {
@@ -94,7 +95,7 @@ class WhichService {
                 res.json(callback);
             });
         } catch (e) {
-            res.json({ error: 'Não foi possível deletar o pedido. ' + e });
+            res.json({ error: 'Nï¿½o foi possï¿½vel deletar o pedido. ' + e });
         }
     }
 }
