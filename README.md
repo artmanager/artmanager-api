@@ -56,7 +56,7 @@ ArtManager.API                          --> raiz projeto
     └── unit_tests                      --> testes unitarios 
 ```
 
-## Configuração do supervisor na EC2
+## Modelo de configuração do supervisor na EC2
 
 ```
 [program:artmanager-api]
@@ -74,7 +74,7 @@ stderr_logfile_backups=0
 stderr_logfile_maxbytes=0
 ```
 
-## Configuração do NGINX para API
+## Modelo de configuração do NGINX para API
 
 ```
 server {
@@ -86,19 +86,6 @@ server {
     location / {
         proxy_pass http://localhost:3000;
     }
-}
-```
-
-## Configuração do proxy reverso no MONIT
-
-```
-server {
-  listen 80;
-  server_name monit.artmanager.com.br;
-
-  location / {
-    proxy_pass http://localhost:2812;
- }
 }
 ```
 
