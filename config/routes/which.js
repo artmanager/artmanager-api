@@ -10,7 +10,7 @@ router.post(common.routes.which.getWhich, which.GetWhich.bind(which));
 router.post(common.routes.which.getWhichByClient, which.WhichByClient.bind(which));
 router.post(common.routes.which.postWhich, which.InsertWhich.bind(which));
 router.put(common.routes.which.putUpdateEntrancePending, which.UpdateEntrancePending.bind(which));
-router.delete(common.routes.which.deleteWhich, which.DeleteWhich.bind(which));
+router.post(common.routes.which.deleteWhich, which.DeleteWhich.bind(which));
 
 
 module.exports = router;

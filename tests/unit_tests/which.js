@@ -191,14 +191,14 @@ describe.only('Which', function () {
     //        });
     //});
 
-    //it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
+    // it('Test Service, consult which, method: GET, ConsultWhich, Route: getWhich', function (done) {
 
     //    var obj = {
     //        dt_from: '2016-05-20',
-    //        dt_to: '2016-05-30'
+    //        dt_to: '2016-06-30'
     //    };
 
-    //    request(config.application.url)
+    //    request('http://api.artmanager.com.br/')
     //    .post(common.routes.which.getWhich)
     //    .send(obj)
     //    .set('Accept', 'application/json')
@@ -208,17 +208,15 @@ describe.only('Which', function () {
     //    .end(function (err, res) {
 
     //        let result = res.body;
-    //        console.log(result.success);
+    //        console.log(result);
     //        if (result.success) {
     //            done();
     //        } else if(result.error) {
     //            return done(result.error);
-    //        } else {
-    //            return done('Unexpected result');
-    //        }
+    //        } 
 
     //    });
-    //});
+    // });
 
     //it('Test Service, Insert one, method: POST, InsertOne', function (done) {
     //    var obj = {
@@ -365,9 +363,9 @@ describe.only('Which', function () {
 
     it('test request, delete one which, route: /product, method: get', function (done) {
 
-        request("http://api.artmanager.com.br")
-        .delete(common.routes.which.deleteWhich)
-        .send({ id: 1 })
+        request("http://localhost:3000")
+        .post(common.routes.which.deleteWhich)
+        .send({ id: 4 })
         .set('accept', 'application/json')
         .set('x-access-token', token)
         .expect('content-type', /json/)
